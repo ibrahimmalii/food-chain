@@ -1,31 +1,42 @@
-import classes from './Header.module.css'
+import classes from "./Header.module.css";
+import { Link } from "react-router-dom";
 
 
 const Navbar = (props) => {
   return (
-      <div className ={classes.nav}>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary text-light ">
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <button class="navbar-brand text-light btn btn-primary">Tridge Fulfillment Solution</button>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+    <div
+      className={classes.nav}
+      style={{ position: "fixed", top: 0, width: "100%" , zIndex: 1 }}
+    >
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark text-light ">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <Link to='/' className="navbar-brand text-light btn " style={{fontSize:'15px'}}>
+            Tridge Fulfillment Solution
+          </Link>
+          <form className="form-inline my-2 my-lg-0">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
           </form>
-          </div>
-          <a>Sign In</a>
-          
-          <select className='form-control'>
+        </div>
+        <small>Sign In</small>
+        <Link
+          to="/login"
+          className="btn btn-light text-secondary"
+          style={{ borderRadius: "20px", fontSize: "13px", fontWeight: "bold" }}
+        >
+          Get Start
+        </Link>
+
+        <select className="form-control bg-black text-light">
           <option> English</option>
           <option>Arabic</option>
           <option>Ting Viet</option>
-          </select>
-
-    </nav>
+        </select>
+      </nav>
     </div>
   );
 };

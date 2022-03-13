@@ -1,0 +1,44 @@
+.skills {
+  text-transform: uppercase;
+  font-size: 1.3vw;
+  display: inline-block;
+  white-space: nowrap;
+  animation: floatText 40s infinite linear;
+  /* padding-left: 100%; */
+  display: flex;
+  padding: 10px;
+}
+
+.product {
+  display: inline-block;
+  white-space: nowrap;
+  animation: floatPhoto 15s infinite linear;
+  overflow: hidden;
+}
+
+
+@keyframes floatPhoto {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes floatText {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.skills:hover,
+.product:hover {
+  animation-play-state: paused;
+}
+
+.footer {
+  color: rgb(157, 182, 204);
+  background-color: rgb(33, 43, 54);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+

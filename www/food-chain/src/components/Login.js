@@ -12,7 +12,7 @@ const Login = (props) => {
     }
   
   return (
-    <Form className="mt-5 m-auto" style={{ width: "35%" }} onSubmit={checkData}>
+    <Form  style={{ width: "35%" , margin:'100px auto'}} onSubmit={checkData}>
       <h2>Sign In</h2>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
