@@ -1,0 +1,29 @@
+.skills,
+.langs {
+  text-transform: uppercase;
+  font-size: 1.3vw;
+  display: inline-block;
+  white-space: nowrap;
+  animation: floatText 40s infinite linear;
+  /* /Initial offset, which places the text off-screen/ */
+  padding-left: 100%;
+  /* color: white; */
+  display: flex;
+  padding: 10px;
+}
+
+@keyframes floatText {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.skills:hover,
+.langs:hover {
+  animation-play-state: paused;
+}
+
+.footer{
+    color: rgb(157, 182, 204);
+    background-color: rgb(33, 43, 54);
+}

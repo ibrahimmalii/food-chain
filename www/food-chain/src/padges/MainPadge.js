@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import Filtter from '../components/MainPadge/Filtter';
+import Footer from '../components/MainPadge/Footer';
 import Header from '../components/MainPadge/Header';
 import MainBody from '../components/MainPadge/MainBody';
 import TrendProduct from '../components/MainPadge/Products/TrendProduct';
@@ -14,6 +15,7 @@ const MainPadge = props => {
             <Filtter/>
             <TrendProduct/>
             <UpComingProduct/>
+            <Footer/>
         </Fragment>
     )
 }
