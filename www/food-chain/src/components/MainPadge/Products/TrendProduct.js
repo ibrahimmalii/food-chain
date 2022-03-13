@@ -1,83 +1,25 @@
 import classes from "./TrendProduct.module.css";
+import move from "../Footer.module.css";
 
-const TrendProduct = (props) => {
+const TrendProduct = ({ photos }) => {
   return (
-      <div className={classes.cardProduct}>
-      <h4 className='mb-4'>Trending Products</h4>
-      <div className="row">
-        <div className=" offset-1 col-12 col-sm">
-          <img
-            src="https://images.tridge.com/720x720/fulfillment_image/2c/56/84/2c568460532116d1b7c4391148b19c23866987e9/11F.jpg"
-            alt="sunFlower"
-            width="200px"
-            height="200px"
-          />
-          <h6>Refined Sunflower Oil</h6>
-          <span>Turky</span>
-          <h6>USD 6.25</h6>
-          <small className="text-muted">AVALIABLE SPACE:</small>
-          <p className="text-muted">FAQ / Refined</p>
-          <button type="button" class="btn btn-outline-primary">See Details</button>
-        </div>
-        <div className="col-12 col-sm">
-          <img
-            src="https://images.tridge.com/720x720/fulfillment_image/2c/56/84/2c568460532116d1b7c4391148b19c23866987e9/11F.jpg"
-            alt="sunFlower"
-            width="200px"
-            height="200px"
-          />
-          <h6>Refined Sunflower Oil</h6>
-          <span>Turky</span>
-          <h6>USD 6.25</h6>
-          <small className="text-muted">AVALIABLE SPACE:</small>
-          <p className="text-muted">FAQ / Refined</p>
-          <button type="button" class="btn btn-outline-primary">See Details</button>
-        </div>
-        <div className="col-12 col-sm">
-          <img
-            src="https://images.tridge.com/720x720/fulfillment_image/2c/56/84/2c568460532116d1b7c4391148b19c23866987e9/11F.jpg"
-            alt="sunFlower"
-            width="200px"
-            height="200px"
-          />
-          <h6>Refined Sunflower Oil</h6>
-          <span>Turky</span>
-          <h6>USD 6.25</h6>
-          <small className="text-muted">AVALIABLE SPACE:</small>
-          <p className="text-muted">FAQ / Refined</p>
-          <button type="button" class="btn btn-outline-primary">See Details</button>
-        </div>
-        <div className="col-12 col-sm">
-          <img
-            src="https://images.tridge.com/720x720/fulfillment_image/2c/56/84/2c568460532116d1b7c4391148b19c23866987e9/11F.jpg"
-            alt="sunFlower"
-            width="200px"
-            height="200px"
-          />
-          <h6>Refined Sunflower Oil</h6>
-          <span>Turky</span>
-          <h6>USD 6.25</h6>
-          <small className="text-muted">AVALIABLE SPACE:</small>
-          <p className="text-muted">FAQ / Refined</p>
-          <button type="button" class="btn btn-outline-primary">See Details</button>
-        </div>
-        <div className="col-12 col-sm">
-          <img
-            src="https://images.tridge.com/720x720/fulfillment_image/2c/56/84/2c568460532116d1b7c4391148b19c23866987e9/11F.jpg"
-            alt="sunFlower"
-            width="200px"
-            height="200px"
-          />
-          <h6>Refined Sunflower Oil</h6>
-          <span>Turky</span>
-          <h6>USD 6.25</h6>
-          <small className="text-muted">AVALIABLE SPACE:</small>
-          <p className="text-muted">FAQ / Refined</p>
-          <button type="button" class="btn btn-outline-primary">See Details</button>
-        </div>
+    <div>
+      <div className="col-12 col-sm">
+        <img src={photos.src} alt="sunFlower" width="200px" height="200px" />
+        <h6>{photos.name}</h6>
+        <span>{photos.country}</span>
+        <h6>{photos.salary}</h6>
+        <small className="text-muted">{photos.avaliable}</small>
+        <p className="text-muted" style={{fontSize:'10px'}}>{photos.require}</p>
+        <button type="button" class="btn btn-outline-primary">
+          See Details
+        </button>
       </div>
-    </div>
-  );
-};
+      </div>
+      );
+    };
+    // <div className={move.buttonMove}>
+    //   <button className="btn btn-light float-end">arrow</button>
+    // </div>
 
 export default TrendProduct;

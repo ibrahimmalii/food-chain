@@ -1,9 +1,3 @@
-.container {
-  padding: 40px;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .container div {
   background-color: rgb(187, 202, 233);
   opacity: 0.5;
@@ -16,6 +10,17 @@
 .container span{
   position: relative;
   top: 1.7em;
+}
+
+
+.container h2 {
+  margin-top: 5%;
+  font-size: 30px;
+}
+.container {
+  padding: 40px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container h2 {
@@ -32,45 +37,51 @@
   margin: auto;
 }
 
-.nav input , .nav input:hover , .nav input:active{
+.nav input,
+.nav input:hover,
+.nav input:active {
   width: 400px;
   background-color: rgb(70, 73, 78);
-  opacity: .6;
+  opacity: 0.6;
   height: 50%;
   margin: 0 20px;
-  border: none
+  border: none;
 }
 
-.nav button {
-    font-size: 15px;
-}
 
 .nav select {
-    margin-right:20px;
-    width: 80px;
-    color: white
+  margin-right: 20px;
+  width: 80px;
+  color: white;
 }
 
 .nav a {
-    margin: 0 40px;
-
+  margin: 0 40px;
 }
 
 .images img {
-  margin-right: 10px;  
-  width: 104px
+  margin-right: 10px;
+  width: 104px;
 }
 
-.mainFiltter{
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    font-family: 	
-    Verdana;
-    font-size: 10px;
+.images{
+  overflow: hidden;
 }
 
-.mainFiltter button{
-    border: 1px solid rgb(145, 174, 194);
-    margin: 1px;
+.mainFiltter {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  font-family: Verdana;
+  font-size: 10px;
 }
+
+.mainFiltter button {
+  border: 1px solid rgb(145, 174, 194);
+  margin: 1px;
+}
+
+.nav small {
+  margin-right: -20px;
+}
+

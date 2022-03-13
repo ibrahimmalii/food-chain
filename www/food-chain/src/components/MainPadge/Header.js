@@ -7,7 +7,7 @@ const Header = (props) => {
       style={{
         backgroundImage: `url(https://cdn-new.tridge.com/static/4c84e81b13.jpg)`,
         width: "90%",
-        margin: "50px auto",
+        margin: "100px auto",
         borderRadius: "5px",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
