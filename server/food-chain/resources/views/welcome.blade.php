@@ -1,5 +1,4 @@
-
-@foreach ($files as $item)
-<img src="{{ URL($item->file_path) }}" width="200" height="200" alt="" title=""></a>
-    
+<h1>Welcome page</h1>
+@foreach ($products as $item)
+    <p>{{$item->files}}</p>
 @endforeach

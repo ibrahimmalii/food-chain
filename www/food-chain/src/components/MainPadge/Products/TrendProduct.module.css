@@ -3,13 +3,8 @@
     width: 84%
 }
 
-.cardProduct img , .upcomingProduct img{
-    object-fit: cover;
-    border-radius: 5px;
-}
-
 .cardProduct div div , .upcomingProduct div div{
-    border-radius: 5px;
+    border-radius: 10px;
     margin: auto;
     overflow: hidden;
 }
