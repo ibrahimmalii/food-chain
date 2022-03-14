@@ -1,19 +1,20 @@
+import classes from "../MainPadge/Header.module.css";
 import { Link } from "react-router-dom";
 
-const Filtter = ({ categories }) => {
+const ProductName = ({ title }) => {
   return (
     <div>
-      {categories && (
+      {title && (
         <Link
           className="col btn"
+          to="/fruit"
           style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px" }}
-          to={`/categories/${categories.id}`}
         >
-          {categories.title}
+          {title.title}
         </Link>
       )}
     </div>
   );
 };
 
-export default Filtter;
+export default ProductName;
