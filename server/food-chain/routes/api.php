@@ -24,13 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('/products/search', [ProductController::class, 'search']);
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
-
-Route::get('products/avatar/{product}', [ProductController::class, 'getProductImg']);
-
-
-Route::get('/search', function () {
-    dd('done');
-    return Product::search('Magnam')->get();
-});

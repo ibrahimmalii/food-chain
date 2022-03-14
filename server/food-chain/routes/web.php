@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return Product::all();
+    // return Product::all();
+    return Product::search('Hazelnut Kernel')->get();
     $products = Product::where('id', 8)->first();
     // return $products;
     return view('welcome', ['products' => $products]);
