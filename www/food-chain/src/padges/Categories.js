@@ -1,4 +1,5 @@
-const Categories = props => {
+const Categories = ({categorie}) => {
+    console.log(categorie)
     return 'this is categorie padge'
 }
 

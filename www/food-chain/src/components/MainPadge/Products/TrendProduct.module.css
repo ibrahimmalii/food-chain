@@ -1,14 +1,14 @@
-.cardProduct , .upcomingProduct{
+.cardProduct {
     margin: 40px auto;
     width: 84%
 }
 
-.cardProduct div div , .upcomingProduct div div{
+.cardProduct div div {
     border-radius: 10px;
     margin: auto;
     overflow: hidden;
 }
 
-.cardProduct h6 , .upcomingProduct h6{
+.cardProduct h6 {
     margin-top: 2%;
 }
