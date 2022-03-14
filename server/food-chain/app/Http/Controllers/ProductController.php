@@ -120,9 +120,16 @@ class ProductController extends Controller
         //
     }
 
-    public function getProductImg(Product $product)
+
+
+    /**
+     * Search function
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function search(Request $request)
     {
-        $product = Product::where('id', $product->id)->with('files')->first();
-        return ['files' => $product->files[0]];
+        return Product::search($request->search)->get();
     }
 }
