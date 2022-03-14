@@ -6,6 +6,7 @@ import TrendProduct from "../components/MainPadge/Products/TrendProduct";
 import UpComingProduct from "../components/MainPadge/Products/UpComingProduct";
 import classes from "../components/MainPadge/Products/TrendProduct.module.css";
 const MainPadge = ({ data }) => {
+  
   return (
     <Fragment>
       <Header />

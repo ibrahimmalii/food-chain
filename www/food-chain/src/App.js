@@ -22,9 +22,9 @@ function App() {
       .get("/api/products")
       .then((response) => setData(response.data));
 
-    axiosInstance
-      .get("/api/categories")
-      .then((response) => setCategories(response.data));
+    // axiosInstance
+    //   .get("/api/categories")
+    //   .then((response) => setCategories(response.data));
   }, []);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main data={data} />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/categorie" element={<Categorie categorie={categories} />}></Route>
+          <Route path="/categorie" element={<Categorie categorie={data} />}></Route>
           <Route path="/fruit" element={<Fruit />}></Route>
           <Route path="/coffee" element={<Coffee />}></Route>
           <Route path="/seafood" element={<Seafood />}></Route>
