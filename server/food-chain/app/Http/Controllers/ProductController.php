@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('category')->get() ;
+        return Product::with('category', 'files')->get();
     }
 
     /**
@@ -72,7 +72,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return Product::where('id', $product->id)->with('files')->get();
+        return Product::where('id', $product->id)->get();
     }
 
     /**
@@ -109,9 +109,9 @@ class ProductController extends Controller
         //
     }
 
-    public function getProductImg(Product $product){
+    public function getProductImg(Product $product)
+    {
         $product = Product::where('id', $product->id)->with('files')->first();
-        return ['files'=> $product->files[0]];
+        return ['files' => $product->files[0]];
     }
-
 }
