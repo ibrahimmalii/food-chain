@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return $products = Product::where('id', 3)->get();
+    return Product::all();
+    $products = Product::where('id', 8)->first();
+    // return $products;
     return view('welcome', ['products' => $products]);
 });
