@@ -22,6 +22,11 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str()->random(10),
             'email_verified_at' => now()
         ]);
-        \App\Models\Product::factory(10)->create();
+        \App\Models\Category::insert([
+            ['title' => 'Fruits', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste soluta, pariatur nulla magnam quaerat molestias error, molestiae nostrum minus libero voluptatum quas accusamus quasi fugit mollitia quos sapiente provident sunt.'],
+            ['title' => 'Legumes', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste soluta, pariatur nulla magnam quaerat molestias error, molestiae nostrum minus libero voluptatum quas accusamus quasi fugit mollitia quos sapiente provident sunt.']
+        ]);
+
+        // \App\Models\Product::factory(5)->create();
     }
 }

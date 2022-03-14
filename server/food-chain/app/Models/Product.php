@@ -6,13 +6,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+// use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
     use HasFactory;
+    // , Searchable;
     protected $guarded = ['id'];
     protected $with = ['files'];
     protected $hidden = ['created_at', 'updated_at'];
+
+
+    /**
+     * Searchable attributes
+     *
+     * @return string[]
+     */
+    // public function toSearchableArray()
+    // {
+    //     return [
+    //         'title' => $this->title,
+    //         'description' => $this->description
+    //     ];
+    // }
 
 
     /**

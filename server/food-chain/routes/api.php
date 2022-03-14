@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,9 @@ Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
 
 Route::get('products/avatar/{product}', [ProductController::class, 'getProductImg']);
+
+
+Route::get('/search', function () {
+    dd('done');
+    return Product::search('Magnam')->get();
+});
