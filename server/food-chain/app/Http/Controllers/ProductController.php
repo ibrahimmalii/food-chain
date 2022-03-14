@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\File;
 use Carbon\Exceptions\Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 
@@ -38,29 +39,39 @@ class ProductController extends Controller
      * @param  \App\Http\Requests\StoreProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        $validated = (object) $request->validated();
-        $product = Product::create([
-            'title' => $validated->title,
-            'description' => $validated->description,
-            'price' => $validated->price,
-            'country' => $validated->country,
-            'variety' => $validated->variety,
-            'category_id' => $validated->category_id,
-            'slug' => str()->slug($validated->title)
+        request()->validate([
+            'title' => 'required|max:255',
+            'description' => 'required|max:1000',
+            'price' => 'required|integer',
+            'country' => 'required',
+            'variety' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            // 'photos.*' => 'required'
+            // 'photos' => 'required'
         ]);
-        try {
-            $fileName = time() . '_' . $validated->photos->getClientOriginalName();
-            $filePath = $validated->photos->storeAs('products', $fileName, 'public');
-            File::create([
-                'product_id' => $product->id,
-                'name' => time() . '_' . $validated->photos->getClientOriginalName(),
-                'file_path' => '/public/' . $filePath
-            ]);
-        } catch (Throwable $e) {
-            return $e;
-        }
+
+
+        // $validated = (object) $request->validated();
+        // dd($validated);
+        $product = Product::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'country' => $request->country,
+            'variety' => $request->variety,
+            'category_id' => $request->category_id,
+            'slug' => str()->slug($request->title)
+        ]);
+
+        $fileName = time() . '_' . $request->photos->getClientOriginalName();
+        $filePath = $request->photos->storeAs('products', $fileName, 'public');
+        File::create([
+            'product_id' => $product->id,
+            'name' => time() . '_' . $request->photos->getClientOriginalName(),
+            'file_path' => '/public/' . $filePath
+        ]);
         return $product;
     }
 
