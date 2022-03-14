@@ -8,7 +8,7 @@ const Categories = ({ categorie }) => {
     <div className={classes.categorie}>
       <div
         className="container"
-        style={{ marginTop: "100px", fontFamily: "Fantasy" }}
+        style={{ marginTop: "100px" }}
       >
         <h2>Browser Markets</h2>
         <Filtter />
