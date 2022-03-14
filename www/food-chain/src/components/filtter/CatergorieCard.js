@@ -2,7 +2,8 @@ const CatergorieCard = ({ item }) => {
   console.log(item);
   return (
     <div className="col-12 col-sm">
-      <div>
+      {item && 
+        <div>
         <img
           src={"http://localhost:8000" + item?.files[0].file_path}
           alt="sunFlower"
@@ -20,6 +21,7 @@ const CatergorieCard = ({ item }) => {
           See Details
         </button>
       </div>
+      }
     </div>
   );
 };

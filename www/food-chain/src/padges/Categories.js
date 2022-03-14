@@ -13,6 +13,7 @@ const Categories = ({ categorie }) => {
         <h2>Browser Markets</h2>
         <Filtter />
         <input type="text" placeholder="Search" />
+        <div>
         <div className="row">
           {categorie &&
             categorie.map((item, index) => {
@@ -20,6 +21,7 @@ const Categories = ({ categorie }) => {
                 <CatergorieCard item={item}/>
               </div>;
             })}
+        </div>
         </div>
         <CatergorieCard />
       </div>
