@@ -1,6 +1,7 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { axiosInstance } from "./axios/config";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Gallery from "./padges/Gallery";
 
 const Main = React.lazy(() => import("./padges/MainPadge.js"));
 const Nav = React.lazy(() => import("./components/MainPadge/Navbar.js"));
@@ -53,6 +54,7 @@ function App() {
             element={<Fruit categories={categories}/>}
           ></Route>
           <Route path="/product/:id" element={<Product products={products}/>}></Route>
+          <Route path='/gallery' element={<Gallery/>}></Route>
         </Routes>
         <Footer footerData={data} />
       </Suspense>

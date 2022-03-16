@@ -1,8 +1,14 @@
 import classes from "./Header.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login')
+  }
   return (
     <div
       className={classes.nav}
@@ -22,7 +28,7 @@ const Navbar = (props) => {
             />
           </form>
         </div>
-        <small>Sign In</small>
+        {localStorage.token ? <button class="btn btn-outline-danger" onClick={logout}>Logout</button> : <small>Sign In</small>}
         <Link
           to="/login"
           className="btn btn-light text-secondary"

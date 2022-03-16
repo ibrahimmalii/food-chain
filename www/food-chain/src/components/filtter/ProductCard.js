@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 const ProductCard = (props) => {
   return (
-    <Link to={`/product/${props.type.id}`}>
-      <div className="col-12 col-sm">
+    <div className="col-12 col-sm" style={{ borderRadius: '10px' , overflew: 'hidden'}}>
+    <Link to={`/product/${props.type.id}`} style={{textDecoration: 'none'}}>
         <img
           src={"http://localhost:8000" + props.type.files[0].file_path}
           alt="sunFlower"
@@ -19,8 +19,8 @@ const ProductCard = (props) => {
         <button type="button" class="btn btn-outline-primary mb-5">
           See Details
         </button>
+        </Link>
       </div>
-    </Link>
   );
 };
 

@@ -49,7 +49,7 @@ const Fruits = (props) => {
         <div className="row m-5">
           {type &&
             type.data[0].products.map((res) => {
-              return <ProductCard type={res} />;
+              return  <ProductCard type={res} />;
             })}
         </div>
       </div>

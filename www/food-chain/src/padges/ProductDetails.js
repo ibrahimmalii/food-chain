@@ -2,11 +2,14 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { axiosInstance } from "./../axios/config";
 import DetailsCard from "../components/filtter/DetailsCard";
-import DetailsImage from "./../components/filtter/DetailsImage";
+import Details from "../components/filtter/Details";
+import PhotosGallary from './../components/filtter/PhotosGallary';
+
 
 export default function ProductDetails(props) {
   const params = useParams();
   const [type, setType] = useState("");
+  const [displayGallary , setDisplayGallary] = useState(false)
 
   const handleType = useCallback(async () => {
     axiosInstance.get(`api/products/${params.id}`).then((res) => {
@@ -18,20 +21,31 @@ export default function ProductDetails(props) {
     handleType();
   }, [handleType]);
 
+ 
+
   return (
     <div className="container mt-5">
       <DetailsCard productId={type} />
+      <div className="text-center">
+      <button
+        className="btn btn-outline-primary m-5"
+        onClick={() => setDisplayGallary(false)} 
+      >
+
+        Product Details
+      </button>
+      <button
+        className="btn btn-outline-primary "
+        onClick={() => setDisplayGallary(true)}
+      >
+        Gallary
+      </button>
+    </div>
+    {
+      !displayGallary ? <Details productId= {type}/> : <PhotosGallary productId= {type}/>
+    }
       </div>
       );
     }
-    // <div className="d-flex" style={{marginLeft: '50px'}}>
-    //   {type &&
-    //     type.data[0].files.map((res) => (
-    //       <div
-    //         className="m-1"
-    //         style={{ borderRadius: "10px", overflow: "hidden" }}
-    //       >
-    //         <DetailsImage photos={res.file_path} />
-    //       </div>
-    //     ))}
-    // </div>
+   
+   

@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 const CatergorieCard = ({ item }) => {
 
   return (
+    <Link style={{textDecoration: 'none'}} to={`/product/${item.id}`}>
     <div className="col-12 col-sm">
       {item && 
         <div>
@@ -23,6 +26,7 @@ const CatergorieCard = ({ item }) => {
       </div>
       }
     </div>
+    </Link>
   );
 };
 
