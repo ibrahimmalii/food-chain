@@ -1,135 +1,22 @@
-import classes from './Footer.module.css';
+import classes from "./Footer.module.css";
 
-const Footer = (props) => {
+const Footer = ({ footerData }) => {
   return (
     <div className={classes.footer}>
       <div className={classes.skills}>
-        <div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;<div>Pear</div> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{' '}
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp; <div>Pear</div> &nbsp;&nbsp;
-        <div>15.23$</div>
-        &nbsp;&nbsp;
+        <div className="d-flex">
+          {footerData &&
+            footerData.map((res) => {
+              return (
+                <div className="d-flex">
+                  <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
+                  <div>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
+                  <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
+                  <div>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

@@ -47,8 +47,16 @@ const MainBody = (props) => {
                 alt="packaging_inspection_01.jpg"
               />
               <img
+                src="https://images.tridge.com/120x120/fulfillment_file/21/25/7e/21257e2510ec4894d5293e032e2e74f64f8aa713/farm_inspection_02.jpg"
+                alt="farm_inspection_02.jpg"
+              />
+              <img
                 src="https://images.tridge.com/120x120/fulfillment_file/79/54/90/79549093a6cf99a74e60e1231fd90d3d720694bc/packaging_inspection_01.jpg"
                 alt="packaging_inspection_01.jpg"
+              />
+              <img
+                src="https://images.tridge.com/120x120/fulfillment_file/c2/ac/b7/c2acb701102b3e3d5327df9a0f64894ce66b195d/Avocado_Quality_Check.JPG"
+                alt="Avocado Quality Check.JPG"
               />
             </div>
           </div>
