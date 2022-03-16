@@ -5,7 +5,7 @@ const Filtter = ({ categories }) => {
     <div>
       {categories && (
         <Link
-          className="col btn"
+          className="col btn w-100"
           style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px" }}
           to={`/categories/${categories.id}`}
         >

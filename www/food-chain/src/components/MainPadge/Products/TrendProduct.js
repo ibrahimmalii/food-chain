@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 
 const TrendProduct = ({ photos }) => {
-  console.log(photos)
+
+
   return (
       <div className="col-12 col-sm">
         <img src={'http://localhost:8000' + photos.files[0].file_path} alt="sunFlower" width="200px" height="200px" />

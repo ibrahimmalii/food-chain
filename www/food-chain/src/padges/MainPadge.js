@@ -15,7 +15,7 @@ const MainPadge = (props) => {
       <div className={classCategories.mainFiltter}>
         <div className="row container text-center">
           <Link
-            className="col btn"
+            className="col btn w-100"
             style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px" }}
             to="/categories"
           >
@@ -23,7 +23,7 @@ const MainPadge = (props) => {
           </Link>
           {props.categories && props.categories.map((res , index) => {
             return(
-              <div className='col' key={index}>
+              <div className='col w-100' key={index}>
               <Filtter categories={res} />
               </div>
             )

@@ -2,8 +2,9 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { axiosInstance } from "./../axios/config";
 import classes from "./Categories.module.css";
-import ProductName from "../components/filtter/ProductName";
 import searchClass from "./Categories.module.css";
+import ProductCard from "./../components/filtter/ProductCard";
+import Filtter from './../components/MainPadge/Filtter';
 
 const Fruits = (props) => {
   const params = useParams();
@@ -19,8 +20,11 @@ const Fruits = (props) => {
     handleType();
   }, [handleType]);
 
+
+
+
   return (
-    <div className={classes.categorie}>
+    <div className={searchClass.categorie}>
       <div className="container" style={{ marginTop: "100px" }}>
         <h2>Browser Markets</h2>
         <div className={classes.mainFiltter}>
@@ -32,17 +36,22 @@ const Fruits = (props) => {
             >
               All Categories
             </Link>
-            {props.productName &&
-              props.productName.map((res) => {
-                return (
-                  <div className="col">
-                    <ProductName title={res} />
-                  </div>
-                );
-              })}
+            {props.categories && props.categories.map((res , index) => {
+              return(
+                <div className='col w-100' key={index}>
+                <Filtter categories={res} />
+                </div>
+              )
+            })}
           </div>
         </div>
         <input type="text" placeholder="Search" />
+        <div className="row m-5">
+          {type &&
+            type.data[0].products.map((res) => {
+              return <ProductCard type={res} />;
+            })}
+        </div>
       </div>
     </div>
   );
