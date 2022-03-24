@@ -22,18 +22,6 @@ const TrendProduct = ({ photos }) => {
           {photos.require}
         </p>
         <button
-          type="button"
-          style={{
-            borderRadius: "20px",
-            color: "#2F7CEF",
-            fontSize: "12px",
-            border: "2px solid #B8D1F7",
-            marginBottom: '50px',
-            fontFamily: 'Inter, sans-serif',
-            padding: '7px',
-            width: '100px',
-            fontWeight: 'bold'
-          }}
          className={classes.buttonDetails}
         >
           See Details
