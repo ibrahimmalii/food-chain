@@ -1,43 +1,69 @@
-import classes from "./Header.module.css";
-import { Link, useNavigate } from "react-router-dom";
-
+import classes from './Header.module.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.clear();
-    navigate('/login')
-  }
+    navigate('/login');
+  };
   return (
     <div
       className={classes.nav}
-      style={{ position: "fixed", top: 0, width: "100%" , zIndex: 1 }}
+      style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1 }}
     >
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark text-light ">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <Link to='/' className="navbar-brand text-light btn " style={{fontSize:'15px'}}>
-            Tridge Fulfillment Solution
+      <nav
+        className='navbar navbar-expand-lg navbar-light bg-black text-light '
+        style={{ backgrounColor: '#00000' }}
+      >
+        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+          <Link
+            to='/'
+            className='navbar-brand text-light'
+            style={{
+              fontSize: '15px',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '400',
+            }}
+          >
+            TRU Market Fulfillment Solution
           </Link>
-          <form className="form-inline my-2 my-lg-0">
+          <form className='form-inline my-2 my-lg-0'>
             <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
+              className=' mr-sm-2'
+              type='search'
+              placeholder='Search any products in food and agriculture'
+              aria-label='Search'
             />
           </form>
         </div>
-        {localStorage.token ? <button class="btn btn-outline-danger" onClick={logout}>Logout</button> : <small>Sign In</small>}
-        <Link
-          to="/login"
-          className="btn btn-light text-secondary"
-          style={{ borderRadius: "20px", fontSize: "13px", fontWeight: "bold" }}
-        >
-          Get Start
-        </Link>
+        <small className='text-bold mx-2'>{localStorage?.name}</small>
+        {localStorage.token ? (
+          <button class='btn btn-outline-danger mx-2' onClick={logout}>
+            Logout
+          </button>
+        ) : (
+          <small>
+            <Link
+              to='/login'
+              className='btn text-light'
+              style={{
+                borderRadius: '8px',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                fontFamily: 'Inter, sans-serif'
+              }}
+            >
+              Sing In
+            </Link>
+          </small>
+        )}
 
-        <select className="form-control bg-black text-light">
+        <select
+          className='form-control bg-black text-light'
+          style={{ fontSize: '14px', border: 'none' , fontFamily: 'Inter, sans-serif'}}
+        >
           <option> English</option>
           <option>Arabic</option>
           <option>Ting Viet</option>

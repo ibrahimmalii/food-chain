@@ -14,7 +14,7 @@ const Header = (props) => {
       }}
       className={classes.container}
     >
-    <span>Tridge Fulfillment Solution</span>
+    <span>TRU Market Fulfillment Solution</span>
       <div>
       </div>
       <h2>
