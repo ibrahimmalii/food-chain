@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import classes from "./TrendProduct.module.css";
 const TrendProduct = ({ photos }) => {
   return (
+    <div className={classes.content}>
     <Link to={`/product/${photos.id}`} style={{ textDecoration: "none" }}>
-      <div className={classes.content}>
         <img
           src={"http://localhost:8000" + photos.files[0].file_path}
           alt="sunFlower"
@@ -38,8 +38,8 @@ const TrendProduct = ({ photos }) => {
         >
           See Details
         </button>
+        </Link>
       </div>
-    </Link>
   );
 };
 
