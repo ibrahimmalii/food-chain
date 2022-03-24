@@ -1,4 +1,3 @@
-import imageHeader from "../../assets/up1.jpg";
 import classes from "./Header.module.css";
 
 const Header = (props) => {
@@ -28,7 +27,7 @@ const Header = (props) => {
         quality product that you need safely and reliably.
       </p>
       <br />
-      <button className="btn btn-primary">Browser Products</button>
+      <button className="btn btn-primary">Browse Products</button>
     </div>
   );
 };

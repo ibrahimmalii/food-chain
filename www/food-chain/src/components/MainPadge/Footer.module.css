@@ -4,7 +4,6 @@
   display: inline-block;
   white-space: nowrap;
   animation: floatText 40s infinite linear;
-  /* padding-left: 100%; */
   display: flex;
   padding: 10px;
 }

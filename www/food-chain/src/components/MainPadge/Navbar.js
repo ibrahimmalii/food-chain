@@ -30,10 +30,11 @@ const Navbar = (props) => {
             TRU Market Fulfillment Solution
           </Link>
           <form className='form-inline my-2 my-lg-0'>
+          <i className="fa fa-search" style={{position: 'absolute' , marginTop: '20px' , marginLeft:'20px' , color: '#759EA0'}}></i>
             <input
               className=' mr-sm-2'
               type='search'
-              placeholder='Search any products in food and agriculture'
+              placeholder= 'Search any products in food and agriculture'
               aria-label='Search'
             />
           </form>

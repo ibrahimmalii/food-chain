@@ -41,7 +41,6 @@ const Login = (props) => {
     >
       <h2>Sign In</h2>
       <Form.Group className='mb-3' controlId='formBasicEmail'>
-      <div><i className="fa fa-trash"></i></div>
         <Form.Label> Email address </Form.Label>
         <Form.Control type='email' placeholder='Enter email' ref={emailValue} />
       </Form.Group>

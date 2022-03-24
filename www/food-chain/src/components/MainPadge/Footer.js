@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
 
 const Footer = ({ footerData }) => {
@@ -6,12 +7,29 @@ const Footer = ({ footerData }) => {
       <div className={classes.skills}>
         <div className="d-flex">
           {footerData &&
-            footerData.map((res) => {
+            footerData.map((res, index) => {
               return (
-                <div className="d-flex">
-                  <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
+                <div className="d-flex" key={index}>
+                  <Link
+                    to={`/categories/${res.category_id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "rgb(157, 182, 204)",
+                    }}
+                  >
+                    <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
+                  </Link>
                   <div>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
-                  <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
+                  <Link
+                    to={`/categories/${res.category_id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "rgb(157, 182, 204)",
+                    }}
+                  >
+                    <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
+                  </Link>
+
                   <div>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
                 </div>
               );
