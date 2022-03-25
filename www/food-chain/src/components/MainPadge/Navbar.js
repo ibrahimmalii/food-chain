@@ -1,8 +1,12 @@
 import classes from './Header.module.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import TrendProduct from './Products/TrendProduct';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState('');
+  const [data, setData] = useState([])
 
   const logout = () => {
     localStorage.clear();
@@ -30,13 +34,35 @@ const Navbar = (props) => {
             TRU Market Fulfillment Solution
           </Link>
           <form className='form-inline my-2 my-lg-0'>
-          <i className="fa fa-search" style={{position: 'absolute' , marginTop: '20px' , marginLeft:'20px' , color: '#759EA0'}}></i>
+            <i
+              className='fa fa-search'
+              style={{
+                position: 'absolute',
+                marginTop: '20px',
+                marginLeft: '20px',
+                color: '#759EA0',
+              }}
+            ></i>
             <input
               className=' mr-sm-2'
               type='search'
-              placeholder= 'Search any products in food and agriculture'
+              placeholder='Search any products in food and agriculture'
               aria-label='Search'
+              list='browsers'
+              name='browser'
+              id='browser'
+              onChange={(e) => setSearchValue(e.target.value)}
             />
+            <datalist id='browsers'>
+              {props.data && props.data.map((res, index) => {
+                return (
+                  <div>
+                    <option value={res.title} />
+                    {res.title === searchValue && setData(res)}
+                  </div>
+                )
+              })}
+            </datalist>
           </form>
         </div>
         <small className='text-bold mx-2'>{localStorage?.name}</small>
@@ -53,7 +79,7 @@ const Navbar = (props) => {
                 borderRadius: '8px',
                 fontSize: '13px',
                 fontWeight: 'bold',
-                fontFamily: 'Inter, sans-serif'
+                fontFamily: 'Inter, sans-serif',
               }}
             >
               Sing In
@@ -63,7 +89,11 @@ const Navbar = (props) => {
 
         <select
           className='form-control bg-black text-light'
-          style={{ fontSize: '14px', border: 'none' , fontFamily: 'Inter, sans-serif'}}
+          style={{
+            fontSize: '14px',
+            border: 'none',
+            fontFamily: 'Inter, sans-serif',
+          }}
         >
           <option> English</option>
           <option>Arabic</option>

@@ -6,7 +6,7 @@ const MainBody = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-12 col-sm-6">
-          <b>Overview of Tridge Fulfillment Solution</b>
+          <b>Overview of TRU Market Fulfillment Solution</b>
           <img
             style={{ width: "90%", marginTop: "30px", height: "120px" }}
             src="https://cdn-new.tridge.com/static/a9ecd81a54.png"

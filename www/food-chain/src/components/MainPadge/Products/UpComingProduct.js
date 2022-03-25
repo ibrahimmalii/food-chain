@@ -14,7 +14,7 @@ const UpComingProduct = ({ photos }) => {
         <div className={classes.title}>{photos.title}</div>
         <span className={classes.country}>{photos.country}</span>
         <div className={classes.price}>
-          <span style={{ color: "#637381" }}>USA</span> {photos.price}  ~
+          <span style={{ color: "#637381" }}>USD</span> {photos.price}  ~
         </div>
         <div className={classes.available}>AVAILABLE SPECS:</div>
         <small className="text-muted">{photos.variety}</small>

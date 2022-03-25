@@ -41,17 +41,19 @@
 }
 
 .buttonDetails:hover {
-  border: 1px solid #87B4F4
+  border: 2px solid #87B4F4;
+  background-color: #EDF3FB;
 }
 
 .buttonDetails {
   border-radius: 20px;
   color: #2f7cef;
   font-size: 12px;
-  border: 1px solid #b8d1f7;
+  border: 2px solid #B8D2F7;
   margin-bottom: 50px;
   font-family: Inter, sans-serif;
   padding: 7px;
   width: 100px;
   font-weight: bold;
+  background-color: white;
 }

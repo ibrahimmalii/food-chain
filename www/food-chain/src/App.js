@@ -38,7 +38,7 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading ....</div>}>
-        <Nav />
+        <Nav data={data}/>
         <Routes>
           <Route
             path="/"
