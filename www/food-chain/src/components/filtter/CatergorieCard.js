@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import classes from '../MainPadge/Products/TrendProduct.module.css'
 
 const CatergorieCard = ({ item }) => {
 
@@ -12,15 +13,21 @@ const CatergorieCard = ({ item }) => {
           alt="sunFlower"
           width="200px"
           height="200px"
+          style={{ borderRadius: "8px" }}
         />
-        <h6>{item.title}</h6>
-        <span>{item.country}</span>
-        <h6>{item.price}</h6>
+        <div className={classes.title}>{item.title}</div>
+        <span className={classes.country}>{item.country}</span>
+        <div className={classes.price}>
+          <span style={{ color: "#637381" }}>USD</span> {item.price}  ~
+        </div>
+        <div className={classes.available}>AVAILABLE SPECS:</div>
         <small className="text-muted">{item.variety}</small>
         <p className="text-muted" style={{ fontSize: "10px" }}>
           {item.require}
         </p>
-        <button type="button" class="btn btn-outline-primary mb-5">
+        <button
+         className={classes.buttonDetails}
+        >
           See Details
         </button>
       </div>

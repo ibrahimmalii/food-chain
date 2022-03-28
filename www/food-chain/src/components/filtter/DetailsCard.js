@@ -6,12 +6,14 @@ const DetailsCard = (props) => {
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
 
+  
   const handleMouseMove = (event) => {
     setSrc(event.target.src);
   };
-
+  
   return (
     <div>
+      {console.log('child')}
       <div className='container row'>
         <div className='col-4 mt-5 offset-1'>
           <div className='mb-5'>
