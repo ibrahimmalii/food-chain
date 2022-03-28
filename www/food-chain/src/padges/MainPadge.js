@@ -1,13 +1,13 @@
-import { Fragment } from "react";
-import Filtter from "../components/MainPadge/Filtter";
-import Header from "../components/MainPadge/Header";
-import MainBody from "../components/MainPadge/MainBody";
-import TrendProduct from "../components/MainPadge/Products/TrendProduct";
-import UpComingProduct from "../components/MainPadge/Products/UpComingProduct";
-import classes from "../components/MainPadge/Products/TrendProduct.module.css";
-import classCategories from "../components/MainPadge/Header.module.css";
-import { Link } from "react-router-dom";
-import Admin from "../components/MainPadge/Admin";
+import { Fragment } from 'react';
+import Filtter from '../components/MainPadge/Filtter';
+import Header from '../components/MainPadge/Header';
+import MainBody from '../components/MainPadge/MainBody';
+import TrendProduct from '../components/MainPadge/Products/TrendProduct';
+import UpComingProduct from '../components/MainPadge/Products/UpComingProduct';
+import classes from '../components/MainPadge/Products/TrendProduct.module.css';
+import classCategories from '../components/MainPadge/Header.module.css';
+import { Link } from 'react-router-dom';
+import Admin from '../components/MainPadge/Admin';
 const MainPadge = (props) => {
   return (
     <Fragment>
@@ -15,35 +15,35 @@ const MainPadge = (props) => {
       {props.categories && <Admin categories={props.categories} />}
       {props.categories &&
         props.categories.map((res, index) => {
-          return <div className="col w-100" key={index}></div>;
+          return <div className='col w-100' key={index}></div>;
         })}
 
       <MainBody />
       <h4
-        className="container mt-5"
+        className='container mt-5'
         style={{
-          fontWeight: "600",
-          fontSize: "24px",
-          letterSpacing: "-0.7px",
-          fontFamily: "Inter, sans-serif",
-          color: 'rgb(33, 43, 54)'
+          fontWeight: '600',
+          fontSize: '24px',
+          letterSpacing: '-0.7px',
+          fontFamily: 'Inter, sans-serif',
+          color: 'rgb(33, 43, 54)',
         }}
       >
         Browse by Category
       </h4>
       <div className={classCategories.mainFiltter}>
-        <div className="row container text-center">
+        <div className='row container text-center'>
           <Link
-            className="col btn w-100"
-            style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px" }}
-            to="/categories"
+            className='col btn w-100'
+            style={{ border: '1px solid rgb(145, 174, 194)', margin: '1px' }}
+            to='/categories'
           >
             All Categories
           </Link>
           {props.categories &&
             props.categories.map((res, index) => {
               return (
-                <div className="col w-100" key={index}>
+                <div className='col w-100' key={index}>
                   <Filtter categories={res} />
                 </div>
               );
@@ -51,17 +51,22 @@ const MainPadge = (props) => {
         </div>
       </div>
       <div className={classes.cardProduct}>
-        <h4 className="mb-4">Trending Products</h4>
-        <div className="row">
-          {props.data &&
+        <h4 className='mb-4'>Trending Products</h4>
+        <div className='row'>
+          {props.data.length ? (
             props.data.map((photo, index) => {
               return (
-                <div key={index} className="col-4">
+                <div key={index} className='col-4'>
                   <TrendProduct photos={photo} />
                   <UpComingProduct photos={photo} />
                 </div>
               );
-            })}
+            })
+          ) : (
+            <div className='card p-4 bg-secondary text-light text-center m-auto'>
+              <h3>There is no result</h3>
+            </div>
+          )}
         </div>
       </div>
     </Fragment>
