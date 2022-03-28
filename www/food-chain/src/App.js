@@ -10,6 +10,7 @@ const Login = React.lazy(() => import("./components/Login.js"));
 const Categories = React.lazy(() => import("./padges/Categories.js"));
 const Fruit = React.lazy(() => import("./padges/Fruits.js"));
 const Product = React.lazy(() => import("./padges/ProductDetails.js"));
+const Filtter = React.lazy(() => import('./components/filtter/FiltterCard.js'))
 
 function App() {
   const [data, setData] = useState("");
@@ -55,6 +56,7 @@ function App() {
           ></Route>
           <Route path="/product/:id" element={<Product products={products}/>}></Route>
           <Route path='/gallery' element={<Gallery/>}></Route>
+          <Route path='/filtter' element={<Filtter/>}></Route>
         </Routes>
         <Footer footerData={data} />
       </Suspense>

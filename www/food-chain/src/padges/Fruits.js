@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { axiosInstance } from "./../axios/config";
 import classes from "./Categories.module.css";
 import searchClass from "./Categories.module.css";
@@ -8,13 +8,16 @@ import Filtter from "./../components/MainPadge/Filtter";
 
 const Fruits = (props) => {
   const params = useParams();
+  const inputSearch = useRef();
   const [type, setType] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [searchData, setSearchData] = useState(false);
 
   const handleType = useCallback(async () => {
     axiosInstance.get(`api/categories/${params.id}`).then((res) => {
-      setType(res);
+      setType(res)
+      setSearchData(false) 
+      inputSearch.current.value = ''
     });
   }, [params.id]);
 
@@ -23,10 +26,12 @@ const Fruits = (props) => {
   }, [handleType]);
 
   const handleChange = (e) => {
-    setSearchValue(e.target.value);
+    type &&
+      type.data[0].products.map((res) => {
+        return res.title === e.target.value && setSearchValue(res)
+      });
     setSearchData(true);
-    console.log(searchData)
-  }
+  };
 
   return (
     <div className={searchClass.categorie}>
@@ -59,7 +64,8 @@ const Fruits = (props) => {
           list="browse"
           name="browser"
           id="browser"
-          onChange={(e) => handleChange(e) }
+          ref={inputSearch}
+          onChange={(e) => handleChange(e)}
         />
         <datalist id="browse">
           {type &&

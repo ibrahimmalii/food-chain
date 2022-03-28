@@ -1,16 +1,29 @@
 import classes from './Header.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { axiosInstance } from './../../axios/config';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
-  const [searchValue, setSearchValue] = useState('');
-  const [ setData] = useState([])
+  const [data ,  setData] = useState([]);
+  const [searchNav , setSearchNav] = useState('')
 
   const logout = () => {
     localStorage.clear();
     navigate('/login');
   };
+
+  const handleSearch = (e) => {
+    setSearchNav(e.target.value)
+    getSearchData()
+  }
+
+  const getSearchData = () => {
+    axiosInstance.post('/api/products/search' , {
+      search: searchNav
+    }).then(res => localStorage.setItem('key' , res.data.title));
+    
+  }
   return (
     <div
       className={classes.nav}
@@ -50,14 +63,13 @@ const Navbar = (props) => {
               list='browsers'
               name='browser'
               id='browser'
-              onChange={(e) => setSearchValue(e.target.value)}
+              onChange={(e) => handleSearch(e)}
             />
             <datalist id='browsers'>
               {props.data && props.data.map((res, index) => {
                 return (
                   <div>
                     <option value={res.title} />
-                    {res.title === searchValue && setData(res)}
                   </div>
                 )
               })}
