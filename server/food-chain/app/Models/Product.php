@@ -15,7 +15,7 @@ class Product extends Model
     protected $with = ['files'];
     protected $hidden = ['created_at', 'updated_at'];
 
-    const SEARCHABLE_FIELDS = ['title', 'description'];
+    const SEARCHABLE_FIELDS = ['title'];
 
 
     /**
@@ -27,7 +27,6 @@ class Product extends Model
     {
         return [
             'title' => $this->title,
-            'description' => $this->description
         ];
     }
 

@@ -1,8 +1,10 @@
 input::placeholder {
   color: #759EA0;
-  margin-left: 30px;
+  /* margin-left: 30px; */
   position: absolute;
 }
+
+
 .container div {
   background-color: rgb(187, 202, 233);
   opacity: 0.5;
@@ -53,6 +55,9 @@ input::placeholder {
   padding: 10px;
   border: none;
   border-radius: 5px;
+  outline: none;
+  color: #759EA0;
+  text-indent: 30px;
 }
 
 

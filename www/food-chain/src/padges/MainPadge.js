@@ -56,7 +56,7 @@ const MainPadge = (props) => {
           {props.data.length ? (
             props.data.map((photo, index) => {
               return (
-                <div key={index} className='col-4'>
+                <div key={index} className='col-3'>
                   <TrendProduct photos={photo} />
                   <UpComingProduct photos={photo} />
                 </div>
