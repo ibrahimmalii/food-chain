@@ -73,6 +73,7 @@ function App() {
           <Route path='/gallery' element={<Gallery />}></Route>
           <Route path='/filtter' element={<Filtter />}></Route>
         </Routes>
+
         <Footer footerData={data} />
       </Suspense>
     </BrowserRouter>
