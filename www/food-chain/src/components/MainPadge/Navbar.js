@@ -5,8 +5,8 @@ import { axiosInstance } from './../../axios/config';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
-  const [data ,  setData] = useState([]);
-  const [searchNav , setSearchNav] = useState('')
+  const [data, setData] = useState([]);
+  const [searchNav, setSearchNav] = useState('');
 
   const logout = () => {
     localStorage.clear();
@@ -14,16 +14,21 @@ const Navbar = (props) => {
   };
 
   const handleSearch = (e) => {
-    setSearchNav(e.target.value)
-    getSearchData()
-  }
+    // setSearchNav(e.target.value);
+    props.onDataChanged(e.target.value);
+    // getSearchData();
+  };
 
   const getSearchData = () => {
-    axiosInstance.post('/api/products/search' , {
-      search: searchNav
-    }).then(res => localStorage.setItem('key' , res.data.title));
-    
-  }
+    axiosInstance
+      .post('/api/products/search', {
+        search: searchNav,
+      })
+      .then((res) => {
+        props.onDataChanged(res);
+        localStorage.setItem('key', res.data.title);
+      });
+  };
   return (
     <div
       className={classes.nav}
@@ -63,16 +68,18 @@ const Navbar = (props) => {
               list='browsers'
               name='browser'
               id='browser'
+              style={{ 'text-indent': '25px', outline: 'none' }}
               onChange={(e) => handleSearch(e)}
             />
             <datalist id='browsers'>
-              {props.data && props.data.map((res, index) => {
-                return (
-                  <div>
-                    <option value={res.title} />
-                  </div>
-                )
-              })}
+              {props.data &&
+                props.data.map((res, index) => {
+                  return (
+                    <div>
+                      <option value={res.title} />
+                    </div>
+                  );
+                })}
             </datalist>
           </form>
         </div>
