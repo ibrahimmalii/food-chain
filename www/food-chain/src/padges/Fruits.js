@@ -4,11 +4,13 @@ import { axiosInstance } from "./../axios/config";
 import classes from "./Categories.module.css";
 import searchClass from "./Categories.module.css";
 import ProductCard from "./../components/filtter/ProductCard";
-import Filtter from './../components/MainPadge/Filtter';
+import Filtter from "./../components/MainPadge/Filtter";
 
 const Fruits = (props) => {
   const params = useParams();
   const [type, setType] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [searchData, setSearchData] = useState(false);
 
   const handleType = useCallback(async () => {
     axiosInstance.get(`api/categories/${params.id}`).then((res) => {
@@ -20,8 +22,11 @@ const Fruits = (props) => {
     handleType();
   }, [handleType]);
 
-
-
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+    setSearchData(true);
+    console.log(searchData)
+  }
 
   return (
     <div className={searchClass.categorie}>
@@ -36,21 +41,45 @@ const Fruits = (props) => {
             >
               All Categories
             </Link>
-            {props.categories && props.categories.map((res , index) => {
-              return(
-                <div className='col w-100' key={index}>
-                <Filtter categories={res} />
-                </div>
-              )
-            })}
+            {props.categories &&
+              props.categories.map((res, index) => {
+                return (
+                  <div className="col w-100" key={index}>
+                    <Filtter categories={res} />
+                  </div>
+                );
+              })}
           </div>
         </div>
-        <input type="text" placeholder="Search" />
-        <div className="row m-5">
+        <input
+          className=" mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          list="browse"
+          name="browser"
+          id="browser"
+          onChange={(e) => handleChange(e) }
+        />
+        <datalist id="browse">
           {type &&
-            type.data[0].products.map((res) => {
-              return  <ProductCard type={res} />;
+            type.data[0].products.map((res, index) => {
+              return (
+                <div>
+                  <option value={res.title} />
+                </div>
+              );
             })}
+        </datalist>
+        <div className="row m-5">
+          {searchData ? (
+            <ProductCard type={searchValue} />
+          ) : (
+            type &&
+            type.data[0].products.map((res) => {
+              return <ProductCard type={res} />;
+            })
+          )}
         </div>
       </div>
     </div>
@@ -58,3 +87,11 @@ const Fruits = (props) => {
 };
 
 export default Fruits;
+// {type &&
+//   type.data[0].products.map((res) => {
+//     return  <ProductCard type={res} />;
+//   })}
+
+// {
+//   !displayGallary ? <Details productId= {type}/> : <PhotosGallary productId= {type}/>
+// }

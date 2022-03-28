@@ -1,12 +1,11 @@
 import classes from './Header.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
-import TrendProduct from './Products/TrendProduct';
+import { useState } from 'react';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
-  const [data, setData] = useState([])
+  const [ setData] = useState([])
 
   const logout = () => {
     localStorage.clear();
