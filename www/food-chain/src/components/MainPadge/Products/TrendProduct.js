@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "./TrendProduct.module.css";
 const TrendProduct = (props) => {
-  props.data && console.log(props.data)
   return (
     <div className={classes.content}>
     <Link to={`/product/${props.photos.id}`} style={{ textDecoration: "none" }}>

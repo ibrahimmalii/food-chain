@@ -20,3 +20,17 @@
     margin: auto;
     overflow: hidden;
 }
+
+.buttons{
+    margin : 20px;
+    color: #637390;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.buttons:hover{
+    text-decoration: underline;
+    text-decoration-color: #637390;
+}

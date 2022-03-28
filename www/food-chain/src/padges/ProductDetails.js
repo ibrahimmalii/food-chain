@@ -4,6 +4,7 @@ import { axiosInstance } from "./../axios/config";
 import DetailsCard from "../components/filtter/DetailsCard";
 import Details from "../components/filtter/Details";
 import PhotosGallary from './../components/filtter/PhotosGallary';
+import classes from './Categories.module.css';
 
 
 export default function ProductDetails(props) {
@@ -21,26 +22,38 @@ export default function ProductDetails(props) {
     handleType();
   }, [handleType]);
 
- 
-
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 ">
       <DetailsCard productId={type} />
-      <div className="text-center">
-      <button
-        className="btn btn-outline-primary m-5"
-        onClick={() => setDisplayGallary(false)} 
+      {DetailsCard && 
+      <div className="text-center mb-5">
+        <span
+          className={classes.buttons}
+          onClick={() => setDisplayGallary(false)} 
+          style={{
+            color: `${!displayGallary ? '#2374EE' : '#637390'}`,
+            textDecoration: `${!displayGallary ? 'underline' : 'none'}`,
+            textDecorationColor: '#2374EE'
+          }}
       >
 
         Product Details
-      </button>
-      <button
-        className="btn btn-outline-primary "
-        onClick={() => setDisplayGallary(true)}
+      </span>
+      <span
+        className={classes.buttons}
+          onClick={() => setDisplayGallary(true)}
+          style={{
+            color: `${displayGallary ? '#2374EE' : '#637390'}`,
+            textDecoration: `${displayGallary ? 'underline' : 'none'}`,
+            textDecorationColor: '#2374EE'
+          }}
       >
         Gallary
-      </button>
-    </div>
+      </span>
+      </div>
+    }
+    {console.log('parent')}
+    <hr style={{ color: '#E9EDF2' , height: '2px'}}/>
     {
       !displayGallary ? <Details productId= {type}/> : <PhotosGallary productId= {type}/>
     }
