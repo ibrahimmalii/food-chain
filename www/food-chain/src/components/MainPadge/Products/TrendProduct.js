@@ -27,7 +27,7 @@ const TrendProduct = (props) => {
           See Details
         </button>
         </Link>
-      </div>
+        </div>
   );
 };
 

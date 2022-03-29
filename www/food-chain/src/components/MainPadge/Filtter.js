@@ -10,6 +10,7 @@ const Filtter = ({ categories }) => {
           to={`/categories/${categories.id}`}
         >
           {categories.title}
+          <i className="fa fa-angle-right " style={{marginLeft: '30px'}}  />
         </Link>
       )}
     </div>

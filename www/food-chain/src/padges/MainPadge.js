@@ -32,13 +32,14 @@ const MainPadge = (props) => {
         Browse by Category
       </h4>
       <div className={classCategories.mainFiltter}>
-        <div className='row container text-center'>
+        <div className='row container'>
           <Link
             className='col btn w-100'
             style={{ border: '1px solid rgb(145, 174, 194)', margin: '1px' }}
             to='/categories'
           >
             All Categories
+            <i className="fa fa-angle-right " style={{marginLeft: '20px'}}  />
           </Link>
           {props.categories &&
             props.categories.map((res, index) => {
