@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import classes from '../MainPadge/Products/TrendProduct.module.css';
 import flagStyle from '../../assets/css/icons.css';
+import Urls from '../../Urls';
 
 const ProductCard = (props) => {
   return (
@@ -10,14 +11,14 @@ const ProductCard = (props) => {
     >
       <Link to={`/product/${props.type.id}`} style={{ textDecoration: 'none' }}>
         <img
-          src={'http://localhost:8000' + props.type.files[0].file_path}
+          src={Urls.domainUrl + props.type.files[0].file_path}
           alt='sunFlower'
           width='200px'
           height='200px'
           style={{ borderRadius: '8px' }}
         />
         <div className={classes.title}>{props.type.title}</div>
-        <i className={`flag-icon flag-icon-${props.type.variety} mx-1`}></i>
+        <i className={`flag-icon flag-icon-${props.type.flag} mx-1`}></i>
         <span className={classes.country}>{props.type.country}</span>
         <div className={classes.price}>
           <span style={{ color: '#637381' }}>USD</span> {props.type.price} ~

@@ -2,6 +2,7 @@ import { axiosInstance } from './../../axios/config';
 import { useRef, useState } from 'react';
 const Admin = (props) => {
   const [photos, setPhotos] = useState(null);
+  const [countryName, setCountry] = useState(null);
   const title = useRef();
   const description = useRef();
   const price = useRef();
@@ -13,27 +14,33 @@ const Admin = (props) => {
     setPhotos(e.target.files[0]);
   };
 
+  const onCountryChange = (event) => {
+    const index = event.nativeEvent.target.selectedIndex;
+    const text = event.nativeEvent.target[index].text;
+    setCountry(text);
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('title', title.current.value);
     formData.append('description', description.current.value);
     formData.append('price', price.current.value);
-    console.log(country);
-    formData.append('country', country.value);
+    formData.append('flag', country.current.value);
+    formData.append('country', countryName);
     formData.append('variety', variety.current.value);
     formData.append('category_id', categorieId.current.value);
     formData.append('photos', photos);
-    // axiosInstance
-    //   .post('/api/products', formData, {
-    //     headers: {
-    //       'content-type': 'multipart/form-data',
-    //     },
-    //   })
-    //   .then((res) => {
-    //     window.location.reload();
-    //   })
-    //   .catch(console.error);
+    axiosInstance
+      .post('/api/products', formData, {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      })
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch(console.error);
   };
   return (
     <div className='text-center mb-5'>
@@ -94,7 +101,7 @@ const Admin = (props) => {
                     aria-label='Amount (to the nearest dollar)'
                     ref={price}
                   />
-                  <span className='input-group-text'>.00</span>
+                  <span className='input-group-text'>$</span>
                 </div>
                 <div className='input-group mb-3'>
                   <span className='input-group-text'>Variety</span>
@@ -109,7 +116,13 @@ const Admin = (props) => {
 
                 <div className='input-group mb-3'>
                   <span className='input-group-text'>Country</span>
-                  <select name='country'>
+                  <select
+                    onChange={onCountryChange}
+                    className='form-select'
+                    aria-label='Default select example'
+                    name='country'
+                    ref={country}
+                  >
                     <option value='  ' selected>
                       Select a country
                     </option>

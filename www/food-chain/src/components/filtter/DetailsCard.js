@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from '../MainPadge/Products/TrendProduct.module.css';
+import Urls from '../../Urls';
 
 const DetailsCard = (props) => {
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
 
-  
   const handleMouseMove = (event) => {
     setSrc(event.target.src);
   };
-  
+
   return (
     <div>
       {console.log('child')}
@@ -55,14 +55,13 @@ const DetailsCard = (props) => {
                     style={{ borderRadius: '10px', overflow: 'hidden' }}
                   >
                     <img
-                      src={'http://localhost:8000' + res.file_path}
+                      src={Urls.domainUrl + res.file_path}
                       alt='fruit'
                       width='100px'
                       height='100px'
                       onMouseMove={(event) => handleMouseMove(event)}
                     />
-                    {!photos &&
-                      setPhotos('http://localhost:8000' + res.file_path)}
+                    {!photos && setPhotos(Urls.domainUrl + res.file_path)}
                   </div>
                 );
               })}
@@ -103,28 +102,76 @@ const DetailsCard = (props) => {
               >
                 USD / MT, March 7, 2022
               </span>
-            </div> 
-            <div style={{height: '100px'  , borderRadius: '5px' , boxShadow: '0em 0em 1em rgba(0,0,0,0.1)'}}  className=' mt-5 p-4'>
+            </div>
+            <div
+              style={{
+                height: '100px',
+                borderRadius: '5px',
+                boxShadow: '0em 0em 1em rgba(0,0,0,0.1)',
+              }}
+              className=' mt-5 p-4'
+            >
               <ul style={{ listStyleType: 'none' }}>
-                <li style={{color: 'rgb(33, 43, 54)' ,     fontSize: '14px' , lineHeight: '22px' ,     fontWeight: '400'}}>
-                <i class="fas fa-exclamation-circle" style={{marginLeft: '-35px' , marginRight : '20px'}}></i>Currently our offer prices are not available due to frequent
+                <li
+                  style={{
+                    color: 'rgb(33, 43, 54)',
+                    fontSize: '14px',
+                    lineHeight: '22px',
+                    fontWeight: '400',
+                  }}
+                >
+                  <i
+                    class='fas fa-exclamation-circle'
+                    style={{ marginLeft: '-35px', marginRight: '20px' }}
+                  ></i>
+                  Currently our offer prices are not available due to frequent
                   fluctuation. <br />
-                  <a className='' style={{textDecoration: 'none'}}>Get a quote</a> now for an offer price for this market.
+                  <a className='' style={{ textDecoration: 'none' }}>
+                    Get a quote
+                  </a>{' '}
+                  now for an offer price for this market.
                 </li>
               </ul>
             </div>
-            <div style={{  borderRadius: '5px' , boxShadow: '0em 0em 1em rgba(0,0,0,0.1)'}}  className=' mt-5 p-4'>
-              <h1 style={{ fontSize: '16px', fontWeight: '600', fontFamily: 'Inter, sans-serif' }}>Current Offer Base Prices</h1>
-              <div  style={{  borderRadius: '5px' , backgroundColor: '#F9FAFB'}}  className='mt-4 p-4'>
-              <h1 style={{ fontSize: '16px' ,  color: ' rgb(99, 115, 129)'}}>Available Specifications:</h1>
-              <ul style={{ listStyleType: 'none' ,color: ' rgb(99, 115, 129)' , fontWeight: '400' , fontSize: '14px', lineHeight: '28px'}}>
-                <li>Variety: Yellow, Mature</li>
-                <li>Color: Yellow</li>
-                <li>Grade: High Quality</li>
-                <li>Packaging Type: Carton Box</li>
-                <li>Processed Style: Fresh</li>
-                <li>Incoterms: FOB</li>
-              </ul>
+            <div
+              style={{
+                borderRadius: '5px',
+                boxShadow: '0em 0em 1em rgba(0,0,0,0.1)',
+              }}
+              className=' mt-5 p-4'
+            >
+              <h1
+                style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                Current Offer Base Prices
+              </h1>
+              <div
+                style={{ borderRadius: '5px', backgroundColor: '#F9FAFB' }}
+                className='mt-4 p-4'
+              >
+                <h1 style={{ fontSize: '16px', color: ' rgb(99, 115, 129)' }}>
+                  Available Specifications:
+                </h1>
+                <ul
+                  style={{
+                    listStyleType: 'none',
+                    color: ' rgb(99, 115, 129)',
+                    fontWeight: '400',
+                    fontSize: '14px',
+                    lineHeight: '28px',
+                  }}
+                >
+                  <li>Variety: Yellow, Mature</li>
+                  <li>Color: Yellow</li>
+                  <li>Grade: High Quality</li>
+                  <li>Packaging Type: Carton Box</li>
+                  <li>Processed Style: Fresh</li>
+                  <li>Incoterms: FOB</li>
+                </ul>
               </div>
             </div>
           </div>

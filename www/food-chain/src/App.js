@@ -40,7 +40,7 @@ function App() {
       );
       setData(newSearchArr);
     } else {
-      fetchDataHandler();
+      setData(originalData);
     }
   };
 
