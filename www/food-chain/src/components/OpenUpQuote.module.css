@@ -1,15 +1,15 @@
 .container{
     position: relative;
-    padding: 30px;
+    padding: 25px;
     border-radius: 20px;
     background-color: rgb(33, 43, 54);
-    padding-bottom : 80px;
+    padding-bottom : 70px;
     font-family: Inter, sans-serif;
     position: fixed;
     bottom: 0%;
     right:5%;
     width: 27%;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .truthy{

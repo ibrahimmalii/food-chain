@@ -19,7 +19,7 @@ const Footer = ({ footerData }) => {
                   >
                     <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
                   </Link>
-                  <div>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
+                  <div style={{color: '#A8ACB1'}}>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
                   <Link
                     to={`/categories/${res.category_id}`}
                     style={{
@@ -30,7 +30,7 @@ const Footer = ({ footerData }) => {
                     <div>{res.title} &nbsp;&nbsp; &nbsp;</div>
                   </Link>
 
-                  <div>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
+                  <div style={{color: '#A8ACB1'}}>{res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</div>
                 </div>
               );
             })}

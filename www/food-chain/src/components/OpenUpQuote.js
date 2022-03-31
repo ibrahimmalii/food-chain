@@ -2,7 +2,7 @@ import classes from "./OpenUpQuote.module.css";
 import { useState } from "react";
 
 export default function OpenUpQuote() {
-  const [stateQuote, setStateQuote] = useState(true);
+  const [stateQuote, setStateQuote] = useState(false);
 
   const handleChangeUp = () => {
     setStateQuote(false)
@@ -26,7 +26,7 @@ export default function OpenUpQuote() {
           </div>
         </div>
       ) : (
-        <div className="float-end mx-5" style={{ width: "28%" }}>
+        <div className="float-end mx-5" style={{ width: "30%" }}>
           <div className={classes.container}>
             <i
               className="fa fa-angle-down text-light float-end  "

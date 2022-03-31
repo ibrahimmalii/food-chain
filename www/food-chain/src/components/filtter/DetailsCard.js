@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "../MainPadge/Products/TrendProduct.module.css";
-import flagStyle from "../../assets/css/icons.css";
 import Urls from "../../Urls";
 
 const DetailsCard = (props) => {
@@ -385,9 +384,10 @@ const DetailsCard = (props) => {
                                   }}
                                 ></i>
                                 <select
+                                className='p-2'
                                   id="cars"
                                   style={{
-                                    border: "none",
+                                    border: "1px solid #C4CDD5",
                                     marginRight: "20px",
                                   }}
                                 >
@@ -404,7 +404,7 @@ const DetailsCard = (props) => {
                                   className={classes.inputNumber}
                                   style={{
                                     fontSize: "1.1rem",
-                                    border: "none",
+                                    border: "1px solid #C4CDD5",
                                     color: "#919EAB",
                                   }}
                                 />
