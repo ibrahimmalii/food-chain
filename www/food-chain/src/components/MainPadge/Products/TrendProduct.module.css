@@ -1,7 +1,6 @@
 .cardProduct {
   margin: 40px auto;
   width: 84%;
-  /* background-color: transparent; */
 }
 
 .cardProduct h6 {
@@ -57,3 +56,11 @@
   font-weight: bold;
   background-color: white;
 }
+
+.inputNumber::placeholder{
+  color: #919EAB
+}
+
+.inputNumber :hover , .inputNumber:active , .inputNumber:focus{
+  outline: none;
+} 

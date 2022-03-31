@@ -374,14 +374,14 @@ const DetailsCard = (props) => {
                             >
                               YOUR REQUIREMENTS
                             </span>
-                            <div style={{ margin: "20px"  , marginTop: '50px'}}>
+                            <div style={{ margin: "20px", marginTop: "50px" }}>
                               <div>
                                 <i
                                   class="fa fa-truck-moving"
                                   style={{
                                     fontSize: "15px",
-                                    marginRight: "20px",
-                                    color: '#919EAB'
+                                    marginRight: "30px",
+                                    color: "#919EAB",
                                   }}
                                 ></i>
                                 <select
@@ -399,10 +399,14 @@ const DetailsCard = (props) => {
                                   </option>
                                 </select>
                                 <input
-                                type='number'
+                                  type="number"
                                   placeholder="Port of loading"
-                                  
-                                  style={{ fontSize: "1.1rem", border: "none" , color: '#919EAB'}}
+                                  className={classes.inputNumber}
+                                  style={{
+                                    fontSize: "1.1rem",
+                                    border: "none",
+                                    color: "#919EAB",
+                                  }}
                                 />
                                 <select
                                   id="country"
@@ -421,19 +425,49 @@ const DetailsCard = (props) => {
                                       props.productId.data[0].country}
                                   </option>
                                 </select>
-                                </div>
-                                <div className="mt-5">
-                                <i class="fa fa-calendar-day" style={{
-                                  fontSize: "15px",
-                                  marginRight: "20px",
-                                  color: '#919EAB'
-                                }} ></i>
+                              </div>
+                              <div className="mt-5">
+                                <i
+                                  class="fa fa-calendar-day"
+                                  style={{
+                                    fontSize: "15px",
+                                    marginRight: "20px",
+                                    color: "#919EAB",
+                                  }}
+                                ></i>
                                 <input
                                   placeholder="Preferred shipment data or schedule"
-                                  className='w-75'
-                                  style={{ fontSize: "1.1rem", border: "none" , marginLeft: "20px",}}
+                                  className={classes.inputNumber}
+                                  style={{
+                                    fontSize: "1.1rem",
+                                    border: "none",
+                                    marginLeft: "20px",
+                                    width: "75%",
+                                  }}
                                 />
-                                </div>
+                              </div>
+                              <div style={{ marginTop: "50px" }}>
+                                <i
+                                  class="fa fa-credit-card-front"
+                                  style={{
+                                    fontSize: "15px",
+                                    marginRight: "20px",
+                                    color: "#919EAB",
+                                  }}
+                                ></i>
+
+                                <input
+                                  placeholder="Purchase volume e.g. 10,000"
+                                  className={classes.inputNumber}
+                                  type="number"
+                                  style={{
+                                    fontSize: "1.1rem",
+                                    border: "none",
+                                    marginLeft: "20px",
+                                    width: "75%",
+                                  }}
+                                ></input>
+                              </div>
                             </div>
                           </form>
                         </div>

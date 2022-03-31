@@ -5,7 +5,6 @@ import { axiosInstance } from './../../axios/config';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
   const [searchNav, setSearchNav] = useState('');
 
   const logout = () => {
@@ -14,9 +13,7 @@ const Navbar = (props) => {
   };
 
   const handleSearch = (e) => {
-    // setSearchNav(e.target.value);
     props.onDataChanged(e.target.value);
-    // getSearchData();
   };
 
   const getSearchData = () => {
