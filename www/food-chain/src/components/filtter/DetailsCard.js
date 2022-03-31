@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import classes from "../MainPadge/Products/TrendProduct.module.css";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import classes from '../MainPadge/Products/TrendProduct.module.css';
+import Urls from '../../Urls';
 
 const DetailsCard = (props) => {
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
-
-  console.log(props.params);
 
   const handleMouseMove = (event) => {
     setSrc(event.target.src);
@@ -56,14 +55,13 @@ const DetailsCard = (props) => {
                     style={{ borderRadius: "10px", overflow: "hidden" }}
                   >
                     <img
-                      src={"http://localhost:8000" + res.file_path}
-                      alt="fruit"
-                      width="100px"
-                      height="100px"
+                      src={Urls.domainUrl + res.file_path}
+                      alt='fruit'
+                      width='100px'
+                      height='100px'
                       onMouseMove={(event) => handleMouseMove(event)}
                     />
-                    {!photos &&
-                      setPhotos("http://localhost:8000" + res.file_path)}
+                    {!photos && setPhotos(Urls.domainUrl + res.file_path)}
                   </div>
                 );
               })}

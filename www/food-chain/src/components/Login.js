@@ -2,6 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useRef } from 'react';
 import { axiosInstance } from './../axios/config';
 import { useNavigate } from 'react-router-dom';
+import styleFlag from '../../src/assets/css/icons.css';
 
 const Login = (props) => {
   const emailValue = useRef();
