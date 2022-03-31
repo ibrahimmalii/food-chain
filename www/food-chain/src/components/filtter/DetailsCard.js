@@ -354,6 +354,9 @@ const DetailsCard = (props) => {
                           information filled in automatically.
                         </span>
                       </div>
+                      <div>
+                      
+                      </div>
 
                       
                     </div>
