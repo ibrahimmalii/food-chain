@@ -193,7 +193,10 @@ const DetailsCard = (props) => {
                 aria-labelledby='exampleModalLabel'
                 aria-hidden='true'
               >
-                <div class='modal-dialog modal-lg'>
+                <div
+                  className='mx-auto modal-dialog modal-lg'
+                  style={{ width: '60%', marginTop: '93px' }}
+                >
                   <div
                     className='modal-content'
                     style={{
@@ -208,260 +211,277 @@ const DetailsCard = (props) => {
                   >
                     <button
                       type='button'
-                      class='btn-close'
+                      class='btn-close mb-2'
                       data-bs-dismiss='modal'
                       aria-label='Close'
                     ></button>
-                    <div>
-                      <div className='d-flex'>
-                        <div>
-                          <p
-                            class='modal-title h1'
-                            id='exampleModalLabel'
-                            style={{
-                              lineHeight: '28px',
-                              fontSize: '20px',
-                              color: 'rgb(255, 255, 255)',
-                            }}
-                          >
-                            Get a quote for
-                          </p>
+                    <div className='row'>
+                      <div className='col-5'>
+                        <p
+                          class='modal-title h1'
+                          id='exampleModalLabel'
+                          style={{
+                            lineHeight: '28px',
+                            fontSize: '20px',
+                            color: 'rgb(255, 255, 255)',
+                          }}
+                        >
+                          Get a quote for
+                        </p>
+                        <div
+                          className='my-3 d-flex'
+                          style={{ overflow: 'hidden' }}
+                        >
                           <div
-                            className='my-3 d-flex'
-                            style={{ overflow: 'hidden' }}
-                          >
-                            <div
+                            style={{
+                              width: '70px',
+                              height: '70px',
+                              borderRadius: '5px',
+                              objectFit: 'cover',
+                              backgroundPosition: 'center',
+                              backgroundRepeat: 'no-repeat',
+                              backgroundSize: 'cover',
+                              objectPosition: 'center center',
+                              backgroundImage: `${
+                                photos && 'url(' + photos + ')'
+                              }`,
+                            }}
+                          ></div>
+                          <div>
+                            <h1
                               style={{
-                                width: '70px',
-                                height: '70px',
-                                borderRadius: '5px',
-                                objectFit: 'cover',
-                                backgroundPosition: 'center',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundSize: 'cover',
-                                objectPosition: 'center center',
-                                backgroundImage: `${
-                                  photos && 'url(' + photos + ')'
-                                }`,
+                                lineHeight: '24px',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                color: 'rgb(255, 255, 255)',
+                                marginLeft: '10px',
                               }}
-                            ></div>
-                            <div>
+                            >
+                              {props.productId && props.productId.data[0].title}
+                            </h1>
+                            <div className='d-flex'>
                               <h1
                                 style={{
                                   lineHeight: '24px',
                                   fontSize: '16px',
-                                  fontWeight: '600',
+                                  fontWeight: '400',
                                   color: 'rgb(255, 255, 255)',
                                   marginLeft: '10px',
                                 }}
                               >
                                 {props.productId &&
-                                  props.productId.data[0].title}
+                                  props.productId.data[0].country}
                               </h1>
-                              <div className='d-flex'>
-                                <h1
-                                  style={{
-                                    lineHeight: '24px',
-                                    fontSize: '16px',
-                                    fontWeight: '400',
-                                    color: 'rgb(255, 255, 255)',
-                                    marginLeft: '10px',
-                                  }}
-                                >
-                                  {props.productId &&
-                                    props.productId.data[0].country}
-                                </h1>
-                                <div
-                                  style={{
-                                    width: '40px',
-                                    height: '20px',
-                                    objectFit: 'cover',
-                                    backgroundPosition: 'center',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundSize: 'cover',
-                                    objectPosition: 'center center',
-                                    marginLeft: '10px',
-                                  }}
-                                >
-                                  <i
-                                    className={`flag-icon flag-icon-${props.productId.data[0].flag}`}
-                                  ></i>
-                                </div>
+                              <div
+                                style={{
+                                  width: '40px',
+                                  height: '20px',
+                                  objectFit: 'cover',
+                                  backgroundPosition: 'center',
+                                  backgroundRepeat: 'no-repeat',
+                                  backgroundSize: 'cover',
+                                  objectPosition: 'center center',
+                                  marginLeft: '10px',
+                                }}
+                              >
+                                <i
+                                  className={`flag-icon flag-icon-${props.productId.data[0].flag}`}
+                                ></i>
                               </div>
                             </div>
                           </div>
-                          <span
-                            color='textLighter'
-                            style={{
-                              fontSize: '11px',
-                              color: 'rgb(157, 182, 204)',
-                            }}
-                          >
-                            YOUR INFORMATION
-                          </span>
-                          <input
-                            className='form-control'
-                            style={{
-                              backgroundColor: 'rgb(69, 79, 91) ',
-                              outline: 'none',
-                              marginTop: '10px',
-                              border: 'none',
-                            }}
-                            placeholder='Your full name'
-                            type='text'
-                          />
-                          <input
-                            className='form-control'
-                            style={{
-                              backgroundColor: 'rgb(69, 79, 91) ',
-                              outline: 'none',
-                              marginTop: '10px',
-                              border: 'none',
-                            }}
-                            placeholder='Your company name'
-                            type='text'
-                          />
-                          <input
-                            className='form-control'
-                            style={{
-                              backgroundColor: 'rgb(69, 79, 91) ',
-                              outline: 'none',
-                              marginTop: '10px',
-                              border: 'none',
-                            }}
-                            placeholder='Your business email address'
-                            type='text'
-                          />
-                          <input
-                            className='form-control'
-                            style={{
-                              backgroundColor: 'rgb(69, 79, 91) ',
-                              outline: 'none',
-                              marginTop: '10px',
-                              border: 'none',
-                              color: 'rgb(255, 255, 255)',
-                            }}
-                            placeholder='Your phone number'
-                            type='number'
-                          />
+                        </div>
+                        <span
+                          color='textLighter'
+                          style={{
+                            fontSize: '11px',
+                            color: 'rgb(157, 182, 204)',
+                          }}
+                        >
+                          YOUR INFORMATION
+                        </span>
+                        <input
+                          className='form-control'
+                          style={{
+                            backgroundColor: 'rgb(69, 79, 91) ',
+                            outline: 'none',
+                            marginTop: '10px',
+                            border: 'none',
+                          }}
+                          placeholder='Your full name'
+                          type='text'
+                        />
+                        <input
+                          className='form-control'
+                          style={{
+                            backgroundColor: 'rgb(69, 79, 91) ',
+                            outline: 'none',
+                            marginTop: '10px',
+                            border: 'none',
+                          }}
+                          placeholder='Your company name'
+                          type='text'
+                        />
+                        <input
+                          className='form-control'
+                          style={{
+                            backgroundColor: 'rgb(69, 79, 91) ',
+                            outline: 'none',
+                            marginTop: '10px',
+                            border: 'none',
+                          }}
+                          placeholder='Your business email address'
+                          type='text'
+                        />
+                        <input
+                          className='form-control'
+                          style={{
+                            backgroundColor: 'rgb(69, 79, 91) ',
+                            outline: 'none',
+                            marginTop: '10px',
+                            border: 'none',
+                            color: 'rgb(255, 255, 255)',
+                          }}
+                          placeholder='Your phone number'
+                          type='number'
+                        />
 
-                          <span
-                            color='textLighter'
-                            style={{
-                              color: 'rgb(157, 182, 204)',
-                              marginTop: '20px',
-                            }}
-                          >
-                            Want to save your information?
-                            <br />
-                            to have your information filled in automatically.
-                          </span>
-                        </div>
-                        <div>
-                          <form
-                            className='bg-light p-4'
-                            style={{
-                              width: '600px',
-                              borderRadius: '10px',
-                              marginLeft: '50px',
-                            }}
-                          >
-                            <span
-                              style={{
-                                lineHeight: '16px',
-                                fontSize: '11px',
-                                color: 'rgb(99, 115, 129)',
-                              }}
-                            >
-                              YOUR REQUIREMENTS
-                            </span>
-                            <div style={{ margin: '20px', marginTop: '50px' }}>
-                              <div>
-                                <i
-                                  class='fa fa-truck-moving'
-                                  style={{
-                                    fontSize: '15px',
-                                    marginRight: '20px',
-                                    color: '#919EAB',
-                                  }}
-                                ></i>
-                                <select
-                                  id='cars'
-                                  style={{
-                                    border: 'none',
-                                    marginRight: '20px',
-                                  }}
-                                >
-                                  <option value='volvo'>FOT</option>
-                                  <option value='saab'>FCA</option>
-                                  <option value='vw'>CIF</option>
-                                  <option value='audi' selected>
-                                    CFR
-                                  </option>
-                                </select>
-                                <input
-                                  type='number'
-                                  placeholder='Port of loading'
-                                  style={{
-                                    fontSize: '1.1rem',
-                                    border: 'none',
-                                    color: '#919EAB',
-                                  }}
-                                />
-                                <select
-                                  id='country'
-                                  style={{
-                                    border: 'none',
-                                    marginRight: '20px',
-                                  }}
-                                >
-                                  <option value='saab'>FCA</option>
-                                  <option value='vw'>CIF</option>
-                                  <option value='audi' selected>
-                                    CFR
-                                  </option>
-                                  <option value='volvo' selected>
-                                    {props.productId &&
-                                      props.productId.data[0].country}
-                                  </option>
-                                </select>
-                              </div>
-                              <div className='mt-5'>
-                                <i
-                                  class='fa fa-calendar-day'
-                                  style={{
-                                    fontSize: '15px',
-                                    marginRight: '20px',
-                                    color: '#919EAB',
-                                  }}
-                                ></i>
-                                <input
-                                  placeholder='Preferred shipment data or schedule'
-                                  className='w-75'
-                                  style={{
-                                    fontSize: '1.1rem',
-                                    border: 'none',
-                                    marginLeft: '20px',
-                                  }}
-                                />
-                              </div>
-                            </div>
-                          </form>
-                        </div>
+                        <span
+                          color='textLighter'
+                          style={{
+                            color: 'rgb(157, 182, 204)',
+                            marginTop: '20px',
+                          }}
+                        >
+                          Want to save your information?{' '}
+                        </span>
+                        <span className='text-light fw-bold'>
+                          {' '}
+                          Join Tru Market For Free
+                        </span>
+                        <br />
+                        <span
+                          style={{
+                            color: 'rgb(157, 182, 204)',
+                            marginTop: '20px',
+                          }}
+                        >
+                          to have your information filled in automatically.
+                        </span>
                       </div>
-                    </div>
+                      <div className='col'>
+                        <form
+                          className='bg-light p-4'
+                          style={{
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <span
+                            style={{
+                              lineHeight: '16px',
+                              fontSize: '11px',
+                              color: 'rgb(99, 115, 129)',
+                            }}
+                          >
+                            YOUR REQUIREMENTS
+                          </span>
+                          <div style={{ margin: '20px', marginTop: '50px' }}>
+                            <div>
+                              <i
+                                class='fa fa-truck-moving'
+                                style={{
+                                  fontSize: '15px',
+                                  marginRight: '30px',
+                                  color: '#919EAB',
+                                }}
+                              ></i>
+                              <select
+                                id='cars'
+                                style={{
+                                  border: 'none',
+                                  marginRight: '20px',
+                                }}
+                              >
+                                <option value='volvo'>FOT</option>
+                                <option value='saab'>FCA</option>
+                                <option value='vw'>CIF</option>
+                                <option value='audi' selected>
+                                  CFR
+                                </option>
+                              </select>
+                              <input
+                                type='number'
+                                placeholder='Port of loading'
+                                className={classes.inputNumber}
+                                style={{
+                                  fontSize: '1.1rem',
+                                  border: 'none',
+                                  color: '#919EAB',
+                                }}
+                              />
+                              <select
+                                id='country'
+                                style={{
+                                  border: 'none',
+                                  marginRight: '20px',
+                                }}
+                              >
+                                <option value='saab'>FCA</option>
+                                <option value='vw'>CIF</option>
+                                <option value='audi' selected>
+                                  CFR
+                                </option>
+                                <option value='volvo' selected>
+                                  {props.productId &&
+                                    props.productId.data[0].country}
+                                </option>
+                              </select>
+                            </div>
+                            <div className='mt-5'>
+                              <i
+                                class='fa fa-calendar-day'
+                                style={{
+                                  fontSize: '15px',
+                                  marginRight: '20px',
+                                  color: '#919EAB',
+                                }}
+                              ></i>
+                              <input
+                                placeholder='Preferred shipment data or schedule'
+                                className={classes.inputNumber}
+                                style={{
+                                  fontSize: '1.1rem',
+                                  border: 'none',
+                                  marginLeft: '20px',
+                                  width: '75%',
+                                }}
+                              />
+                            </div>
+                            <div style={{ marginTop: '50px' }}>
+                              <i
+                                class='fa fa-credit-card-front'
+                                style={{
+                                  fontSize: '15px',
+                                  marginRight: '20px',
+                                  color: '#919EAB',
+                                }}
+                              ></i>
 
-                    <div>
-                      <button
-                        type='button'
-                        class='btn btn-secondary'
-                        data-bs-dismiss='modal'
-                      >
-                        Close
-                      </button>
-                      <button type='button' class='btn btn-primary'>
-                        Save changes
-                      </button>
+                              <input
+                                placeholder='Purchase volume e.g. 10,000'
+                                className={classes.inputNumber}
+                                type='number'
+                                style={{
+                                  fontSize: '1.1rem',
+                                  border: 'none',
+                                  marginLeft: '20px',
+                                  width: '75%',
+                                }}
+                              ></input>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
