@@ -5,6 +5,8 @@ import DetailsCard from "../components/filtter/DetailsCard";
 import Details from "../components/filtter/Details";
 import PhotosGallary from './../components/filtter/PhotosGallary';
 import classes from './Categories.module.css';
+import OpenUpQuote from './../components/OpenUpQuote';
+
 
 
 export default function ProductDetails(props) {
@@ -22,10 +24,13 @@ export default function ProductDetails(props) {
     handleType();
   }, [handleType]);
 
+
+
   return (
     <div className="container mt-5 ">
-      <DetailsCard productId={type} />
-      {DetailsCard && 
+    {type && 
+      <div>
+      <DetailsCard productId={type}  params = {params.id}/>
       <div className="text-center mb-5">
         <span
           className={classes.buttons}
@@ -51,12 +56,16 @@ export default function ProductDetails(props) {
         Gallary
       </span>
       </div>
-    }
-    {console.log('parent')}
+  
     <hr style={{ color: '#E9EDF2' , height: '2px'}}/>
     {
       !displayGallary ? <Details productId= {type}/> : <PhotosGallary productId= {type}/>
     }
+    <OpenUpQuote/>
+      </div>
+    }
+   
+      
       </div>
       );
     }

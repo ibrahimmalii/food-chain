@@ -1,0 +1,45 @@
+.container{
+    position: relative;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: rgb(33, 43, 54);
+    padding-bottom : 80px;
+    font-family: Inter, sans-serif;
+    position: fixed;
+    bottom: 0%;
+    right:5%;
+    width: 27%;
+    text-align: center;
+}
+
+.truthy{
+    
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(33, 43, 54);
+    padding-bottom : 50px;
+    font-family: Inter, sans-serif;
+    position: fixed;
+    bottom: 0%;
+    right:5%;
+    width: 27%;
+    text-align: center;
+
+}
+
+
+.container h1  {
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 28px;
+    color: rgb(255, 255, 255);
+}
+
+.truthy h1 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 28px;
+    color: rgb(255, 255, 255);
+}
+
