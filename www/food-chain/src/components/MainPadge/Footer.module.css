@@ -15,7 +15,6 @@
   overflow: hidden;
 }
 
-
 @keyframes floatPhoto {
   to {
     transform: translateX(-50%);
@@ -40,4 +39,3 @@
   bottom: 0;
   width: 100%;
 }
-

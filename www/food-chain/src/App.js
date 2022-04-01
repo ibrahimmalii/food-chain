@@ -55,7 +55,13 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Main data={data} categories={categories} />}
+            element={
+              <Main
+                data={data}
+                categories={categories}
+                onAddProduct={fetchDataHandler}
+              />
+            }
           ></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route
@@ -73,7 +79,7 @@ function App() {
           <Route path='/gallery' element={<Gallery />}></Route>
           <Route path='/filtter' element={<Filtter />}></Route>
         </Routes>
-        
+
         <Footer footerData={data} />
       </Suspense>
     </BrowserRouter>

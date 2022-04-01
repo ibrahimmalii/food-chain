@@ -1,14 +1,27 @@
 import classes from './Header.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { axiosInstance } from './../../axios/config';
+import userService from '../../UserService.js';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [searchNav, setSearchNav] = useState('');
+  const [isUserLogged, setIsUserLogged] = useState(userService.isLogged());
+
+  useEffect(() => {
+    userService.getLoggedStatus().subscribe((res) => {
+      console.log('res from use effect', res);
+      setIsUserLogged(res);
+    });
+    if (localStorage.token) {
+      userService.setLoggedStatus(true);
+    }
+  });
 
   const logout = () => {
     localStorage.clear();
+    userService.setLoggedStatus(false);
     navigate('/login');
   };
 
@@ -16,16 +29,6 @@ const Navbar = (props) => {
     props.onDataChanged(e.target.value);
   };
 
-  const getSearchData = () => {
-    axiosInstance
-      .post('/api/products/search', {
-        search: searchNav,
-      })
-      .then((res) => {
-        props.onDataChanged(res);
-        localStorage.setItem('key', res.data.title);
-      });
-  };
   return (
     <div
       className={classes.nav}
@@ -81,7 +84,7 @@ const Navbar = (props) => {
           </form>
         </div>
         <small className='text-bold mx-2'>{localStorage?.name}</small>
-        {localStorage.token ? (
+        {isUserLogged ? (
           <button class='btn btn-outline-danger mx-2' onClick={logout}>
             Logout
           </button>

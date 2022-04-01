@@ -9,10 +9,22 @@ import classCategories from '../components/MainPadge/Header.module.css';
 import { Link } from 'react-router-dom';
 import Admin from '../components/MainPadge/Admin';
 const MainPadge = (props) => {
+  const handleData = (e) => {
+    console.log('med', e);
+    if (e) {
+      props.onAddProduct(e);
+    }
+  };
+
   return (
     <Fragment>
       <Header />
-      {props.categories && <Admin categories={props.categories} />}
+      {props.categories && (
+        <Admin
+          categories={props.categories}
+          onProductAddedSuccessully={handleData}
+        />
+      )}
       {props.categories &&
         props.categories.map((res, index) => {
           return <div className='col w-100' key={index}></div>;
@@ -39,7 +51,7 @@ const MainPadge = (props) => {
             to='/categories'
           >
             All Categories
-            <i className="fa fa-angle-right " style={{marginLeft: '20px'}}  />
+            <i className='fa fa-angle-right ' style={{ marginLeft: '20px' }} />
           </Link>
           {props.categories &&
             props.categories.map((res, index) => {

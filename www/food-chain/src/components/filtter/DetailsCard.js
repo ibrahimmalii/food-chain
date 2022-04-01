@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from '../MainPadge/Products/TrendProduct.module.css';
 import flagStyle from '../../assets/css/icons.css';
 import Urls from '../../Urls';
+import userService from '../../UserService';
 
 const DetailsCard = (props) => {
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
+  const [modalState, setModalState] = useState(false);
 
   const handleMouseMove = (event) => {
     setSrc(event.target.src);
+  };
+
+  const username = useRef();
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    localStorage.token = 'dommy token';
+    localStorage.name = username.current.value;
+    userService.setLoggedStatus(true);
   };
 
   return (
@@ -305,11 +316,11 @@ const DetailsCard = (props) => {
                           style={{
                             backgroundColor: 'rgb(69, 79, 91) ',
                             outline: 'none',
-                            marginTop: '10px',
                             border: 'none',
                           }}
                           placeholder='Your full name'
                           type='text'
+                          ref={username}
                         />
                         <input
                           className='form-control'
@@ -371,12 +382,15 @@ const DetailsCard = (props) => {
                       </div>
                       <div className='col'>
                         <form
-                          className='bg-light p-4'
+                          className='bg-light p-2'
                           style={{
                             borderRadius: '10px',
                           }}
                         >
-                          <span
+                          {/* Start of my form */}
+
+                          <small
+                            className='fw-bold'
                             style={{
                               lineHeight: '16px',
                               fontSize: '11px',
@@ -384,100 +398,154 @@ const DetailsCard = (props) => {
                             }}
                           >
                             YOUR REQUIREMENTS
-                          </span>
-                          <div style={{ margin: '20px', marginTop: '50px' }}>
-                            <div>
-                              <i
-                                class='fa fa-truck-moving'
-                                style={{
-                                  fontSize: '15px',
-                                  marginRight: '30px',
-                                  color: '#919EAB',
-                                }}
-                              ></i>
-                              <select
-                                id='cars'
-                                style={{
-                                  border: 'none',
-                                  marginRight: '20px',
-                                }}
+                          </small>
+                          <div className='mt-2 form-inputs'>
+                            <div class='d-flex align-items-center car-input border'>
+                              <div
+                                className='form-group-text border'
+                                style={{ padding: '7px' }}
                               >
-                                <option value='volvo'>FOT</option>
-                                <option value='saab'>FCA</option>
-                                <option value='vw'>CIF</option>
-                                <option value='audi' selected>
-                                  CFR
-                                </option>
-                              </select>
-                              <input
-                                type='number'
-                                placeholder='Port of loading'
-                                className={classes.inputNumber}
-                                style={{
-                                  fontSize: '1.1rem',
-                                  border: 'none',
-                                  color: '#919EAB',
-                                }}
-                              />
-                              <select
-                                id='country'
-                                style={{
-                                  border: 'none',
-                                  marginRight: '20px',
-                                }}
-                              >
-                                <option value='saab'>FCA</option>
-                                <option value='vw'>CIF</option>
-                                <option value='audi' selected>
-                                  CFR
-                                </option>
-                                <option value='volvo' selected>
-                                  {props.productId &&
-                                    props.productId.data[0].country}
-                                </option>
-                              </select>
+                                <i
+                                  class='fa fa-truck-moving'
+                                  style={{
+                                    fontSize: '15px',
+                                    marginRight: '10px',
+                                    color: '#919EAB',
+                                  }}
+                                ></i>
+                              </div>
+                              <div>
+                                <select
+                                  id='cars'
+                                  style={{
+                                    marginRight: '10px',
+                                    border: 'none',
+                                  }}
+                                >
+                                  <option value='volvo'>FOT</option>
+                                  <option value='saab'>FCA</option>
+                                  <option value='vw'>CIF</option>
+                                  <option value='audi' selected>
+                                    CFR
+                                  </option>
+                                </select>
+                              </div>
+                              <div>
+                                <input
+                                  type='number'
+                                  placeholder='Port of loading'
+                                  className={classes.inputNumber}
+                                  class='form-control flex-grow-1'
+                                  style={{
+                                    border: 'none',
+                                  }}
+                                />
+                              </div>
+                              <div>
+                                <select
+                                  id='country'
+                                  style={{
+                                    border: 'none',
+                                  }}
+                                >
+                                  <option value='saab'>FCA</option>
+                                  <option value='vw'>CIF</option>
+                                  <option value='audi' selected>
+                                    CFR
+                                  </option>
+                                  <option value='volvo' selected>
+                                    {props.productId &&
+                                      props.productId.data[0].country}
+                                  </option>
+                                </select>
+                              </div>
                             </div>
-                            <div className='mt-5'>
-                              <i
-                                class='fa fa-calendar-day'
-                                style={{
-                                  fontSize: '15px',
-                                  marginRight: '20px',
-                                  color: '#919EAB',
-                                }}
-                              ></i>
-                              <input
-                                placeholder='Preferred shipment data or schedule'
-                                className={classes.inputNumber}
-                                style={{
-                                  fontSize: '1.1rem',
-                                  border: 'none',
-                                  marginLeft: '20px',
-                                  width: '75%',
-                                }}
-                              />
-                            </div>
-                            <div style={{ marginTop: '50px' }}>
-                              <i
-                                class='fa fa-credit-card-front'
-                                style={{
-                                  fontSize: '15px',
-                                  marginRight: '20px',
-                                  color: '#919EAB',
-                                }}
-                              ></i>
 
+                            <div class='input-group my-3'>
+                              <span
+                                class='input-group-text'
+                                style={{ width: '45px' }}
+                              >
+                                <i
+                                  class='fa fa-calendar-day form-group-text'
+                                  style={{
+                                    fontSize: '15px',
+                                    color: '#919EAB',
+                                  }}
+                                ></i>
+                              </span>
                               <input
+                                type='text'
+                                className='form-control'
+                                aria-label='Dollar amount (with dot and two decimal places)'
+                                placeholder='Preferred shipment data or schedule'
+                              />
+                            </div>
+                            <div class='input-group my-3'>
+                              <span
+                                class='input-group-text'
+                                style={{ width: '45px' }}
+                              >
+                                <i
+                                  class='fa fa-credit-card-front'
+                                  style={{
+                                    fontSize: '15px',
+                                    color: '#919EAB',
+                                  }}
+                                ></i>
+                              </span>
+                              <input
+                                type='text'
+                                className='form-control border-end-none'
                                 placeholder='Purchase volume e.g. 10,000'
-                                className={classes.inputNumber}
-                                type='number'
                                 style={{
-                                  fontSize: '1.1rem',
-                                  border: 'none',
-                                  marginLeft: '20px',
-                                  width: '75%',
+                                  borderRight: 'none',
                                 }}
-                              ></input>
+                              />
+                              <select
+                                id='Select283'
+                                name='tentativePurchaseVolumeUnit'
+                                className='input-group-text'
+                                aria-invalid='false'
+                                style={{
+                                  width: '100px',
+                                  background: 'white',
+                                }}
+                              >
+                                <option value='_undefined'>Unit</option>
+                                <option value='ton'>metric ton</option>
+                                <option value='kg'>kg</option>
+                                <option value='lbs'>lbs</option>
+                                <option value='m3'>m³</option>
+                                <option value='l'>liter</option>
+                                <option value='ml'>ml</option>
+                              </select>
+                            </div>
+                            <div class=' my-3'>
+                              <textarea
+                                class='form-control'
+                                style={{ height: '87px', resize: 'none' }}
+                                placeholder='Specifiy your needs, including packaging or requirements. ex) Hass / Size 40 / 25kg Carton Box / CIF Seoul'
+                                id='floatingTextarea'
+                              ></textarea>
+                            </div>
+                            <div className='d-flex align-items-center'>
+                              <div className='flex-grow-1'>
+                                <p className='small fw-bold'>
+                                  By sending a message to Tridge, you agree to
+                                  be contacted by our sales team via your
+                                  specified contact information.
+                                </p>
+                              </div>
+                              <div className='mx-2'>
+                                <button
+                                  className='btn btn-primary fw-bold'
+                                  style={{ borderRadius: '30px' }}
+                                  onClick={submitForm}
+                                >
+                                  Submit
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </form>
