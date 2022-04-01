@@ -8,7 +8,7 @@ import userService from '../../UserService';
 const DetailsCard = (props) => {
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
-  const [modalState, setModalState] = useState(false);
+  const [modalState, setModalState] = useState(true);
 
   const handleMouseMove = (event) => {
     setSrc(event.target.src);
@@ -21,6 +21,7 @@ const DetailsCard = (props) => {
     localStorage.token = 'dommy token';
     localStorage.name = username.current.value;
     userService.setLoggedStatus(true);
+    setModalState(false)
   };
 
   return (
@@ -226,7 +227,8 @@ const DetailsCard = (props) => {
                       data-bs-dismiss='modal'
                       aria-label='Close'
                     ></button>
-                    <div className='row'>
+                    
+                    {modalState ?<div className='row'>
                       <div className='col-5'>
                         <p
                           class='modal-title h1'
@@ -550,7 +552,7 @@ const DetailsCard = (props) => {
                           </div>
                         </form>
                       </div>
-                    </div>
+                    </div>: <div>toggle</div>}
                   </div>
                 </div>
               </div>

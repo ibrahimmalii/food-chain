@@ -1,12 +1,10 @@
 import classes from './Header.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { axiosInstance } from './../../axios/config';
 import userService from '../../UserService.js';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
-  const [searchNav, setSearchNav] = useState('');
   const [isUserLogged, setIsUserLogged] = useState(userService.isLogged());
 
   useEffect(() => {
