@@ -4,11 +4,81 @@ import classes from '../MainPadge/Products/TrendProduct.module.css';
 import flagStyle from '../../assets/css/icons.css';
 import Urls from '../../Urls';
 import userService from '../../UserService';
+import { Button, Card } from 'react-bootstrap';
+import Task from './Task';
 
 const DetailsCard = (props) => {
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
   const [modalState, setModalState] = useState(true);
+  const [isChanged, setIsChanged] = useState(true);
+  const [mileStones, setMileStones] = useState([
+    {
+      id: '384hisdhf',
+      task: null,
+      date: null,
+      amount: null,
+    },
+  ]);
+
+  const [availableMilestones, setAvailableMilestones] = useState({
+    'Pre-harvest': {
+      selected: false,
+    },
+    Harvest: {
+      selected: false,
+    },
+    Packing: {
+      selected: false,
+    },
+    'Export documentation': {
+      selected: false,
+    },
+    Arrival: {
+      selected: false,
+    },
+  });
+
+  const onSelectType = ({ id, task, date, amount }) => {
+    console.log('from event');
+    mileStones.map((item) => {
+      if (item.id === id) {
+        item.task = task;
+        item.date = date;
+        item.amount = amount;
+      }
+    });
+    const selectedTasks = [];
+    mileStones.reduce((acc, prev) => {
+      if (acc.task) {
+        selectedTasks.push(acc.task);
+        return;
+      }
+      return selectedTasks.push(prev.task);
+    }, '');
+
+    const newAvaliableMileStone = availableMilestones;
+    for (const item in newAvaliableMileStone) {
+      if (selectedTasks.includes(item)) {
+        newAvaliableMileStone[item].selected = true;
+      } else {
+        newAvaliableMileStone[item].selected = false;
+      }
+    }
+
+    setAvailableMilestones(newAvaliableMileStone);
+    setIsChanged(!isChanged);
+  };
+
+  const addNewTask = () => {
+    const obj = {
+      id: crypto.randomUUID(),
+      task: null,
+      date: null,
+      amount: null,
+    };
+    setMileStones([...mileStones, obj]);
+  };
 
   const handleMouseMove = (event) => {
     setSrc(event.target.src);
@@ -17,11 +87,14 @@ const DetailsCard = (props) => {
   const username = useRef();
   const submitForm = (e) => {
     e.preventDefault();
-
-    localStorage.token = 'dommy token';
-    localStorage.name = username.current.value;
-    userService.setLoggedStatus(true);
-    setModalState(false)
+    if (username.current.value) {
+      localStorage.token = crypto.randomUUID();
+      localStorage.name = username.current.value;
+      userService.setLoggedStatus(true);
+      setModalState(false);
+    } else {
+      alert('please complete your data!!');
+    }
   };
 
   return (
@@ -227,332 +300,455 @@ const DetailsCard = (props) => {
                       data-bs-dismiss='modal'
                       aria-label='Close'
                     ></button>
-                    
-                    {modalState ?<div className='row'>
-                      <div className='col-5'>
-                        <p
-                          class='modal-title h1'
-                          id='exampleModalLabel'
-                          style={{
-                            lineHeight: '28px',
-                            fontSize: '20px',
-                            color: 'rgb(255, 255, 255)',
-                          }}
-                        >
-                          Get a quote for
-                        </p>
-                        <div
-                          className='my-3 d-flex'
-                          style={{ overflow: 'hidden' }}
-                        >
-                          <div
+
+                    {modalState ? (
+                      <div className='row'>
+                        <div className='col-5'>
+                          <p
+                            class='modal-title h1'
+                            id='exampleModalLabel'
                             style={{
-                              width: '70px',
-                              height: '70px',
-                              borderRadius: '5px',
-                              objectFit: 'cover',
-                              backgroundPosition: 'center',
-                              backgroundRepeat: 'no-repeat',
-                              backgroundSize: 'cover',
-                              objectPosition: 'center center',
-                              backgroundImage: `${
-                                photos && 'url(' + photos + ')'
-                              }`,
+                              lineHeight: '28px',
+                              fontSize: '20px',
+                              color: 'rgb(255, 255, 255)',
                             }}
-                          ></div>
-                          <div>
-                            <h1
+                          >
+                            Get a quote for
+                          </p>
+                          <div
+                            className='my-3 d-flex'
+                            style={{ overflow: 'hidden' }}
+                          >
+                            <div
                               style={{
-                                lineHeight: '24px',
-                                fontSize: '16px',
-                                fontWeight: '600',
-                                color: 'rgb(255, 255, 255)',
-                                marginLeft: '10px',
+                                width: '70px',
+                                height: '70px',
+                                borderRadius: '5px',
+                                objectFit: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover',
+                                objectPosition: 'center center',
+                                backgroundImage: `${
+                                  photos && 'url(' + photos + ')'
+                                }`,
                               }}
-                            >
-                              {props.productId && props.productId.data[0].title}
-                            </h1>
-                            <div className='d-flex'>
+                            ></div>
+                            <div>
                               <h1
                                 style={{
                                   lineHeight: '24px',
                                   fontSize: '16px',
-                                  fontWeight: '400',
+                                  fontWeight: '600',
                                   color: 'rgb(255, 255, 255)',
                                   marginLeft: '10px',
                                 }}
                               >
                                 {props.productId &&
-                                  props.productId.data[0].country}
+                                  props.productId.data[0].title}
                               </h1>
-                              <div
-                                style={{
-                                  width: '40px',
-                                  height: '20px',
-                                  objectFit: 'cover',
-                                  backgroundPosition: 'center',
-                                  backgroundRepeat: 'no-repeat',
-                                  backgroundSize: 'cover',
-                                  objectPosition: 'center center',
-                                  marginLeft: '10px',
-                                }}
-                              >
-                                <i
-                                  className={`flag-icon flag-icon-${props.productId.data[0].flag}`}
-                                ></i>
+                              <div className='d-flex'>
+                                <h1
+                                  style={{
+                                    lineHeight: '24px',
+                                    fontSize: '16px',
+                                    fontWeight: '400',
+                                    color: 'rgb(255, 255, 255)',
+                                    marginLeft: '10px',
+                                  }}
+                                >
+                                  {props.productId &&
+                                    props.productId.data[0].country}
+                                </h1>
+                                <div
+                                  style={{
+                                    width: '40px',
+                                    height: '20px',
+                                    objectFit: 'cover',
+                                    backgroundPosition: 'center',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundSize: 'cover',
+                                    objectPosition: 'center center',
+                                    marginLeft: '10px',
+                                  }}
+                                >
+                                  <i
+                                    className={`flag-icon flag-icon-${props.productId.data[0].flag}`}
+                                  ></i>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <span
-                          color='textLighter'
-                          style={{
-                            fontSize: '11px',
-                            color: 'rgb(157, 182, 204)',
-                          }}
-                        >
-                          YOUR INFORMATION
-                        </span>
-                        <input
-                          className='form-control'
-                          style={{
-                            backgroundColor: 'rgb(69, 79, 91) ',
-                            outline: 'none',
-                            border: 'none',
-                          }}
-                          placeholder='Your full name'
-                          type='text'
-                          ref={username}
-                        />
-                        <input
-                          className='form-control'
-                          style={{
-                            backgroundColor: 'rgb(69, 79, 91) ',
-                            outline: 'none',
-                            marginTop: '10px',
-                            border: 'none',
-                          }}
-                          placeholder='Your company name'
-                          type='text'
-                        />
-                        <input
-                          className='form-control'
-                          style={{
-                            backgroundColor: 'rgb(69, 79, 91) ',
-                            outline: 'none',
-                            marginTop: '10px',
-                            border: 'none',
-                          }}
-                          placeholder='Your business email address'
-                          type='text'
-                        />
-                        <input
-                          className='form-control'
-                          style={{
-                            backgroundColor: 'rgb(69, 79, 91) ',
-                            outline: 'none',
-                            marginTop: '10px',
-                            border: 'none',
-                            color: 'rgb(255, 255, 255)',
-                          }}
-                          placeholder='Your phone number'
-                          type='number'
-                        />
-
-                        <span
-                          color='textLighter'
-                          style={{
-                            color: 'rgb(157, 182, 204)',
-                            marginTop: '20px',
-                          }}
-                        >
-                          Want to save your information?{' '}
-                        </span>
-                        <span className='text-light fw-bold'>
-                          {' '}
-                          Join Tru Market For Free
-                        </span>
-                        <br />
-                        <span
-                          style={{
-                            color: 'rgb(157, 182, 204)',
-                            marginTop: '20px',
-                          }}
-                        >
-                          to have your information filled in automatically.
-                        </span>
-                      </div>
-                      <div className='col'>
-                        <form
-                          className='bg-light p-2'
-                          style={{
-                            borderRadius: '10px',
-                          }}
-                        >
-                          {/* Start of my form */}
-
-                          <small
-                            className='fw-bold'
+                          <span
+                            color='textLighter'
                             style={{
-                              lineHeight: '16px',
                               fontSize: '11px',
-                              color: 'rgb(99, 115, 129)',
+                              color: 'rgb(157, 182, 204)',
                             }}
                           >
-                            YOUR REQUIREMENTS
-                          </small>
-                          <div className='mt-2 form-inputs'>
-                            <div class='d-flex align-items-center car-input border'>
-                              <div
-                                className='form-group-text border'
-                                style={{ padding: '7px' }}
-                              >
-                                <i
-                                  class='fa fa-truck-moving'
-                                  style={{
-                                    fontSize: '15px',
-                                    marginRight: '10px',
-                                    color: '#919EAB',
-                                  }}
-                                ></i>
-                              </div>
-                              <div>
-                                <select
-                                  id='cars'
-                                  style={{
-                                    marginRight: '10px',
-                                    border: 'none',
-                                  }}
+                            YOUR INFORMATION
+                          </span>
+                          <input
+                            className='form-control'
+                            style={{
+                              backgroundColor: 'rgb(69, 79, 91) ',
+                              outline: 'none',
+                              border: 'none',
+                            }}
+                            placeholder='Your full name'
+                            type='text'
+                            ref={username}
+                          />
+                          <input
+                            className='form-control'
+                            style={{
+                              backgroundColor: 'rgb(69, 79, 91) ',
+                              outline: 'none',
+                              marginTop: '10px',
+                              border: 'none',
+                            }}
+                            placeholder='Your company name'
+                            type='text'
+                          />
+                          <input
+                            className='form-control'
+                            style={{
+                              backgroundColor: 'rgb(69, 79, 91) ',
+                              outline: 'none',
+                              marginTop: '10px',
+                              border: 'none',
+                            }}
+                            placeholder='Your business email address'
+                            type='text'
+                          />
+                          <input
+                            className='form-control'
+                            style={{
+                              backgroundColor: 'rgb(69, 79, 91) ',
+                              outline: 'none',
+                              marginTop: '10px',
+                              border: 'none',
+                              color: 'rgb(255, 255, 255)',
+                            }}
+                            placeholder='Your phone number'
+                            type='number'
+                          />
+
+                          <span
+                            color='textLighter'
+                            style={{
+                              color: 'rgb(157, 182, 204)',
+                              marginTop: '20px',
+                            }}
+                          >
+                            Want to save your information?{' '}
+                          </span>
+                          <span className='text-light fw-bold'>
+                            {' '}
+                            Join Tru Market For Free
+                          </span>
+                          <br />
+                          <span
+                            style={{
+                              color: 'rgb(157, 182, 204)',
+                              marginTop: '20px',
+                            }}
+                          >
+                            to have your information filled in automatically.
+                          </span>
+                        </div>
+                        <div className='col'>
+                          <form
+                            className='bg-light p-2'
+                            style={{
+                              borderRadius: '10px',
+                            }}
+                          >
+                            {/* Start of my form */}
+
+                            <small
+                              className='fw-bold'
+                              style={{
+                                lineHeight: '16px',
+                                fontSize: '11px',
+                                color: 'rgb(99, 115, 129)',
+                              }}
+                            >
+                              YOUR REQUIREMENTS
+                            </small>
+                            <div className='mt-2 form-inputs'>
+                              <div class='d-flex align-items-center car-input border'>
+                                <div
+                                  className='form-group-text border'
+                                  style={{ padding: '7px' }}
                                 >
-                                  <option value='volvo'>FOT</option>
-                                  <option value='saab'>FCA</option>
-                                  <option value='vw'>CIF</option>
-                                  <option value='audi' selected>
-                                    CFR
-                                  </option>
-                                </select>
+                                  <i
+                                    class='fa fa-truck-moving'
+                                    style={{
+                                      fontSize: '15px',
+                                      marginRight: '10px',
+                                      color: '#919EAB',
+                                    }}
+                                  ></i>
+                                </div>
+                                <div>
+                                  <select
+                                    id='cars'
+                                    style={{
+                                      marginRight: '10px',
+                                      border: 'none',
+                                    }}
+                                  >
+                                    <option value='volvo'>FOT</option>
+                                    <option value='saab'>FCA</option>
+                                    <option value='vw'>CIF</option>
+                                    <option value='audi' selected>
+                                      CFR
+                                    </option>
+                                  </select>
+                                </div>
+                                <div>
+                                  <input
+                                    type='number'
+                                    placeholder='Port of loading'
+                                    className={classes.inputNumber}
+                                    class='form-control flex-grow-1'
+                                    style={{
+                                      border: 'none',
+                                    }}
+                                  />
+                                </div>
+                                <div>
+                                  <select
+                                    id='country'
+                                    style={{
+                                      border: 'none',
+                                    }}
+                                  >
+                                    <option value='saab'>FCA</option>
+                                    <option value='vw'>CIF</option>
+                                    <option value='audi' selected>
+                                      CFR
+                                    </option>
+                                    <option value='volvo' selected>
+                                      {props.productId &&
+                                        props.productId.data[0].country}
+                                    </option>
+                                  </select>
+                                </div>
                               </div>
-                              <div>
+
+                              <div class='input-group my-3'>
+                                <span
+                                  class='input-group-text'
+                                  style={{ width: '45px' }}
+                                >
+                                  <i
+                                    class='fa fa-calendar-day form-group-text'
+                                    style={{
+                                      fontSize: '15px',
+                                      color: '#919EAB',
+                                    }}
+                                  ></i>
+                                </span>
                                 <input
-                                  type='number'
-                                  placeholder='Port of loading'
-                                  className={classes.inputNumber}
-                                  class='form-control flex-grow-1'
-                                  style={{
-                                    border: 'none',
-                                  }}
+                                  type='text'
+                                  className='form-control'
+                                  aria-label='Dollar amount (with dot and two decimal places)'
+                                  placeholder='Preferred shipment data or schedule'
                                 />
                               </div>
-                              <div>
-                                <select
-                                  id='country'
+                              <div class='input-group my-3'>
+                                <span
+                                  class='input-group-text'
+                                  style={{ width: '45px' }}
+                                >
+                                  <i
+                                    class='fa fa-credit-card-front'
+                                    style={{
+                                      fontSize: '15px',
+                                      color: '#919EAB',
+                                    }}
+                                  ></i>
+                                </span>
+                                <input
+                                  type='text'
+                                  className='form-control border-end-none'
+                                  placeholder='Purchase volume e.g. 10,000'
                                   style={{
-                                    border: 'none',
+                                    borderRight: 'none',
+                                  }}
+                                />
+                                <select
+                                  id='Select283'
+                                  name='tentativePurchaseVolumeUnit'
+                                  className='input-group-text'
+                                  aria-invalid='false'
+                                  style={{
+                                    width: '100px',
+                                    background: 'white',
                                   }}
                                 >
-                                  <option value='saab'>FCA</option>
-                                  <option value='vw'>CIF</option>
-                                  <option value='audi' selected>
-                                    CFR
-                                  </option>
-                                  <option value='volvo' selected>
-                                    {props.productId &&
-                                      props.productId.data[0].country}
-                                  </option>
+                                  <option value='_undefined'>Unit</option>
+                                  <option value='ton'>metric ton</option>
+                                  <option value='kg'>kg</option>
+                                  <option value='lbs'>lbs</option>
+                                  <option value='m3'>m³</option>
+                                  <option value='l'>liter</option>
+                                  <option value='ml'>ml</option>
                                 </select>
                               </div>
-                            </div>
-
-                            <div class='input-group my-3'>
-                              <span
-                                class='input-group-text'
-                                style={{ width: '45px' }}
-                              >
-                                <i
-                                  class='fa fa-calendar-day form-group-text'
-                                  style={{
-                                    fontSize: '15px',
-                                    color: '#919EAB',
-                                  }}
-                                ></i>
-                              </span>
-                              <input
-                                type='text'
-                                className='form-control'
-                                aria-label='Dollar amount (with dot and two decimal places)'
-                                placeholder='Preferred shipment data or schedule'
-                              />
-                            </div>
-                            <div class='input-group my-3'>
-                              <span
-                                class='input-group-text'
-                                style={{ width: '45px' }}
-                              >
-                                <i
-                                  class='fa fa-credit-card-front'
-                                  style={{
-                                    fontSize: '15px',
-                                    color: '#919EAB',
-                                  }}
-                                ></i>
-                              </span>
-                              <input
-                                type='text'
-                                className='form-control border-end-none'
-                                placeholder='Purchase volume e.g. 10,000'
-                                style={{
-                                  borderRight: 'none',
-                                }}
-                              />
-                              <select
-                                id='Select283'
-                                name='tentativePurchaseVolumeUnit'
-                                className='input-group-text'
-                                aria-invalid='false'
-                                style={{
-                                  width: '100px',
-                                  background: 'white',
-                                }}
-                              >
-                                <option value='_undefined'>Unit</option>
-                                <option value='ton'>metric ton</option>
-                                <option value='kg'>kg</option>
-                                <option value='lbs'>lbs</option>
-                                <option value='m3'>m³</option>
-                                <option value='l'>liter</option>
-                                <option value='ml'>ml</option>
-                              </select>
-                            </div>
-                            <div class=' my-3'>
-                              <textarea
-                                class='form-control'
-                                style={{ height: '87px', resize: 'none' }}
-                                placeholder='Specifiy your needs, including packaging or requirements. ex) Hass / Size 40 / 25kg Carton Box / CIF Seoul'
-                                id='floatingTextarea'
-                              ></textarea>
-                            </div>
-                            <div className='d-flex align-items-center'>
-                              <div className='flex-grow-1'>
-                                <p className='small fw-bold'>
-                                  By sending a message to Tridge, you agree to
-                                  be contacted by our sales team via your
-                                  specified contact information.
-                                </p>
+                              <div class=' my-3'>
+                                <textarea
+                                  class='form-control'
+                                  style={{ height: '87px', resize: 'none' }}
+                                  placeholder='Specifiy your needs, including packaging or requirements. ex) Hass / Size 40 / 25kg Carton Box / CIF Seoul'
+                                  id='floatingTextarea'
+                                ></textarea>
                               </div>
-                              <div className='mx-2'>
-                                <button
-                                  className='btn btn-primary fw-bold'
-                                  style={{ borderRadius: '30px' }}
-                                  onClick={submitForm}
-                                >
-                                  Submit
-                                </button>
+                              <div className='d-flex align-items-center'>
+                                <div className='flex-grow-1'>
+                                  <p className='small fw-bold'>
+                                    By sending a message to Tridge, you agree to
+                                    be contacted by our sales team via your
+                                    specified contact information.
+                                  </p>
+                                </div>
+                                <div className='mx-2'>
+                                  <button
+                                    className='btn btn-primary fw-bold'
+                                    style={{ borderRadius: '30px' }}
+                                    onClick={submitForm}
+                                  >
+                                    Submit
+                                  </button>
+                                </div>
                               </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className='h3 text-light'>Hire</p>
+                        <Card body className='personal_info mb-4'>
+                          <div className='d-flex'>
+                            <div
+                              style={{
+                                width: '80px',
+                                height: '80px',
+                                borderRadius: '50%',
+                                backgroundImage:
+                                  'url("https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/4ZrVLdVKeijzurndz/people-emotion-and-facial-expression-concept-face-of-happy-smiling-middle-aged-woman-at-office_rleqp4y7g_thumbnail-1080_09.png")',
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                              }}
+                            ></div>
+                            <div className='flex-grow-1 p-2'>
+                              <p className='h6 text-success'>Ibrahim Ali</p>
+                              <span>
+                                <i className='fa fa-car text-danger'></i> Egypt
+                              </span>
                             </div>
                           </div>
-                        </form>
+                        </Card>
+                        <Card>
+                          <Card.Text className='p-2'>
+                            <p className='h4'>Terms</p>
+                          </Card.Text>
+                          <hr />
+                          <Card.Body>
+                            <small>
+                              You're protected by{' '}
+                              <span className='text-success fw-bold'>
+                                Upwork Payment Protection
+                              </span>{' '}
+                              Only for the work you authorize.
+                            </small>
+                            <div className='payment-option mt-4'>
+                              <p className='h5'>
+                                Payment Option{' '}
+                                <i className='fa fa-question'></i>
+                              </p>
+                              <p className='h6'>
+                                Fixed-Price <i className='fa fa-pencil'></i>
+                              </p>
+                              <small className='text-muted'>
+                                Pay as project milestone are completed.
+                              </small>
+                            </div>
+                            <div className='fixed mt-4'>
+                              <p className='h5'>
+                                Pay a fixed price for your project
+                              </p>
+                              <p className='h6'>
+                                $300.00 <i className='fa fa-pencil'></i>
+                              </p>
+                              <small className='text-muted'>
+                                This is the price you and Farhan have agreed
+                                upon.
+                              </small>
+                            </div>
+                            <div className='deposit mt-4'>
+                              <p className='h5'>Deposit funds into Escrow</p>
+                              <small className='text-muted'>
+                                Escrow is a neutral holding place that protects
+                                your deposit until work is approved.
+                              </small>
+                              <p>Here we need to add some info</p>
+                              <small className='text-muted'>
+                                This is the price you and Farhan have agreed
+                                upon.
+                              </small>
+                            </div>
+                            <div className='deposit-funds mt-4'>
+                              <p className='h5'>Deposit funds into Escrow</p>
+                              <small className='text-muted'>
+                                Escrow is a neutral holding place that protects
+                                your deposit until work is approved.
+                              </small>
+                              <div className='mt-3'>
+                                <label className='h6'>
+                                  <input type='radio' name='deposite' /> Deposit
+                                  $300.00 for the whole project
+                                </label>
+                                <br />
+                                <label className='h6'>
+                                  <input type='radio' name='deposite' /> Deposit
+                                  a lesser amount to cover the first milestone.
+                                </label>
+                              </div>
+                            </div>
+                            <hr />
+                          </Card.Body>
+                          <Card.Body>
+                            <p className='h4'>Project Milestones</p>
+                            <small className='text-muted'>
+                              Add project milestones and pay in installments as
+                              each milestone is completed to your satisfaction.
+                            </small>
+                            {mileStones.map((item) => (
+                              <Task
+                                key={item.id}
+                                data={item}
+                                selectOption={mileStones}
+                                availableMilestones={availableMilestones}
+                                isChanged={isChanged}
+                                onSelectType={onSelectType}
+                              />
+                            ))}
+
+                            <Button
+                              variant='success'
+                              disabled={mileStones.length >= 5 && true}
+                              onClick={addNewTask}
+                            >
+                              <i className='fa fa-plus'></i>
+                            </Button>
+                          </Card.Body>
+                        </Card>
                       </div>
-                    </div>: <div>toggle</div>}
+                    )}
                   </div>
                 </div>
               </div>

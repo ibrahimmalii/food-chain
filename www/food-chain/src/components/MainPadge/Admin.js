@@ -31,7 +31,6 @@ const Admin = (props) => {
   };
 
   const submitForm = (e) => {
-    console.log('submit');
     e.preventDefault();
     const formData = new FormData();
     formData.append('title', title.current.value);
