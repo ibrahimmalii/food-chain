@@ -4,7 +4,7 @@ import classes from '../MainPadge/Products/TrendProduct.module.css';
 import flagStyle from '../../assets/css/icons.css';
 import Urls from '../../Urls';
 import userService from '../../UserService';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Modal } from 'react-bootstrap';
 import Task from './Task';
 
 const DetailsCard = (props) => {
@@ -16,6 +16,15 @@ const DetailsCard = (props) => {
   const userCompany = useRef();
   const userPhone = useRef();
   const openModalBtn = useRef();
+  const close = useRef();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    close.current.click();
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
 
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
@@ -313,6 +322,7 @@ const DetailsCard = (props) => {
                     }}
                   >
                     <button
+                      ref={close}
                       type='button'
                       class='btn-close mb-2'
                       data-bs-dismiss='modal'
@@ -819,11 +829,90 @@ const DetailsCard = (props) => {
                             </Button>
                           </Card.Body>
                           <Card.Footer className='text-end'>
-                            <Button variant='primary'>Sumbit</Button>
+                            <Button variant='primary' onClick={handleShow}>
+                              Sumbit
+                            </Button>
                           </Card.Footer>
                         </Card>
                       </div>
                     )}
+
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      backdrop='static'
+                      keyboard={false}
+                      size='md'
+                      centered
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id='contained-modal-title-vcenter'>
+                          Submittion information
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <div className='d-flex'>
+                          <div
+                            className='quCode'
+                            style={{ width: '202px', height: '178px' }}
+                          >
+                            <div
+                              className='borderd'
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                backgroundImage:
+                                  "url('https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png')",
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                border: '1px solid #a4a0a0',
+                              }}
+                            ></div>
+                          </div>
+                          <div className='details ms-3'>
+                            <div className='mb-2 fw-bold'>
+                              <span>Product: </span>
+                              <span className='dataSelected'>
+                                Selected product
+                              </span>
+                            </div>
+                            <div className='mb-2 fw-bold'>
+                              <span>Quantity: </span>
+                              <span className='dataSelected'>
+                                Selected product
+                              </span>
+                            </div>
+                            <div className='mb-2 fw-bold'>
+                              <span>Value of the contract (US$): </span>
+                              <span className='dataSelected'>
+                                Selected product
+                              </span>
+                            </div>
+                            <div className='mb-2 fw-bold'>
+                              <span>Departed at: </span>
+                              <span className='dataSelected'>
+                                Selected product
+                              </span>
+                            </div>
+                            <div className='mb-2 fw-bold'>
+                              <span>Arrived at: </span>
+                              <span className='dataSelected'>
+                                Selected product
+                              </span>
+                            </div>
+                            <div className='mb-2 fw-bold'>
+                              <span>Blockchain address: </span>
+                              <span className='dataSelected'>xxxxxxxxxxxx</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant='primary' onClick={handleClose}>
+                          Understood
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 </div>
               </div>
