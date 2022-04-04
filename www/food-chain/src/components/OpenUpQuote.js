@@ -1,7 +1,7 @@
 import classes from './OpenUpQuote.module.css';
 import { useState } from 'react';
 
-export default function OpenUpQuote() {
+export default function OpenUpQuote(props) {
   const [stateQuote, setStateQuote] = useState(false);
 
   const handleChangeUp = () => {
@@ -11,6 +11,11 @@ export default function OpenUpQuote() {
   const handleChangeDown = () => {
     setStateQuote(true);
   };
+
+  const openModal = () => {
+    props.onOpenQuoteModal(true);
+  };
+
   return (
     <div>
       {stateQuote ? (
@@ -36,6 +41,7 @@ export default function OpenUpQuote() {
             </h1>
             <button
               className='btn btn-primary w-100 mt-4'
+              onClick={openModal}
               style={{
                 borderRadius: '20px',
                 fontSize: '20px',

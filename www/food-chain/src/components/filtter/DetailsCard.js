@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from '../MainPadge/Products/TrendProduct.module.css';
 import flagStyle from '../../assets/css/icons.css';
@@ -8,6 +8,15 @@ import { Button, Card } from 'react-bootstrap';
 import Task from './Task';
 
 const DetailsCard = (props) => {
+  const shipmentData = useRef();
+  const portLoading = useRef();
+  const purchaseVolume = useRef();
+  const discription = useRef();
+  const userEmail = useRef();
+  const userCompany = useRef();
+  const userPhone = useRef();
+  const openModalBtn = useRef();
+
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
   const [modalState, setModalState] = useState(true);
@@ -87,15 +96,21 @@ const DetailsCard = (props) => {
   const username = useRef();
   const submitForm = (e) => {
     e.preventDefault();
-    if (username.current.value) {
+    if (username.current?.value) {
       localStorage.token = crypto.randomUUID();
-      localStorage.name = username.current.value;
+      localStorage.name = username.current?.value;
       userService.setLoggedStatus(true);
       setModalState(false);
     } else {
       alert('please complete your data!!');
     }
   };
+
+  useEffect(() => {
+    if (props.isModalOpened) {
+      openModalBtn.current.click();
+    }
+  }, [props.isModalOpened]);
 
   return (
     <div>
@@ -262,6 +277,7 @@ const DetailsCard = (props) => {
 
               {/* Start of details modal */}
               <button
+                ref={openModalBtn}
                 type='button'
                 className='btn btn-primary w-100 fw-bold'
                 style={{ borderRadius: '20px', fontSize: '20px' }}
@@ -290,7 +306,9 @@ const DetailsCard = (props) => {
                       fontWeight: '400',
                       fontSize: '14px',
                       lineHeight: '22px',
-                      backgroundColor: 'rgb(33, 43, 54)',
+                      backgroundColor: `${
+                        modalState ? 'rgb(33, 43, 54)' : 'lightgray'
+                      }`,
                       borderRadius: '20px',
                     }}
                   >
@@ -389,7 +407,7 @@ const DetailsCard = (props) => {
                             YOUR INFORMATION
                           </span>
                           <input
-                            className='form-control'
+                            className='form-control text-light'
                             style={{
                               backgroundColor: 'rgb(69, 79, 91) ',
                               outline: 'none',
@@ -400,7 +418,7 @@ const DetailsCard = (props) => {
                             ref={username}
                           />
                           <input
-                            className='form-control'
+                            className='form-control text-light'
                             style={{
                               backgroundColor: 'rgb(69, 79, 91) ',
                               outline: 'none',
@@ -408,10 +426,11 @@ const DetailsCard = (props) => {
                               border: 'none',
                             }}
                             placeholder='Your company name'
+                            ref={userCompany}
                             type='text'
                           />
                           <input
-                            className='form-control'
+                            className='form-control text-light'
                             style={{
                               backgroundColor: 'rgb(69, 79, 91) ',
                               outline: 'none',
@@ -419,6 +438,7 @@ const DetailsCard = (props) => {
                               border: 'none',
                             }}
                             placeholder='Your business email address'
+                            ref={userEmail}
                             type='text'
                           />
                           <input
@@ -431,6 +451,7 @@ const DetailsCard = (props) => {
                               color: 'rgb(255, 255, 255)',
                             }}
                             placeholder='Your phone number'
+                            ref={userPhone}
                             type='number'
                           />
 
@@ -480,7 +501,10 @@ const DetailsCard = (props) => {
                               <div class='d-flex align-items-center car-input border'>
                                 <div
                                   className='form-group-text border'
-                                  style={{ padding: '7px' }}
+                                  style={{
+                                    padding: '7px',
+                                    backgroundColor: 'rgb(230 236 242)',
+                                  }}
                                 >
                                   <i
                                     class='fa fa-truck-moving'
@@ -511,6 +535,7 @@ const DetailsCard = (props) => {
                                   <input
                                     type='number'
                                     placeholder='Port of loading'
+                                    ref={portLoading}
                                     className={classes.inputNumber}
                                     class='form-control flex-grow-1'
                                     style={{
@@ -555,7 +580,8 @@ const DetailsCard = (props) => {
                                   type='text'
                                   className='form-control'
                                   aria-label='Dollar amount (with dot and two decimal places)'
-                                  placeholder='Preferred shipment data or schedule'
+                                  placeholder='Preferred shipment date or schedule'
+                                  ref={shipmentData}
                                 />
                               </div>
                               <div class='input-group my-3'>
@@ -575,6 +601,7 @@ const DetailsCard = (props) => {
                                   type='text'
                                   className='form-control border-end-none'
                                   placeholder='Purchase volume e.g. 10,000'
+                                  ref={purchaseVolume}
                                   style={{
                                     borderRight: 'none',
                                   }}
@@ -602,13 +629,17 @@ const DetailsCard = (props) => {
                                 <textarea
                                   class='form-control'
                                   style={{ height: '87px', resize: 'none' }}
+                                  ref={discription}
                                   placeholder='Specifiy your needs, including packaging or requirements. ex) Hass / Size 40 / 25kg Carton Box / CIF Seoul'
                                   id='floatingTextarea'
                                 ></textarea>
                               </div>
                               <div className='d-flex align-items-center'>
                                 <div className='flex-grow-1'>
-                                  <p className='small fw-bold'>
+                                  <p
+                                    className='small fw-bold'
+                                    style={{ color: '#919EAB' }}
+                                  >
                                     By sending a message to Tridge, you agree to
                                     be contacted by our sales team via your
                                     specified contact information.
@@ -630,10 +661,11 @@ const DetailsCard = (props) => {
                       </div>
                     ) : (
                       <div>
-                        <p className='h3 text-light'>Hire</p>
+                        <p className='h3'>Hire</p>
                         <Card body className='personal_info mb-4'>
                           <div className='d-flex'>
                             <div
+                              className='me-2'
                               style={{
                                 width: '80px',
                                 height: '80px',
@@ -644,10 +676,13 @@ const DetailsCard = (props) => {
                                 backgroundPosition: 'center',
                               }}
                             ></div>
-                            <div className='flex-grow-1 p-2'>
-                              <p className='h6 text-success'>Ibrahim Ali</p>
+                            <div className='flex-grow-1 p-2 py-3'>
+                              <p className='h6 text-success'>
+                                {localStorage?.name}
+                              </p>
                               <span>
-                                <i className='fa fa-car text-danger'></i> Egypt
+                                <i className='fa fa-car text-danger'></i>{' '}
+                                {props.productId.data[0].country}
                               </span>
                             </div>
                           </div>
@@ -682,7 +717,10 @@ const DetailsCard = (props) => {
                                 Pay a fixed price for your project
                               </p>
                               <p className='h6'>
-                                $300.00 <i className='fa fa-pencil'></i>
+                                {/* {props.productId.data[0]?.price *
+                                  purchaseVolume.current?.value +
+                                  Number(shipmentData.current?.value)} */}
+                                <i className='fa fa-pencil'></i>
                               </p>
                               <small className='text-muted'>
                                 This is the price you and Farhan have agreed
@@ -695,7 +733,41 @@ const DetailsCard = (props) => {
                                 Escrow is a neutral holding place that protects
                                 your deposit until work is approved.
                               </small>
-                              <p>Here we need to add some info</p>
+                              <p className='h4'>contract details</p>
+                              <hr />
+                              <table
+                                style={{
+                                  width: '100%',
+                                  color: 'gray',
+                                  fontWeight: 'bold',
+                                  fontSize: '15px',
+                                  marginBottom: '30px',
+                                }}
+                              >
+                                <tr>
+                                  <td>Company name</td>
+                                  <td>{userCompany.current?.value}</td>
+                                  <td>Email</td>
+                                  <td>{userEmail.current?.value}</td>
+                                </tr>
+                                <tr>
+                                  <td>phone Number</td>
+                                  <td>{userPhone.current?.value}</td>
+                                  <td>Port of loading</td>
+                                  <td>{portLoading.current?.value}</td>
+                                </tr>
+                                <tr>
+                                  <td>shipment date</td>
+                                  <td>{shipmentData.current?.value}</td>
+                                  <td>Purchase volume</td>
+                                  <td>{purchaseVolume.current?.value}</td>
+                                </tr>
+                                <tr>
+                                  <td>discription</td>
+                                  <td>{discription.current?.value}</td>
+                                </tr>
+                              </table>
+                              <hr />
                               <small className='text-muted'>
                                 This is the price you and Farhan have agreed
                                 upon.
@@ -746,6 +818,9 @@ const DetailsCard = (props) => {
                               <i className='fa fa-plus'></i>
                             </Button>
                           </Card.Body>
+                          <Card.Footer className='text-end'>
+                            <Button variant='primary'>Sumbit</Button>
+                          </Card.Footer>
                         </Card>
                       </div>
                     )}
