@@ -18,13 +18,34 @@ const DetailsCard = (props) => {
   const openModalBtn = useRef();
   const close = useRef();
 
+  console.log(props.isModalOpened);
+  
+  const [stateQuote , setStateQuote] = useState(props.isModalOpened)
   const [show, setShow] = useState(false);
+  const [information , setInformation] = useState(false)
+
+  const measurePrice = () => {
+    console.log('called')
+    const result = +props.productId.data[0]?.price *
+    +purchaseVolume.current?.value +
+    Number(shipmentData.current?.value);
+    
+    if(!localStorage.measurementContract){
+      localStorage.measurementContract = result;
+    }
+    return result; 
+  }
 
   const handleClose = () => {
     close.current.click();
+    setModalState(true);
     setShow(false);
   };
-  const handleShow = () => setShow(true);
+  const handleShow = () =>
+  {
+    setShow(true);
+    setInformation(true)
+  }
 
   const [srcPhoto, setSrc] = useState();
   const [photos, setPhotos] = useState();
@@ -38,6 +59,10 @@ const DetailsCard = (props) => {
       amount: null,
     },
   ]);
+
+  const handleuserCompany =(e) =>{
+    localStorage.company = e.target.value
+  }
 
   const [availableMilestones, setAvailableMilestones] = useState({
     'Pre-harvest': {
@@ -116,11 +141,21 @@ const DetailsCard = (props) => {
   };
 
   useEffect(() => {
-    if (props.isModalOpened) {
+    setStateQuote(true)
+    if (stateQuote) {
       openModalBtn.current.click();
     }
   }, [props.isModalOpened]);
 
+
+  const setPurchase = (e) => {
+    localStorage.setItem("volume" , e.target.value)
+  }
+
+
+  const userShipment = (e) => {
+    localStorage.shipment= e.target.value
+  }
   return (
     <div>
       {console.log('child')}
@@ -437,6 +472,7 @@ const DetailsCard = (props) => {
                             }}
                             placeholder='Your company name'
                             ref={userCompany}
+                            onChange={e => handleuserCompany(e)}
                             type='text'
                           />
                           <input
@@ -587,11 +623,12 @@ const DetailsCard = (props) => {
                                   ></i>
                                 </span>
                                 <input
-                                  type='text'
+                                  type='date'
                                   className='form-control'
                                   aria-label='Dollar amount (with dot and two decimal places)'
                                   placeholder='Preferred shipment date or schedule'
                                   ref={shipmentData}
+                                  onChange={(e) => userShipment(e)}
                                 />
                               </div>
                               <div class='input-group my-3'>
@@ -612,6 +649,7 @@ const DetailsCard = (props) => {
                                   className='form-control border-end-none'
                                   placeholder='Purchase volume e.g. 10,000'
                                   ref={purchaseVolume}
+                                  onChange= {(e)=> setPurchase(e)}
                                   style={{
                                     borderRight: 'none',
                                   }}
@@ -727,9 +765,7 @@ const DetailsCard = (props) => {
                                 Pay a fixed price for your project
                               </p>
                               <p className='h6'>
-                                {/* {props.productId.data[0]?.price *
-                                  purchaseVolume.current?.value +
-                                  Number(shipmentData.current?.value)} */}
+                                {measurePrice()} 
                                 <i className='fa fa-pencil'></i>
                               </p>
                               <small className='text-muted'>
@@ -830,14 +866,15 @@ const DetailsCard = (props) => {
                           </Card.Body>
                           <Card.Footer className='text-end'>
                             <Button variant='primary' onClick={handleShow}>
-                              Sumbit
+                              Submit
                             </Button>
                           </Card.Footer>
                         </Card>
                       </div>
                     )}
 
-                    <Modal
+                    {information && 
+                      <Modal
                       show={show}
                       onHide={handleClose}
                       backdrop='static'
@@ -873,31 +910,31 @@ const DetailsCard = (props) => {
                             <div className='mb-2 fw-bold'>
                               <span>Product: </span>
                               <span className='dataSelected'>
-                                Selected product
+                                {props.productId?.data[0].title}
                               </span>
                             </div>
                             <div className='mb-2 fw-bold'>
                               <span>Quantity: </span>
                               <span className='dataSelected'>
-                                Selected product
+                              {localStorage.getItem('volume')}
                               </span>
                             </div>
                             <div className='mb-2 fw-bold'>
                               <span>Value of the contract (US$): </span>
                               <span className='dataSelected'>
-                                Selected product
+                                {localStorage.measurementContract}
                               </span>
                             </div>
                             <div className='mb-2 fw-bold'>
                               <span>Departed at: </span>
                               <span className='dataSelected'>
-                                Selected product
+                                {localStorage.company}
                               </span>
                             </div>
                             <div className='mb-2 fw-bold'>
                               <span>Arrived at: </span>
                               <span className='dataSelected'>
-                                Selected product
+                                {localStorage.shipment}
                               </span>
                             </div>
                             <div className='mb-2 fw-bold'>
@@ -913,6 +950,7 @@ const DetailsCard = (props) => {
                         </Button>
                       </Modal.Footer>
                     </Modal>
+                    }
                   </div>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 export default function OpenUpQuote(props) {
   const [stateQuote, setStateQuote] = useState(false);
+  const [quoteState , setQuoteState] = useState(true)
 
   const handleChangeUp = () => {
     setStateQuote(false);
@@ -13,7 +14,7 @@ export default function OpenUpQuote(props) {
   };
 
   const openModal = () => {
-    props.onOpenQuoteModal(true);
+    props.onOpenQuoteModal(quoteState);
   };
 
   return (
