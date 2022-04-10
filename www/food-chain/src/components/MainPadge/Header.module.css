@@ -3,6 +3,9 @@ input::placeholder {
   position: absolute;
 }
 
+.modalState input::placeholder , .modalState textarea::placeholder{
+  color: #AFB9C2
+}
 
 .container div {
   background-color: rgb(187, 202, 233);
