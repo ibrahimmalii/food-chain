@@ -7,7 +7,9 @@ import userService from '../../UserService';
 import { Button, Card, Modal } from 'react-bootstrap';
 import placeholders from '../MainPadge/Header.module.css';
 import Task from './Task';
-import { PhoneInput } from 'react-contact-number-input';
+// import { PhoneInput } from 'react-contact-number-input';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const DetailsCard = (props) => {
   const shipmentData = useRef();
@@ -493,20 +495,31 @@ const DetailsCard = (props) => {
                             ref={userEmail}
                             type='text'
                           />
-                          <div
+                          {/* <div
                             class='phone-container form-control'
                             style={{ marginTop: '10px' }}
-                          >
-                            <PhoneInput
-                              className='w-100'
-                              countryCode='us'
-                              placeholder='Your phone number'
-                              ref={userPhone}
-                              withDarkTheme
-                              withShadow
-                              autoFocus
-                            />
-                          </div>
+                          > */}
+                          <PhoneInput
+                            name='phoneNumber'
+                            type='text'
+                            country={'us'}
+                            enableAreaCodes={true}
+                            containerStyle={{
+                              backgroundColor: 'rgb(69, 79, 91) ',
+                              outline: 'none',
+                              marginTop: '10px',
+                              border: 'none',
+                              padding: '7px 0',
+                              borderRadius: '5px',
+                            }}
+                            inputStyle={{
+                              background: 'rgb(69, 79, 91)',
+                              width: '98%',
+                              color: 'white',
+                              border: 'none',
+                            }}
+                          />
+                          {/* </div> */}
                           {/* <input
                             className='form-control'
                             style={{
@@ -595,11 +608,10 @@ const DetailsCard = (props) => {
                                       }}
                                     ></i>
                                   </div>
-                                  <div className='ms-auto'>
+                                  <div className=''>
                                     <select
                                       id='cars'
                                       style={{
-                                        marginRight: '10px',
                                         border: 'none',
                                       }}
                                     >
@@ -611,12 +623,14 @@ const DetailsCard = (props) => {
                                       </option>
                                     </select>
                                   </div>
-                                  <div>
+                                  <div className='flex-grow-1'>
                                     <input
                                       type='number'
                                       placeholder='Port of loading'
                                       ref={portLoading}
-                                      className={classes.inputNumber}
+                                      className={
+                                        classes.inputNumber + 'me-auto'
+                                      }
                                       class='form-control flex-grow-1'
                                       style={{
                                         border: 'none',
