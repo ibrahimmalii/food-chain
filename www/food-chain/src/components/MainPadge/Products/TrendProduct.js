@@ -21,20 +21,26 @@ const TrendProduct = (props) => {
         <i className={`flag-icon flag-icon-${props.photos.flag} mx-1`}></i>
         <span className={classes.country}>{props.photos.country}</span>
         <div className={classes.price}>
-          <span style={{ color: '#637381' }}>USD</span> {props.photos.price} ~
+          <span
+            style={{
+              fontWeight: '400',
+              color: 'rgb(99, 115, 129)',
+              lineHeight: '28px',
+              fontSize: '20px',
+            }}
+          >
+            USD
+          </span>{' '}
+          {props.photos.price} ~
         </div>
         <div className={classes.available}>AVAILABLE SPECS:</div>
         <small className='text-muted'>{props.photos.variety}</small>
         <p className='text-muted' style={{ fontSize: '10px' }}>
           {props.photos.require}
         </p>
-        <button
-         className={classes.buttonDetails}
-        >
-          See Details
-        </button>
-        </Link>
-        </div>
+        <button className={classes.buttonDetails}>See Details</button>
+      </Link>
+    </div>
   );
 };
 
