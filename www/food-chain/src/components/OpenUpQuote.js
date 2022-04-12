@@ -17,6 +17,8 @@ export default function OpenUpQuote(props) {
     props.onOpenQuoteModal(quoteState);
   };
 
+
+
   return (
     <div>
       {stateQuote ? (

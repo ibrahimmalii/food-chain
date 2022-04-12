@@ -19,8 +19,15 @@ const DetailsCard = (props) => {
   const userPhone = useRef();
   const openModalBtn = useRef();
   const close = useRef();
-
   const [stateQuote, setStateQuote] = useState(props.isModalOpened);
+
+  useEffect(() => {
+    setStateQuote(true);
+    if (stateQuote) {
+      openModalBtn.current.click();
+    }
+  }, [props.isModalOpened]);
+
   const [show, setShow] = useState(false);
   const [information, setInformation] = useState(false);
 
@@ -81,7 +88,6 @@ const DetailsCard = (props) => {
   });
 
   const onSelectType = ({ id, task, date, amount }) => {
-    console.log('from event');
     mileStones.map((item) => {
       if (item.id === id) {
         item.task = task;
@@ -148,7 +154,6 @@ const DetailsCard = (props) => {
 
   return (
     <div>
-      {console.log('child')}
       <div className='container row'>
         <div className='col-4 mt-5 offset-1'>
           <div className='mb-5'>
