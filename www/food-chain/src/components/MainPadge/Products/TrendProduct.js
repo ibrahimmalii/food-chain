@@ -34,7 +34,7 @@ const TrendProduct = (props) => {
           {props.photos.price} ~
         </div>
         <div className={classes.available}>AVAILABLE SPECS:</div>
-        <small className='text-muted'>{props.photos.variety}</small>
+        <small className={classes.variety}>{props.photos.variety}</small>
         <p className='text-muted' style={{ fontSize: '10px' }}>
           {props.photos.require}
         </p>
