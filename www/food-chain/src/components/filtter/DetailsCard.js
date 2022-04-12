@@ -18,17 +18,30 @@ const DetailsCard = (props) => {
   const userPhone = useRef();
   const openModalBtn = useRef();
   const close = useRef();
-
-  //input phone
-  // const phoneInputField = useRef();
-  // const phoneInput = window.intlTelInput(phoneInputField, {
-  //   utilsScript:
-  //     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-  // });
-
   const [stateQuote, setStateQuote] = useState(props.isModalOpened);
+
+  useEffect(() => {
+    setStateQuote(true);
+    if (stateQuote) {
+      openModalBtn.current.click();
+    }
+  }, [props.isModalOpened]);
+
   const [show, setShow] = useState(false);
   const [information, setInformation] = useState(false);
+  const [collectionModule , setCollectionModule] = useState({
+    first: false, 
+    second: false,
+    third: false
+  })
+
+  const openfirstModal = () => {
+    setCollectionModule({
+      first: true, 
+      second: false,
+      third: false
+    })
+  }
 
   const measurePrice = () => {
     console.log("called");
@@ -46,10 +59,20 @@ const DetailsCard = (props) => {
     close.current.click();
     setModalState(true);
     setShow(false);
+    setCollectionModule({
+      first: false, 
+      second: false, 
+      third: false
+    })
   };
   const handleShow = () => {
     setShow(true);
     setInformation(true);
+    setCollectionModule({
+      first: false, 
+      second: false, 
+      third: true
+    })
   };
 
   const [srcPhoto, setSrc] = useState();
@@ -88,7 +111,6 @@ const DetailsCard = (props) => {
   });
 
   const onSelectType = ({ id, task, date, amount }) => {
-    console.log("from event");
     mileStones.map((item) => {
       if (item.id === id) {
         item.task = task;
@@ -140,6 +162,11 @@ const DetailsCard = (props) => {
       localStorage.name = username.current?.value;
       userService.setLoggedStatus(true);
       setModalState(false);
+      setCollectionModule({
+        first: false, 
+    second: true,
+    third: false
+      })
     } else {
       alert("please complete your data!!");
     }
@@ -156,10 +183,9 @@ const DetailsCard = (props) => {
   };
   return (
     <div>
-      {console.log("child")}
-      <div className="container row">
-        <div className="col-4 mt-5 offset-1">
-          <div className="mb-5">
+      <div className='container row'>
+        <div className='col-4 mt-5 offset-1'>
+          <div className='mb-5'>
             <Link
               style={{ color: "#C5CBC9", textDecoration: "none" }}
               to="/categories"
@@ -320,6 +346,7 @@ const DetailsCard = (props) => {
               {/* Start of details modal */}
               <button
                 ref={openModalBtn}
+                onClick={openfirstModal}
                 type="button"
                 className="btn btn-primary w-100 fw-bold"
                 style={{ borderRadius: "20px", fontSize: "20px" }}
@@ -343,6 +370,7 @@ const DetailsCard = (props) => {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
+               
                 <div
                   className="mx-auto modal-dialog modal-lg"
                   style={{ width: "100%", marginTop: "10%" }}
@@ -351,7 +379,7 @@ const DetailsCard = (props) => {
                     className="modal-content"
                    
                   >
-                    {modalState ? (
+                    {collectionModule.first ? (
                       <div className="row "  style={{
                         width: "980px",
                         marginLeft: "-100px",
@@ -753,7 +781,7 @@ const DetailsCard = (props) => {
                           </form>
                         </div>
                       </div>
-                    ) : (
+                    ) : (collectionModule.second) ? (
                       <div  style={{
                       
                         padding: "32px",
@@ -928,88 +956,86 @@ const DetailsCard = (props) => {
                           </Card.Footer>
                         </Card>
                       </div>
-                    )}
-
-                    {information && (
-                      <Modal
-                        show={show}
-                        onHide={handleClose}
-                        backdrop="static"
-                        keyboard={false}
-                        size="md"
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title id="contained-modal-title-vcenter">
-                            Submittion information
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <div className="d-flex">
+                    ) : (collectionModule.third) &&( <Modal
+                      show={show}
+                      onHide={handleClose}
+                      backdrop="static"
+                      keyboard={false}
+                      size="md"
+                      centered
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                          Submittion information
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <div className="d-flex">
+                          <div
+                            className="quCode"
+                            style={{ width: "202px", height: "178px" }}
+                          >
                             <div
-                              className="quCode"
-                              style={{ width: "202px", height: "178px" }}
-                            >
-                              <div
-                                className="borderd"
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  backgroundImage:
-                                    "url('https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png')",
-                                  backgroundSize: "cover",
-                                  backgroundPosition: "center",
-                                  border: "1px solid #a4a0a0",
-                                }}
-                              ></div>
+                              className="borderd"
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                backgroundImage:
+                                  "url('https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png')",
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                                border: "1px solid #a4a0a0",
+                              }}
+                            ></div>
+                          </div>
+                          <div className="details ms-3">
+                            <div className="mb-2 fw-bold">
+                              <span>Product: </span>
+                              <span className="dataSelected">
+                                {props.productId?.data[0].title}
+                              </span>
                             </div>
-                            <div className="details ms-3">
-                              <div className="mb-2 fw-bold">
-                                <span>Product: </span>
-                                <span className="dataSelected">
-                                  {props.productId?.data[0].title}
-                                </span>
-                              </div>
-                              <div className="mb-2 fw-bold">
-                                <span>Quantity: </span>
-                                <span className="dataSelected">
-                                  {localStorage.getItem("volume")}
-                                </span>
-                              </div>
-                              <div className="mb-2 fw-bold">
-                                <span>Value of the contract (US$): </span>
-                                <span className="dataSelected">
-                                  {localStorage.measurementContract}
-                                </span>
-                              </div>
-                              <div className="mb-2 fw-bold">
-                                <span>Departed at: </span>
-                                <span className="dataSelected">
-                                  {localStorage.company}
-                                </span>
-                              </div>
-                              <div className="mb-2 fw-bold">
-                                <span>Arrived at: </span>
-                                <span className="dataSelected">
-                                  {localStorage.shipment}
-                                </span>
-                              </div>
-                              <div className="mb-2 fw-bold">
-                                <span>Blockchain address: </span>
-                                <span className="dataSelected">
-                                  xxxxxxxxxxxx
-                                </span>
-                              </div>
+                            <div className="mb-2 fw-bold">
+                              <span>Quantity: </span>
+                              <span className="dataSelected">
+                                {localStorage.getItem("volume")}
+                              </span>
+                            </div>
+                            <div className="mb-2 fw-bold">
+                              <span>Value of the contract (US$): </span>
+                              <span className="dataSelected">
+                                {localStorage.measurementContract}
+                              </span>
+                            </div>
+                            <div className="mb-2 fw-bold">
+                              <span>Departed at: </span>
+                              <span className="dataSelected">
+                                {localStorage.company}
+                              </span>
+                            </div>
+                            <div className="mb-2 fw-bold">
+                              <span>Arrived at: </span>
+                              <span className="dataSelected">
+                                {localStorage.shipment}
+                              </span>
+                            </div>
+                            <div className="mb-2 fw-bold">
+                              <span>Blockchain address: </span>
+                              <span className="dataSelected">
+                                xxxxxxxxxxxx
+                              </span>
                             </div>
                           </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="primary" onClick={handleClose}>
-                            Understood
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    )}
+                        </div>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                          Understood
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>)}
+
+                
                   </div>
                 </div>
               </div>
