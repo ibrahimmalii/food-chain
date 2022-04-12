@@ -57,7 +57,7 @@ const Admin = (props) => {
   };
   return (
     <div className='text-center mb-5'>
-      {isUserLogged && (
+      {localStorage.isAdmin && (
         <Button variant='outline-primary' className='w-50' onClick={handleShow}>
           Add Product
         </Button>
