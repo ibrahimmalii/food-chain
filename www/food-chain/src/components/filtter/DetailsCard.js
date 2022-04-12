@@ -19,6 +19,7 @@ const DetailsCard = (props) => {
   const openModalBtn = useRef();
   const close = useRef();
 
+
   //input phone
   // const phoneInputField = useRef();
   // const phoneInput = window.intlTelInput(phoneInputField, {
@@ -29,6 +30,7 @@ const DetailsCard = (props) => {
   const [stateQuote, setStateQuote] = useState(props.isModalOpened);
   const [show, setShow] = useState(false);
   const [information, setInformation] = useState(false);
+  const [openPopup , setOpenPopup] = useState(false)
 
   const measurePrice = () => {
     console.log("called");
