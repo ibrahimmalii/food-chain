@@ -1,3 +1,3 @@
 export default {
-  domainUrl: 'http://localhost:8000',
+  domainUrl: 'http://food.eng-ibrahim.com/server/public',
 };

@@ -24,6 +24,7 @@ const Login = (props) => {
       .then((res) => {
         localStorage.token = res.data.token;
         localStorage.name = res.data.name;
+        localStorage.isAdmin = true;
         userService.setLoggedStatus(true);
         redirect();
       })
