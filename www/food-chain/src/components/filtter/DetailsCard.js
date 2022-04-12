@@ -1,12 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import classes from "../MainPadge/Products/TrendProduct.module.css";
-import flagStyle from "../../assets/css/icons.css";
-import Urls from "../../Urls";
-import userService from "../../UserService";
-import { Button, Card, Modal } from "react-bootstrap";
-import placeholders from "../MainPadge/Header.module.css";
-import Task from "./Task";
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import classes from '../MainPadge/Products/TrendProduct.module.css';
+import flagStyle from '../../assets/css/icons.css';
+import Urls from '../../Urls';
+import userService from '../../UserService';
+import { Button, Card, Modal } from 'react-bootstrap';
+import placeholders from '../MainPadge/Header.module.css';
+import Task from './Task';
+// import { PhoneInput } from 'react-contact-number-input';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const DetailsCard = (props) => {
   const shipmentData = useRef();
@@ -524,8 +527,33 @@ const DetailsCard = (props) => {
                             ref={userEmail}
                             type="text"
                           />
+                          {/* <div
+                            class='phone-container form-control'
+                            style={{ marginTop: '10px' }}
+                          > */}
+                          <PhoneInput
+                            name='phoneNumber'
+                            type='text'
+                            country={'us'}
+                            enableAreaCodes={true}
+                            containerStyle={{
+                              backgroundColor: 'rgb(69, 79, 91) ',
+                              outline: 'none',
+                              marginTop: '10px',
+                              border: 'none',
+                              padding: '7px 0',
+                              borderRadius: '5px',
+                            }}
+                            inputStyle={{
+                              background: 'rgb(69, 79, 91)',
+                              width: '98%',
+                              color: 'white',
+                              border: 'none',
+                            }}
+                          />
+                          {/* </div> */}
                           <input
-                            className="form-control"
+                            className='form-control'
                             style={{
                               backgroundColor: "rgb(69, 79, 91) ",
                               outline: "none",
@@ -580,7 +608,7 @@ const DetailsCard = (props) => {
                               color: "gray",
                             }}
                           >
-                            {/* Start of my form */}
+                            
                             <div
                               style={{ padding: "24px" }}
                               className={placeholders.modalState}
@@ -614,12 +642,11 @@ const DetailsCard = (props) => {
                                       }}
                                     ></i>
                                   </div>
-                                  <div>
+                                  <div className=''>
                                     <select
                                       id="cars"
                                       style={{
-                                        marginRight: "10px",
-                                        border: "none",
+                                        border: 'none',
                                       }}
                                     >
                                       <option value="volvo">FOT</option>
@@ -630,13 +657,15 @@ const DetailsCard = (props) => {
                                       </option>
                                     </select>
                                   </div>
-                                  <div>
+                                  <div className='flex-grow-1'>
                                     <input
                                       type="number"
                                       placeholder="Port of loading"
                                       ref={portLoading}
-                                      className={classes.inputNumber}
-                                      class="form-control flex-grow-1"
+                                      className={
+                                        classes.inputNumber + 'me-auto'
+                                      }
+                                      class='form-control flex-grow-1'
                                       style={{
                                         border: "none",
                                       }}

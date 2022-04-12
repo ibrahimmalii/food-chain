@@ -40,15 +40,15 @@
 }
 
 .buttonDetails:hover {
-  border: 2px solid #87B4F4;
-  background-color: #EDF3FB;
+  border: 2px solid #87b4f4;
+  background-color: #edf3fb;
 }
 
 .buttonDetails {
   border-radius: 20px;
   color: #2f7cef;
   font-size: 12px;
-  border: 2px solid #B8D2F7;
+  border: 2px solid #b8d2f7;
   margin-bottom: 50px;
   font-family: Inter, sans-serif;
   padding: 7px;
@@ -57,10 +57,29 @@
   background-color: white;
 }
 
-.inputNumber::placeholder{
-  color: #919EAB
+.inputNumber::placeholder {
+  color: #919eab;
 }
 
-.inputNumber :hover , .inputNumber:active , .inputNumber:focus{
+.inputNumber :hover,
+.inputNumber:active,
+.inputNumber:focus {
   outline: none;
-} 
+}
+
+.PhoneInput {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 48px;
+  margin-left: 0;
+  background: red;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  line-height: 25px;
+  height: 35px;
+  width: 300px;
+  outline: none;
+}
