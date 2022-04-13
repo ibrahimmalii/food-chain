@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Filtter from '../components/MainPadge/Filtter';
 import Header from '../components/MainPadge/Header';
 import MainBody from '../components/MainPadge/MainBody';
@@ -8,13 +8,23 @@ import classes from '../components/MainPadge/Products/TrendProduct.module.css';
 import classCategories from '../components/MainPadge/Header.module.css';
 import { Link } from 'react-router-dom';
 import Admin from '../components/MainPadge/Admin';
+import { Spinner } from 'react-bootstrap';
+
 const MainPadge = (props) => {
   const handleData = (e) => {
-    console.log('med', e);
     if (e) {
       props.onAddProduct(e);
     }
   };
+
+  const [isNoDataLoaded, setIsNoDataLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!props.data.length) {
+      setIsNoDataLoaded(true);
+      console.log(isNoDataLoaded);
+    }
+  }, [props.data]);
 
   return (
     <Fragment>
@@ -66,7 +76,7 @@ const MainPadge = (props) => {
       <div className={classes.cardProduct}>
         <h4 className='mb-4'>Trending Products</h4>
         <div className='row'>
-          {props.data.length ? (
+          {props.data && props.data.length > 0 ? (
             props.data.map((photo, index) => {
               return (
                 <div key={index} className='col-3'>
@@ -75,10 +85,18 @@ const MainPadge = (props) => {
                 </div>
               );
             })
-          ) : (
-            <div className='card p-4 bg-secondary text-light text-center m-auto'>
-              <h3>There is no result</h3>
+          ) : !props.data ? (
+            <div className='text-center p-4 mb-5'>
+              <Spinner animation='border' size='md' role='status'>
+                <span className='visually-hidden'>Loading...</span>
+              </Spinner>
             </div>
+          ) : (
+            isNoDataLoaded && (
+              <div className='card p-4 bg-secondary text-light text-center m-auto'>
+                <h3>There is no result</h3>
+              </div>
+            )
           )}
         </div>
       </div>
