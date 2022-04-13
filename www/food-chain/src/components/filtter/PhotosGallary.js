@@ -4,7 +4,7 @@ const PhotosGallary = (props) => {
   // console.log(props.productId)
   return (
     <div>
-      <h3 className='mt-5'>Gallary</h3>
+      <h3 className='mt-5'>Gallery</h3>
       <div
         className='container mb-5 mt-5'
         style={{ display: 'flex', flexWrap: 'wrap' }}

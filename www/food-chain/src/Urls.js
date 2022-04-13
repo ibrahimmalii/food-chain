@@ -1,3 +1,3 @@
 export default {
-  domainUrl: 'http://food.eng-ibrahim.com/server/public',
+  domainUrl: 'https://food.eng-ibrahim.com/server/public',
 };

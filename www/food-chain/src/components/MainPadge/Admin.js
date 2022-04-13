@@ -77,7 +77,7 @@ const Admin = (props) => {
             <div className=''>
               <div className='input-group mb-3'>
                 <span className='input-group-text' id='basic-addon1'>
-                  Title
+                  Product Name
                 </span>
                 <input
                   name='title'
@@ -98,7 +98,7 @@ const Admin = (props) => {
                   aria-label='Amount (to the nearest dollar)'
                   ref={price}
                 />
-                <span className='input-group-text'>$</span>
+                <span className='input-group-text'>KG</span>
               </div>
               <div className='input-group mb-3'>
                 <span className='input-group-text'>Variety</span>
