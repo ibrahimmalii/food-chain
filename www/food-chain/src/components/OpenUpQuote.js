@@ -39,9 +39,9 @@ export default function OpenUpQuote(props) {
               style={{ fontSize: '20px' }}
               onClick={handleChangeDown}
             />
-            <h1 className='mt-3'>
+            <p className='mt-3 text-light' style={{fontSize:'20px', fontWeight: '600'}}>
               Are you interested in this market? Get a quote now.
-            </h1>
+            </p>
             <button
               className='btn btn-primary w-100 mt-4'
               onClick={openModal}
