@@ -107,7 +107,31 @@ const DetailsCard = (props) => {
   const [mileStones, setMileStones] = useState([
     {
       id: '384hisdhf',
-      task: null,
+      task: 'Pre-harvest',
+      date: null,
+      amount: null,
+    },
+    {
+      id: 'kdjfaije83',
+      task: 'Harvest',
+      date: null,
+      amount: null,
+    },
+    {
+      id: 'dkj83fkm',
+      task: 'Packing',
+      date: null,
+      amount: null,
+    },
+    {
+      id: 'lsdi8333',
+      task: 'Export documentation',
+      date: null,
+      amount: null,
+    },
+    {
+      id: 'akiehhd',
+      task: 'Arrival',
       date: null,
       amount: null,
     },
@@ -419,7 +443,7 @@ const DetailsCard = (props) => {
                           fontSize: '14px',
                           lineHeight: '22px',
                           backgroundColor: `${
-                            modalState ? 'rgb(33, 43, 54)' : 'lightgray'
+                            modalState ? 'rgb(33, 43, 54)' : 'rgb(33, 43, 54)'
                           }`,
                           borderRadius: '10px',
                           overflowY: 'auto',
@@ -1144,19 +1168,22 @@ const DetailsCard = (props) => {
                       </div>
                     ) : collectionModule.second ? (
                       <div
+                        className='row '
                         style={{
-                          padding: '32px',
-                          fontFamily: 'Inter, sans-serif',
+                          width: '900px',
+                          padding: '30px 17px',
                           fontWeight: '400',
                           fontSize: '14px',
                           lineHeight: '22px',
                           backgroundColor: `${
-                            modalState ? 'rgb(33, 43, 54)' : 'lightgray'
+                            modalState ? 'rgb(33, 43, 54)' : 'rgb(33, 43, 54)'
                           }`,
                           borderRadius: '10px',
+                          overflowY: 'auto',
+                          maxHeight: 'calc(100vh - 145px)',
                         }}
                       >
-                        <p className='h3'>Hire</p>
+                        <p className='h3 text-light fw-bold'>Purchase Order</p>
                         <Card body className='personal_info mb-4'>
                           <div className='d-flex'>
                             <div
@@ -1165,15 +1192,17 @@ const DetailsCard = (props) => {
                                 width: '80px',
                                 height: '80px',
                                 borderRadius: '50%',
-                                backgroundImage:
-                                  'url("https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/4ZrVLdVKeijzurndz/people-emotion-and-facial-expression-concept-face-of-happy-smiling-middle-aged-woman-at-office_rleqp4y7g_thumbnail-1080_09.png")',
+                                backgroundImage: `${
+                                  photos && 'url(' + photos + ')'
+                                }`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                               }}
                             ></div>
                             <div className='flex-grow-1 p-2 py-3'>
                               <p className='h6 text-success'>
-                                {localStorage?.name}
+                                {props.productId &&
+                                  props.productId.data[0].title}
                               </p>
                               <span>
                                 <i className='fa fa-car text-danger'></i>{' '}
@@ -1191,7 +1220,7 @@ const DetailsCard = (props) => {
                             <small>
                               You're protected by{' '}
                               <span className='text-success fw-bold'>
-                                Upwork Payment Protection
+                                TRU MARKET Smart Contract
                               </span>{' '}
                               Only for the work you authorize.
                             </small>
@@ -1201,33 +1230,25 @@ const DetailsCard = (props) => {
                                 <i className='fa fa-question'></i>
                               </p>
                               <p className='h6'>
-                                Fixed-Price <i className='fa fa-pencil'></i>
-                              </p>
-                              <small className='text-muted'>
-                                Pay as project milestone are completed.
-                              </small>
-                            </div>
-                            <div className='fixed mt-4'>
-                              <p className='h5'>
-                                Pay a fixed price for your project
+                                Order total: <i className='fa fa-pencil'></i>
                               </p>
                               <p className='h6'>
-                                {localStorage?.measurementContract}
-                                <i className='fa fa-pencil'></i>
+                                US$ {localStorage?.measurementContract}.
                               </p>
-                              <small className='text-muted'>
-                                This is the price you and Farhan have agreed
-                                upon.
+                              <small>
+                                This is the price you and the exporter have
+                                agreed upon.
                               </small>
                             </div>
+
                             <div className='deposit mt-4'>
                               <p className='h5'>Deposit funds into Escrow</p>
                               <small className='text-muted'>
                                 Escrow is a neutral holding place that protects
                                 your deposit until work is approved.
                               </small>
-                              <p className='h4'>contract details</p>
                               <hr />
+                              <p className='h4'>Buyer details</p>
                               <table
                                 style={{
                                   width: '100%',
@@ -1240,8 +1261,17 @@ const DetailsCard = (props) => {
                                 <tr>
                                   <td>Company name</td>
                                   <td>{userCompany.current?.value}</td>
-                                  <td>Email</td>
-                                  <td>{userEmail.current?.value}</td>
+                                  <td>Product name</td>
+                                  <td>
+                                    {props.productId &&
+                                      props.productId.data[0].title}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Contact name</td>
+                                  <td>{localStorage?.name}</td>
+                                  <td>Purchase volume</td>
+                                  <td>{purchaseVolume.current?.value}</td>
                                 </tr>
                                 <tr>
                                   <td>phone Number</td>
@@ -1250,14 +1280,13 @@ const DetailsCard = (props) => {
                                   <td>{portLoading.current?.value}</td>
                                 </tr>
                                 <tr>
-                                  <td>shipment date</td>
-                                  <td>{shipmentData.current?.value}</td>
-                                  <td>Purchase volume</td>
-                                  <td>{purchaseVolume.current?.value}</td>
-                                </tr>
-                                <tr>
-                                  <td>discription</td>
-                                  <td>{discription.current?.value}</td>
+                                  <td>email</td>
+                                  <td>{userEmail.current?.value}</td>
+                                  <td>ETD</td>
+                                  <td>
+                                    {localStorage.shipment &&
+                                      measureShipmentDate()}
+                                  </td>
                                 </tr>
                               </table>
                               <hr />
@@ -1269,20 +1298,10 @@ const DetailsCard = (props) => {
                             <div className='deposit-funds mt-4'>
                               <p className='h5'>Deposit funds into Escrow</p>
                               <small className='text-muted'>
-                                Escrow is a neutral holding place that protects
-                                your deposit until work is approved.
+                                Escrow is a neutral holding place in the Smart
+                                Contract that protects your deposit until work
+                                is approved.
                               </small>
-                              <div className='mt-3'>
-                                <label className='h6'>
-                                  <input type='radio' name='deposite' /> Deposit
-                                  $300.00 for the whole project
-                                </label>
-                                <br />
-                                <label className='h6'>
-                                  <input type='radio' name='deposite' /> Deposit
-                                  a lesser amount to cover the first milestone.
-                                </label>
-                              </div>
                             </div>
                             <hr />
                           </Card.Body>
@@ -1292,7 +1311,7 @@ const DetailsCard = (props) => {
                               Add project milestones and pay in installments as
                               each milestone is completed to your satisfaction.
                             </small>
-                            {mileStones.map((item) => (
+                            {mileStones.map((item, index) => (
                               <Task
                                 key={item.id}
                                 data={item}
@@ -1303,13 +1322,13 @@ const DetailsCard = (props) => {
                               />
                             ))}
 
-                            <Button
+                            {/* <Button
                               variant='success'
                               disabled={mileStones.length >= 5 && true}
                               onClick={addNewTask}
                             >
                               <i className='fa fa-plus'></i>
-                            </Button>
+                            </Button> */}
                           </Card.Body>
                           <Card.Footer className='text-end'>
                             <Button variant='primary' onClick={handleShow}>
@@ -1405,7 +1424,7 @@ const DetailsCard = (props) => {
                             </div>
                           </Modal.Body>
                           <Modal.Footer>
-                            <div>
+                            <div class='flex-grow-1'>
                               <small>
                                 These are your order details. Operation traced
                                 by TRU MARKET Blockchain
