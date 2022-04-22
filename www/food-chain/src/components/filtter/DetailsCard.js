@@ -61,7 +61,7 @@ const DetailsCard = (props) => {
     if (!localStorage.measurementContract) {
       localStorage.measurementContract = result;
     }
-    return result;
+    return result.toLocaleString('en-IN');
   };
 
   const handleClose = () => {
@@ -542,6 +542,7 @@ const DetailsCard = (props) => {
                           <PhoneInput
                             name='phoneNumber'
                             type='text'
+                            ref={userPhone}
                             country={'us'}
                             enableAreaCodes={true}
                             containerStyle={{
@@ -814,7 +815,7 @@ const DetailsCard = (props) => {
                           borderRadius: '10px',
                         }}
                       >
-                        <p className='h3'>Hire</p>
+                        <p className='h3'>Purchase Order</p>
                         <Card body className='personal_info mb-4'>
                           <div className='d-flex'>
                             <div
@@ -849,7 +850,7 @@ const DetailsCard = (props) => {
                             <small>
                               You're protected by{' '}
                               <span className='text-success fw-bold'>
-                                Upwork Payment Protection
+                                TRU MARKET Smart Contract
                               </span>{' '}
                               Only for the work you authorize.
                             </small>
@@ -884,8 +885,8 @@ const DetailsCard = (props) => {
                                 Escrow is a neutral holding place that protects
                                 your deposit until work is approved.
                               </small>
-                              <p className='h4'>contract details</p>
                               <hr />
+                              <p className='h4'>Buyer details</p>
                               <table
                                 style={{
                                   width: '100%',
@@ -898,8 +899,15 @@ const DetailsCard = (props) => {
                                 <tr>
                                   <td>Company name</td>
                                   <td>{userCompany.current?.value}</td>
-                                  <td>Email</td>
-                                  <td>{userEmail.current?.value}</td>
+                                  <td>Product name</td>
+                                  <td>{props.productId &&
+                                    props.productId.data[0].title}</td>
+                                </tr>
+                                <tr>
+                                  <td>Contact name</td>
+                                  <td>{}</td>
+                                  <td>Purchase volume</td>
+                                  <td>{purchaseVolume.current?.value}</td>
                                 </tr>
                                 <tr>
                                   <td>phone Number</td>
@@ -908,14 +916,10 @@ const DetailsCard = (props) => {
                                   <td>{portLoading.current?.value}</td>
                                 </tr>
                                 <tr>
-                                  <td>shipment date</td>
+                                  <td>email</td>
+                                  <td>{userEmail.current?.value}</td>
+                                  <td>ETD</td>
                                   <td>{shipmentData.current?.value}</td>
-                                  <td>Purchase volume</td>
-                                  <td>{purchaseVolume.current?.value}</td>
-                                </tr>
-                                <tr>
-                                  <td>discription</td>
-                                  <td>{discription.current?.value}</td>
                                 </tr>
                               </table>
                               <hr />
@@ -988,7 +992,7 @@ const DetailsCard = (props) => {
                         >
                           <Modal.Header>
                             <Modal.Title id='contained-modal-title-vcenter'>
-                              Submittion information
+                              Thank you for your order
                             </Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
@@ -1032,13 +1036,13 @@ const DetailsCard = (props) => {
                                 <div className='mb-2 fw-bold'>
                                   <span>Departed at: </span>
                                   <span className='dataSelected'>
-                                    {localStorage.company}
+                                  {localStorage.shipment}
                                   </span>
                                 </div>
                                 <div className='mb-2 fw-bold'>
                                   <span>Arrived at: </span>
                                   <span className='dataSelected'>
-                                    {localStorage.shipment}
+                                    
                                   </span>
                                 </div>
                                 <div className='mb-2 fw-bold'>

@@ -13,7 +13,9 @@ const Fruits = (props) => {
   const [searchValue, setSearchValue] = useState('');
   const [searchData, setSearchData] = useState(false);
 
+
   const handleType = useCallback(async () => {
+    
     axiosInstance.get(`api/categories/${params.id}`).then((res) => {
       setType(res);
       setSearchData(false);
