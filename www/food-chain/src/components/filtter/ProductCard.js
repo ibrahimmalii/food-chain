@@ -12,7 +12,7 @@ const ProductCard = (props) => {
           style={{ borderRadius: '10px', overflew: 'hidden' }}
         >
           <Link
-            to={`/product/${props.type.id}`}
+            to={`/product/${props.type.slug}`}
             style={{ textDecoration: 'none' }}
           >
             <img

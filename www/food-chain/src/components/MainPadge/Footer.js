@@ -37,6 +37,13 @@ const Footer = ({ footerData }) => {
                       &nbsp;&nbsp;
                     </small>
                   </div>
+                </div>
+              );
+            })}
+          {footerData &&
+            footerData.map((res, index) => {
+              return (
+                <div className='d-flex' key={index}>
                   <Link
                     to={`/categories/${res.category_id}`}
                     style={{
@@ -57,7 +64,41 @@ const Footer = ({ footerData }) => {
                       style={{
                         fontWeight: '800',
                         color: '#F9FAFB',
-                        fontSize: '14px',
+                        // fontSize: '14px',
+                      }}
+                    >
+                      USD {res.price} ~ / KG &nbsp;&nbsp; &nbsp;&nbsp;
+                      &nbsp;&nbsp;
+                    </small>
+                  </div>
+                </div>
+              );
+            })}
+          {footerData &&
+            footerData.map((res, index) => {
+              return (
+                <div className='d-flex' key={index}>
+                  <Link
+                    to={`/categories/${res.category_id}`}
+                    style={{
+                      color: 'rgb(157, 182, 204)',
+                      fontWeight: '600',
+                      fontSize: '14px',
+                      textDecoration: 'none',
+                      color: 'rgb(157, 182, 204)',
+                    }}
+                  >
+                    <div>
+                      <small>{res.title} &nbsp;&nbsp; &nbsp;</small>
+                    </div>
+                  </Link>
+                  <div>
+                    <small
+                      className='fw-bold'
+                      style={{
+                        fontWeight: '800',
+                        color: '#F9FAFB',
+                        // fontSize: '14px',
                       }}
                     >
                       USD {res.price} ~ / KG &nbsp;&nbsp; &nbsp;&nbsp;

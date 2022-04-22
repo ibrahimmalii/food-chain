@@ -3,9 +3,9 @@ import classes from '../MainPadge/Products/TrendProduct.module.css';
 import Urls from '../../Urls';
 
 const CatergorieCard = ({ item }) => {
-  console.log(item)
+  console.log(item);
   return (
-    <Link style={{ textDecoration: 'none' }} to={`/product/${item.id}`}>
+    <Link style={{ textDecoration: 'none' }} to={`/product/${item.slug}`}>
       <div className='col-12 col-sm'>
         {item && (
           <div>

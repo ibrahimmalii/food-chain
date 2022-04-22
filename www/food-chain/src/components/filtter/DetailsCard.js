@@ -61,15 +61,23 @@ const DetailsCard = (props) => {
     });
   };
 
+  const measureShipmentDate = () => {
+    return new Date(localStorage.shipment).toLocaleDateString();
+  };
+  const measureArraialAt = () => {
+    let result = new Date(localStorage.shipment);
+    let finalResult = result.setDate(result.getDate() + 21);
+    finalResult = new Date(finalResult).toLocaleDateString();
+    return finalResult;
+  };
+
   const measurePrice = () => {
     const result =
-      +props.productId.data[0]?.price * +purchaseVolume.current?.value +
-      +props.productId.data[0]?.price;
+      +props.productId.data[0]?.price * +purchaseVolume.current?.value * 1000;
 
     if (!localStorage.measurementContract) {
-      localStorage.measurementContract = result;
+      localStorage.measurementContract = result.toLocaleString();
     }
-    return result;
   };
 
   const handleClose = () => {
@@ -174,12 +182,16 @@ const DetailsCard = (props) => {
   const username = useRef();
   const submitForm = (e) => {
     console.log(userPhone);
+    measurePrice();
     e.preventDefault();
     if (
       username.current?.value &&
       userEmail.current.value &&
       isEmail &&
-      userPhone.length > 5
+      userPhone.length > 5 &&
+      userCompany.current.value &&
+      purchaseVolume.current?.value &&
+      shipmentData.current?.value
     ) {
       localStorage.token = Math.random().toString(15).substring(2);
       localStorage.name = username.current?.value;
@@ -1200,7 +1212,7 @@ const DetailsCard = (props) => {
                                 Pay a fixed price for your project
                               </p>
                               <p className='h6'>
-                                {measurePrice()}
+                                {localStorage?.measurementContract}
                                 <i className='fa fa-pencil'></i>
                               </p>
                               <small className='text-muted'>
@@ -1313,12 +1325,22 @@ const DetailsCard = (props) => {
                           onHide={handleClose}
                           backdrop='static'
                           keyboard={false}
-                          size='md'
-                          centered
+                          style={{
+                            width: '900px',
+                            padding: '30px 17px',
+                            fontWeight: '400',
+                            fontSize: '14px',
+                            lineHeight: '22px',
+                            backgroundColor: 'rgb(33, 43, 54)',
+                            borderRadius: '10px',
+                            overflowY: 'auto',
+                            maxHeight: 'calc(100vh - 145px)',
+                            color: 'white',
+                          }}
                         >
                           <Modal.Header>
                             <Modal.Title id='contained-modal-title-vcenter'>
-                              Submittion information
+                              Thank you for your order.
                             </Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
@@ -1333,7 +1355,7 @@ const DetailsCard = (props) => {
                                     width: '100%',
                                     height: '100%',
                                     backgroundImage:
-                                      "url('https://www.pngmart.com/files/10/Qr-Code-Background-PNG.png')",
+                                      "url('https://media.istockphoto.com/vectors/code-abstract-vector-modern-bar-code-sample-for-smartphone-scanning-vector-id1095468748?k=20&m=1095468748&s=612x612&w=0&h=QkNgbB839T27QTYllcNKGtTDQj8pgEQ5rjKs62HFXs4=')",
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center',
                                     border: '1px solid #a4a0a0',
@@ -1356,19 +1378,21 @@ const DetailsCard = (props) => {
                                 <div className='mb-2 fw-bold'>
                                   <span>Value of the contract (US$): </span>
                                   <span className='dataSelected'>
-                                    {localStorage.measurementContract}
+                                    {localStorage?.measurementContract}
                                   </span>
                                 </div>
                                 <div className='mb-2 fw-bold'>
                                   <span>Departed at: </span>
                                   <span className='dataSelected'>
-                                    {localStorage.company}
+                                    {localStorage.shipment &&
+                                      measureShipmentDate()}
                                   </span>
                                 </div>
                                 <div className='mb-2 fw-bold'>
                                   <span>Arrived at: </span>
                                   <span className='dataSelected'>
-                                    {localStorage.shipment}
+                                    {localStorage.shipment &&
+                                      measureArraialAt()}
                                   </span>
                                 </div>
                                 <div className='mb-2 fw-bold'>
@@ -1381,6 +1405,12 @@ const DetailsCard = (props) => {
                             </div>
                           </Modal.Body>
                           <Modal.Footer>
+                            <div>
+                              <small>
+                                These are your order details. Operation traced
+                                by TRU MARKET Blockchain
+                              </small>
+                            </div>
                             <Button variant='primary' onClick={handleClose}>
                               Understood
                             </Button>

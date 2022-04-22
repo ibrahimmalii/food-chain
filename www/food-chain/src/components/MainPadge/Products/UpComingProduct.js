@@ -6,7 +6,7 @@ import Urls from '../../../Urls';
 const UpComingProduct = ({ photos }) => {
   return (
     <div className={classes.content}>
-      <Link to={`/product/${photos.id}`} style={{ textDecoration: 'none' }}>
+      <Link to={`/product/${photos.slug}`} style={{ textDecoration: 'none' }}>
         <img
           src={Urls.domainUrl + photos.files[0]?.file_path}
           alt='sunFlower'

@@ -7,7 +7,7 @@ const TrendProduct = (props) => {
   return (
     <div className={classes.content}>
       <Link
-        to={`/product/${props.photos.id}`}
+        to={`/product/${props.photos.slug}`}
         style={{ textDecoration: 'none' }}
       >
         <img

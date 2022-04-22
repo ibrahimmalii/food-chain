@@ -19,10 +19,9 @@ function App() {
   const [products, setProducts] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-
   const fetchDataHandler = useCallback(async () => {
     setIsLoading(true);
-    
+
     axiosInstance
       .get('/api/categories')
       .then((response) => setCategories(response.data));

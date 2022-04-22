@@ -2,7 +2,7 @@
   text-transform: uppercase;
   display: inline-block;
   white-space: nowrap;
-  animation: floatText 40s infinite linear;
+  animation: floatText 20s infinite linear;
   display: flex;
   padding: 16px;
   background-color: rgb(33, 43, 54);
@@ -24,7 +24,7 @@
 
 @keyframes floatText {
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
