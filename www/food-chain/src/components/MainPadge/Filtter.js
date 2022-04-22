@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Filtter = ({ categories }) => {
   return (
-    <div>
+    <div style={{fontFamily: 'Arial, Helvetica, sans-seri' , fontWeight:'600' , fontSize: '100%', lineHeight: '1.15'}}>
       {categories && (
         <Link
           className="col btn w-100"
