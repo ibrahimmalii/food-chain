@@ -1,3 +1,6 @@
+*{
+    font-family: Inter;
+}
 .categorie input {
     border: 1px solid rgb(145, 174, 194);
     margin: 27px;

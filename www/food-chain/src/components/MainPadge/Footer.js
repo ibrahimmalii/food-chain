@@ -14,8 +14,8 @@ const Footer = ({ footerData }) => {
                     to={`/categories/${res.category_id}`}
                     style={{
                       color: 'rgb(157, 182, 204)',
-                      fontWeight: '500',
-                      // fontSize: '14px',
+                      fontWeight: '600',
+                      fontSize: '14px',
                       textDecoration: 'none',
                       color: 'rgb(157, 182, 204)',
                     }}
@@ -41,11 +41,9 @@ const Footer = ({ footerData }) => {
                     to={`/categories/${res.category_id}`}
                     style={{
                       color: 'rgb(157, 182, 204)',
-                      fontWeight: '500',
+                      fontWeight: '600',
                       fontSize: '14px',
                       textDecoration: 'none',
-                      cursor: 'pointer',
-                      lineHeight: '22px',
                       color: 'rgb(157, 182, 204)',
                     }}
                   >

@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export default function OpenUpQuote(props) {
   const [stateQuote, setStateQuote] = useState(false);
-  const [quoteState , setQuoteState] = useState(true)
+  const [quoteState, setQuoteState] = useState(true);
 
   const handleChangeUp = () => {
     setStateQuote(false);
@@ -16,8 +16,6 @@ export default function OpenUpQuote(props) {
   const openModal = () => {
     props.onOpenQuoteModal(quoteState);
   };
-
-
 
   return (
     <div>
@@ -39,9 +37,12 @@ export default function OpenUpQuote(props) {
               style={{ fontSize: '20px' }}
               onClick={handleChangeDown}
             />
-            <h1 className='mt-3'>
-              Are you interested in this market? Get a quote now.
-            </h1>
+            <p
+              className='mt-3 text-light'
+              style={{ fontSize: '20px', fontWeight: '600' }}
+            >
+              Are you interested in this product? Get a quote now.
+            </p>
             <button
               className='btn btn-primary w-100 mt-4'
               onClick={openModal}

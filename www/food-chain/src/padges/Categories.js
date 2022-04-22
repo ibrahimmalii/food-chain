@@ -20,10 +20,11 @@ const Categories = (props) => {
                 style={{
                   border: '1px solid rgb(145, 174, 194)',
                   margin: '5px',
+                  fontFamily: 'Inter'
                 }}
                 to='/categories'
               >
-                All Categories
+                <span>All Categories</span>
               </Link>
               {props.productName &&
                 props.productName.map((res) => {
@@ -34,6 +35,7 @@ const Categories = (props) => {
                         margin: '5px',
                         fontSize: '5px',
                         border: '1px solid rgb(145, 174, 194)',
+                        fontFamily: 'Inter',
                         borderRadius: '4px',
                       }}
                     >
