@@ -1,7 +1,6 @@
 import Urls from '../../Urls';
 
 const PhotosGallary = (props) => {
-  // console.log(props.productId)
   return (
     <div>
       <h3 className='mt-5'>Gallery</h3>

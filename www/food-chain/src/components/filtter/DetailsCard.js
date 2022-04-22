@@ -7,7 +7,6 @@ import userService from '../../UserService';
 import { Button, Card, Modal } from 'react-bootstrap';
 import placeholders from '../MainPadge/Header.module.css';
 import Task from './Task';
-// import { PhoneInput } from 'react-contact-number-input';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
@@ -32,11 +31,19 @@ const DetailsCard = (props) => {
 
   const [show, setShow] = useState(false);
   const [information, setInformation] = useState(false);
+  const [isEmail, setIsEmail] = useState(true);
   const [collectionModule, setCollectionModule] = useState({
     first: false,
     second: false,
     third: false,
   });
+
+  const checkEmail = (email) => {
+    const re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const isValid = re.test(String(email.target.value).toLowerCase());
+    setIsEmail(isValid);
+  };
 
   const openfirstModal = () => {
     setCollectionModule({
@@ -47,10 +54,9 @@ const DetailsCard = (props) => {
   };
 
   const measurePrice = () => {
-    console.log('called');
     const result =
       +props.productId.data[0]?.price * +purchaseVolume.current?.value +
-      Number(shipmentData.current?.value);
+      +props.productId.data[0]?.price;
 
     if (!localStorage.measurementContract) {
       localStorage.measurementContract = result;
@@ -145,7 +151,7 @@ const DetailsCard = (props) => {
 
   const addNewTask = () => {
     const obj = {
-      id: crypto.randomUUID(),
+      id: Math.random().toString(15).substring(2),
       task: null,
       date: null,
       amount: null,
@@ -160,8 +166,8 @@ const DetailsCard = (props) => {
   const username = useRef();
   const submitForm = (e) => {
     e.preventDefault();
-    if (username.current?.value) {
-      localStorage.token = crypto.randomUUID();
+    if (username.current?.value && userEmail.current.value && isEmail) {
+      localStorage.token = Math.random().toString(15).substring(2);
       localStorage.name = username.current?.value;
       userService.setLoggedStatus(true);
       setModalState(false);
@@ -184,8 +190,8 @@ const DetailsCard = (props) => {
   };
   return (
     <div>
-      <div className='container row'>
-        <div className='col-4 mt-5 offset-1'>
+      <div className='container d-flex'>
+        <div className='mt-5'>
           <div className='mb-5'>
             <Link
               style={{ color: '#C5CBC9', textDecoration: 'none' }}
@@ -237,7 +243,7 @@ const DetailsCard = (props) => {
               })}
           </div>
         </div>
-        <div className='col-6 m-5'>
+        <div className='m-5 flex-grow-1'>
           <div className='mt-5'>
             <br />
             <p className='h1 m'>
@@ -523,12 +529,16 @@ const DetailsCard = (props) => {
                             }}
                             placeholder='Your business email address'
                             ref={userEmail}
-                            type='text'
+                            type='email'
+                            onChange={checkEmail}
                           />
-                          {/* <div
-                            class='phone-container form-control'
-                            style={{ marginTop: '10px' }}
-                          > */}
+                          <small
+                            className={
+                              isEmail ? 'd-none' : 'text-danger fw-bold'
+                            }
+                          >
+                            You have to write a correct email
+                          </small>
                           <PhoneInput
                             name='phoneNumber'
                             type='text'
@@ -639,7 +649,7 @@ const DetailsCard = (props) => {
                                   </div>
                                   <div className='flex-grow-1'>
                                     <input
-                                      type='number'
+                                      type='text'
                                       placeholder='Port of loading'
                                       ref={portLoading}
                                       className={
@@ -716,7 +726,7 @@ const DetailsCard = (props) => {
                                     className='form-control border-end-none p-3'
                                     placeholder='Purchase volume e.g. 10,000'
                                     ref={purchaseVolume}
-                                    onChange={(e) => setPurchase(e)}
+                                    onChange={setPurchase}
                                     style={{
                                       borderRight: 'none',
                                     }}
@@ -976,7 +986,7 @@ const DetailsCard = (props) => {
                           size='md'
                           centered
                         >
-                          <Modal.Header closeButton>
+                          <Modal.Header>
                             <Modal.Title id='contained-modal-title-vcenter'>
                               Submittion information
                             </Modal.Title>

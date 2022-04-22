@@ -22,7 +22,6 @@ const MainPadge = (props) => {
   useEffect(() => {
     if (!props.data.length) {
       setIsNoDataLoaded(true);
-      console.log(isNoDataLoaded);
     }
   }, [props.data]);
 
