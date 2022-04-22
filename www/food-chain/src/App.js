@@ -17,20 +17,25 @@ function App() {
   const [originalData, setOriginalData] = useState('');
   const [categories, setCategories] = useState('');
   const [products, setProducts] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const fetchDataHandler = useCallback(async () => {
-    axiosInstance.get('/api/products').then((response) => {
-      setOriginalData(response.data);
-      setData(response.data);
-    });
-
+    setIsLoading(true);
+    
     axiosInstance
       .get('/api/categories')
       .then((response) => setCategories(response.data));
 
     axiosInstance
       .get('/api/products')
-      .then((response) => setProducts(response.data));
+      .then((response) => {
+        setOriginalData(response.data);
+        setData(response.data);
+        setProducts(response.data);
+      })
+      .catch(console.error)
+      .finally(setIsLoading(false));
   }, []);
 
   const handleData = (e) => {
@@ -57,6 +62,7 @@ function App() {
             path='/'
             element={
               <Main
+                isLoading={isLoading}
                 data={data}
                 categories={categories}
                 onAddProduct={fetchDataHandler}

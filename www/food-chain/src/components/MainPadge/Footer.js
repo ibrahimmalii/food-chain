@@ -13,6 +13,9 @@ const Footer = ({ footerData }) => {
                   <Link
                     to={`/categories/${res.category_id}`}
                     style={{
+                      color: 'rgb(157, 182, 204)',
+                      fontWeight: '500',
+                      // fontSize: '14px',
                       textDecoration: 'none',
                       color: 'rgb(157, 182, 204)',
                     }}
@@ -22,14 +25,27 @@ const Footer = ({ footerData }) => {
                     </div>
                   </Link>
                   <div>
-                    <small className='fw-bold' style={{ color: '#A8ACB1' }}>
-                      {res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                    <small
+                      className='fw-bold'
+                      style={{
+                        fontWeight: '800',
+                        color: '#F9FAFB',
+                        // fontSize: '14px',
+                      }}
+                    >
+                      USD {res.price} ~ / KG &nbsp;&nbsp; &nbsp;&nbsp;
+                      &nbsp;&nbsp;
                     </small>
                   </div>
                   <Link
                     to={`/categories/${res.category_id}`}
                     style={{
+                      color: 'rgb(157, 182, 204)',
+                      fontWeight: '500',
+                      fontSize: '14px',
                       textDecoration: 'none',
+                      cursor: 'pointer',
+                      lineHeight: '22px',
                       color: 'rgb(157, 182, 204)',
                     }}
                   >
@@ -38,8 +54,16 @@ const Footer = ({ footerData }) => {
                     </div>
                   </Link>
                   <div>
-                    <small className='fw-bold' style={{ color: '#A8ACB1' }}>
-                      {res.price}$ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                    <small
+                      className='fw-bold'
+                      style={{
+                        fontWeight: '800',
+                        color: '#F9FAFB',
+                        fontSize: '14px',
+                      }}
+                    >
+                      USD {res.price} ~ / KG &nbsp;&nbsp; &nbsp;&nbsp;
+                      &nbsp;&nbsp;
                     </small>
                   </div>
                 </div>

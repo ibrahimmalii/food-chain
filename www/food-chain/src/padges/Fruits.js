@@ -1,23 +1,23 @@
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect, useCallback, useRef } from "react";
-import { axiosInstance } from "./../axios/config";
-import classes from "./Categories.module.css";
-import searchClass from "./Categories.module.css";
-import ProductCard from "./../components/filtter/ProductCard";
-import Filtter from "./../components/MainPadge/Filtter";
+import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { axiosInstance } from './../axios/config';
+import classes from './Categories.module.css';
+import searchClass from './Categories.module.css';
+import ProductCard from './../components/filtter/ProductCard';
+import Filtter from './../components/MainPadge/Filtter';
 
 const Fruits = (props) => {
   const params = useParams();
   const inputSearch = useRef();
-  const [type, setType] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  const [type, setType] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [searchData, setSearchData] = useState(false);
 
   const handleType = useCallback(async () => {
     axiosInstance.get(`api/categories/${params.id}`).then((res) => {
-      setType(res)
-      setSearchData(false) 
-      inputSearch.current.value = ''
+      setType(res);
+      setSearchData(false);
+      inputSearch.current.value = '';
     });
   }, [params.id]);
 
@@ -28,28 +28,28 @@ const Fruits = (props) => {
   const handleChange = (e) => {
     type &&
       type.data[0].products.map((res) => {
-        return res.title === e.target.value && setSearchValue(res)
+        return res.title === e.target.value && setSearchValue(res);
       });
     setSearchData(true);
   };
 
   return (
     <div className={searchClass.categorie}>
-      <div className="container" style={{ marginTop: "100px" }}>
+      <div className='container' style={{ marginTop: '100px' }}>
         <h2>Browser Markets</h2>
         <div className={classes.mainFiltter}>
-          <div className="row container text-center">
+          <div className='row container text-center'>
             <Link
-              className="col btn"
-              style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px" }}
-              to="/categories"
+              className='col btn'
+              style={{ border: '1px solid rgb(145, 174, 194)', margin: '1px' }}
+              to='/categories'
             >
               All Categories
             </Link>
             {props.categories &&
               props.categories.map((res, index) => {
                 return (
-                  <div className="col w-100" key={index}>
+                  <div className='col w-100' key={index}>
                     <Filtter categories={res} />
                   </div>
                 );
@@ -57,17 +57,17 @@ const Fruits = (props) => {
           </div>
         </div>
         <input
-          className=" mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          list="browse"
-          name="browser"
-          id="browser"
+          className=' mr-sm-2'
+          type='search'
+          placeholder='Search'
+          aria-label='Search'
+          list='browse'
+          name='browser'
+          id='browser'
           ref={inputSearch}
           onChange={(e) => handleChange(e)}
         />
-        <datalist id="browse">
+        <datalist id='browse'>
           {type &&
             type.data[0].products.map((res, index) => {
               return (
@@ -77,7 +77,7 @@ const Fruits = (props) => {
               );
             })}
         </datalist>
-        <div className="row m-5">
+        <div className='row m-5'>
           {searchData ? (
             <ProductCard type={searchValue} />
           ) : (
@@ -93,11 +93,3 @@ const Fruits = (props) => {
 };
 
 export default Fruits;
-// {type &&
-//   type.data[0].products.map((res) => {
-//     return  <ProductCard type={res} />;
-//   })}
-
-// {
-//   !displayGallary ? <Details productId= {type}/> : <PhotosGallary productId= {type}/>
-// }

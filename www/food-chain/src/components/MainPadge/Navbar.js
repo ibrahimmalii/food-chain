@@ -9,7 +9,6 @@ const Navbar = (props) => {
 
   useEffect(() => {
     userService.getLoggedStatus().subscribe((res) => {
-      console.log('res from use effect', res);
       setIsUserLogged(res);
     });
     if (localStorage.token) {

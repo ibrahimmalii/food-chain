@@ -57,7 +57,7 @@ export default function ProductDetails(props) {
                 textDecorationColor: '#2374EE',
               }}
             >
-              Gallary
+              Gallery
             </span>
           </div>
 

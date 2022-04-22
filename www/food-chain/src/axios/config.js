@@ -1,5 +1,6 @@
 import axios from 'axios';
+import Urls from '../Urls';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://food.eng-ibrahim.com/server/public',
+  baseURL: Urls.domainUrl,
 });

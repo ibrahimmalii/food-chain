@@ -29,7 +29,6 @@ const Login = (props) => {
         redirect();
       })
       .catch((err) => {
-        console.log(err);
         alert('there is an error in credintials!!');
       });
   };

@@ -1,20 +1,29 @@
-import { Fragment } from 'react';
-import Filtter from '../components/MainPadge/Filtter';
-import Header from '../components/MainPadge/Header';
-import MainBody from '../components/MainPadge/MainBody';
-import TrendProduct from '../components/MainPadge/Products/TrendProduct';
-import UpComingProduct from '../components/MainPadge/Products/UpComingProduct';
-import classes from '../components/MainPadge/Products/TrendProduct.module.css';
-import classCategories from '../components/MainPadge/Header.module.css';
-import { Link } from 'react-router-dom';
-import Admin from '../components/MainPadge/Admin';
+import { Fragment, useEffect, useState } from "react";
+import Filtter from "../components/MainPadge/Filtter";
+import Header from "../components/MainPadge/Header";
+import MainBody from "../components/MainPadge/MainBody";
+import TrendProduct from "../components/MainPadge/Products/TrendProduct";
+import UpComingProduct from "../components/MainPadge/Products/UpComingProduct";
+import classes from "../components/MainPadge/Products/TrendProduct.module.css";
+import classCategories from "../components/MainPadge/Header.module.css";
+import { Link } from "react-router-dom";
+import Admin from "../components/MainPadge/Admin";
+import { Spinner } from "react-bootstrap";
+
 const MainPadge = (props) => {
   const handleData = (e) => {
-    console.log('med', e);
     if (e) {
       props.onAddProduct(e);
     }
   };
+
+  const [isNoDataLoaded, setIsNoDataLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!props.data.length) {
+      setIsNoDataLoaded(true);
+    }
+  }, [props.data]);
 
   return (
     <Fragment>
@@ -27,36 +36,43 @@ const MainPadge = (props) => {
       )}
       {props.categories &&
         props.categories.map((res, index) => {
-          return <div className='col w-100' key={index}></div>;
+          return <div className="col w-100" key={index}></div>;
         })}
 
       <MainBody />
       <h4
-        className='container mt-5'
+        className="container mt-5"
         style={{
-          fontWeight: '600',
-          fontSize: '24px',
-          letterSpacing: '-0.7px',
-          fontFamily: 'Inter, sans-serif',
-          color: 'rgb(33, 43, 54)',
+          fontWeight: "600",
+          fontSize: "24px",
+          letterSpacing: "-0.7px",
+          fontFamily: "Inter, sans-serif",
+          color: "rgb(33, 43, 54)",
         }}
       >
         Browse by Category
       </h4>
       <div className={classCategories.mainFiltter}>
-        <div className='row container'>
+        <div className="row container">
           <Link
-            className='col btn w-100'
-            style={{ border: '1px solid rgb(145, 174, 194)', margin: '1px' }}
-            to='/categories'
+            className="col btn w-100"
+            style={{
+              border: "1px solid rgb(145, 174, 194)",
+              margin: "1px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: "600",
+              fontSize: "14px",
+              lineHeight: "22px",
+            }}
+            to="/categories"
           >
             All Categories
-            <i className='fa fa-angle-right ' style={{ marginLeft: '20px' }} />
+            <i className="fa fa-angle-right " style={{ marginLeft: "20px" }} />
           </Link>
           {props.categories &&
             props.categories.map((res, index) => {
               return (
-                <div className='col w-100' key={index}>
+                <div className="col w-100" key={index}>
                   <Filtter categories={res} />
                 </div>
               );
@@ -64,21 +80,29 @@ const MainPadge = (props) => {
         </div>
       </div>
       <div className={classes.cardProduct}>
-        <h4 className='mb-4'>Trending Products</h4>
-        <div className='row'>
-          {props.data.length ? (
+        <h4 className="mb-4">Trending Products</h4>
+        <div className="row">
+          {props.data && props.data.length > 0 ? (
             props.data.map((photo, index) => {
               return (
-                <div key={index} className='col-3'>
+                <div key={index} className="col-3">
                   <TrendProduct photos={photo} />
                   <UpComingProduct photos={photo} />
                 </div>
               );
             })
-          ) : (
-            <div className='card p-4 bg-secondary text-light text-center m-auto'>
-              <h3>There is no result</h3>
+          ) : !props.data ? (
+            <div className="text-center p-4 mb-5">
+              <Spinner animation="border" size="md" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
             </div>
+          ) : (
+            isNoDataLoaded && (
+              <div className="card p-4 bg-secondary text-light text-center m-auto">
+                <h3>There is no result</h3>
+              </div>
+            )
           )}
         </div>
       </div>

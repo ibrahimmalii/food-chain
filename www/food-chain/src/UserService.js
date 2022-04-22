@@ -7,7 +7,6 @@ const getToken = () => {
 };
 const setLoggedStatus = (status) => {
   loggedStatus.next(status);
-  console.log('from set');
 };
 
 const getLoggedStatus = () => {
@@ -21,7 +20,6 @@ const isLogged = () => {
 };
 
 const logout = () => {
-  console.log('from service');
   localStorage.clear();
   setLoggedStatus(false);
 };

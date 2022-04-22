@@ -21,8 +21,6 @@ export default function Task(props) {
   const iterateOptions = useCallback(() => {
     options = [];
     setOptionsValue([]);
-    console.log('first', optionsValue);
-    // console.log('from loop');
     for (const item in props.availableMilestones) {
       if (props.availableMilestones[item].selected) {
         options.push(
@@ -34,7 +32,6 @@ export default function Task(props) {
         options.push(<option value={item}>{item}</option>);
       }
     }
-    console.log('end', options);
     return setOptionsValue(options);
   }, []);
 

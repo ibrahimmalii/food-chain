@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const Filtter = ({ categories }) => {
   return (
-    <div style={{fontFamily: 'Arial, Helvetica, sans-seri' , fontWeight:'600' , fontSize: '100%', lineHeight: '1.15'}}>
+    <div>
       {categories && (
         <Link
           className="col btn w-100"
-          style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px" }}
+          style={{ border: "1px solid rgb(145, 174, 194)", margin: "1px",fontFamily: 'Inter, sans-serif' , fontWeight:'400' , fontSize: '14px' , lineHeight: '22px' }}
           to={`/categories/${categories.id}`}
         >
           {categories.title}
