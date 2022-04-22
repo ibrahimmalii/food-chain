@@ -4,7 +4,15 @@ import classes from '../MainPadge/Products/TrendProduct.module.css';
 import flagStyle from '../../assets/css/icons.css';
 import Urls from '../../Urls';
 import userService from '../../UserService';
-import { Button, Card, Modal } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  Modal,
+  Dropdown,
+  FormControl,
+  SplitButton,
+  InputGroup,
+} from 'react-bootstrap';
 import placeholders from '../MainPadge/Header.module.css';
 import Task from './Task';
 import PhoneInput from 'react-phone-input-2';
@@ -17,10 +25,10 @@ const DetailsCard = (props) => {
   const discription = useRef();
   const userEmail = useRef();
   const userCompany = useRef();
-  const userPhone = useRef();
   const openModalBtn = useRef();
   const close = useRef();
   const [stateQuote, setStateQuote] = useState(props.isModalOpened);
+  const [userPhone, setUserPhone] = useState('');
 
   useEffect(() => {
     setStateQuote(true);
@@ -165,8 +173,14 @@ const DetailsCard = (props) => {
 
   const username = useRef();
   const submitForm = (e) => {
+    console.log(userPhone);
     e.preventDefault();
-    if (username.current?.value && userEmail.current.value && isEmail) {
+    if (
+      username.current?.value &&
+      userEmail.current.value &&
+      isEmail &&
+      userPhone.length > 5
+    ) {
       localStorage.token = Math.random().toString(15).substring(2);
       localStorage.name = username.current?.value;
       userService.setLoggedStatus(true);
@@ -380,24 +394,24 @@ const DetailsCard = (props) => {
 
                 <div
                   className='mx-auto modal-dialog modal-lg'
-                  style={{ width: '100%', marginTop: '10%' }}
+                  style={{ width: '100%' }}
                 >
                   <div className='modal-content'>
                     {collectionModule.first ? (
                       <div
                         className='row '
                         style={{
-                          width: '980px',
-                          marginLeft: '-100px',
-                          padding: '32px',
-                          fontFamily: 'Inter, sans-serif',
+                          width: '900px',
+                          padding: '30px 17px',
                           fontWeight: '400',
                           fontSize: '14px',
                           lineHeight: '22px',
                           backgroundColor: `${
-                            modalState ? 'rgb(33, 43, 54)' : 'lightgray'
+                            modalState ? 'rgb(33, 43, 54)' : 'rgb(33, 43, 54)'
                           }`,
                           borderRadius: '10px',
+                          overflowY: 'auto',
+                          maxHeight: 'calc(100vh - 145px)',
                         }}
                       >
                         <div style={{ width: '36%' }}>
@@ -542,7 +556,8 @@ const DetailsCard = (props) => {
                           <PhoneInput
                             name='phoneNumber'
                             type='text'
-                            ref={userPhone}
+                            value={userPhone}
+                            onChange={(phone) => setUserPhone(phone)}
                             country={'us'}
                             enableAreaCodes={true}
                             containerStyle={{
@@ -571,7 +586,7 @@ const DetailsCard = (props) => {
                           >
                             <span className='text-light fw-bold'>
                               {' '}
-                              Join Tru Market For Free
+                              Join TRU MARKET for free
                             </span>
                             <br />
                             <span
@@ -615,14 +630,12 @@ const DetailsCard = (props) => {
                               >
                                 YOUR REQUIREMENTS
                               </small>
+
                               <div className='mt-3 form-inputs'>
-                                <div class='d-flex align-items-center car-input border'>
-                                  <div
-                                    className='form-group-text border'
-                                    style={{
-                                      padding: '7px',
-                                      backgroundColor: 'rgb(230 236 242)',
-                                    }}
+                                <div class='input-group my-3 '>
+                                  <span
+                                    class='input-group-text p-3'
+                                    style={{ width: '45px' }}
                                   >
                                     <i
                                       class='fa fa-truck-moving '
@@ -632,54 +645,376 @@ const DetailsCard = (props) => {
                                         color: '#919EAB',
                                       }}
                                     ></i>
-                                  </div>
-                                  <div className=''>
-                                    <select
-                                      id='cars'
-                                      style={{
-                                        border: 'none',
-                                      }}
-                                    >
-                                      <option value='volvo'>FOT</option>
-                                      <option value='saab'>FCA</option>
-                                      <option value='vw'>CIF</option>
-                                      <option value='audi' selected>
-                                        CFR
-                                      </option>
-                                    </select>
-                                  </div>
-                                  <div className='flex-grow-1'>
-                                    <input
-                                      type='text'
-                                      placeholder='Port of loading'
-                                      ref={portLoading}
-                                      className={
-                                        classes.inputNumber + 'me-auto'
-                                      }
-                                      class='form-control flex-grow-1'
-                                      style={{
-                                        border: 'none',
-                                      }}
-                                    />
-                                  </div>
-                                  <div>
-                                    <select
-                                      id='country'
-                                      style={{
-                                        border: 'none',
-                                      }}
-                                    >
-                                      <option value='saab'>FCA</option>
-                                      <option value='vw'>CIF</option>
-                                      <option value='audi' selected>
-                                        CFR
-                                      </option>
-                                      <option value='volvo' selected>
-                                        {props.productId &&
-                                          props.productId.data[0].country}
-                                      </option>
-                                    </select>
-                                  </div>
+                                  </span>
+                                  <select
+                                    id='Select283'
+                                    name='tentativePurchaseVolumeUnit'
+                                    className='input-group-text'
+                                    aria-invalid='false'
+                                    style={{
+                                      width: '100px',
+                                      background: 'white',
+                                    }}
+                                  >
+                                    <option value='fob' selected>
+                                      FOB
+                                    </option>
+                                    <option value='exw'>EXW</option>
+                                    <option value='cfr'>CFR</option>
+                                    <option value='cif'>CIF</option>
+                                    <option value='ddp'>DDP</option>
+                                  </select>
+                                  <input
+                                    type='text'
+                                    className='form-control border-end-none p-3'
+                                    placeholder='Port of loading'
+                                    ref={portLoading}
+                                    style={{
+                                      borderRight: 'none',
+                                      borderLeft: 'none',
+                                    }}
+                                  />
+                                  <select
+                                    id='Select283'
+                                    name='tentativePurchaseVolumeUnit'
+                                    className='input-group-text'
+                                    aria-invalid='false'
+                                    style={{
+                                      width: '100px',
+                                      background: 'white',
+                                    }}
+                                  >
+                                    <option value='volvo' selected>
+                                      {props.productId &&
+                                        props.productId.data[0].country}
+                                    </option>
+                                    <option value='AF'>Afghanistan</option>
+                                    <option value='AL'>Albania</option>
+                                    <option value='DZ'>Algeria</option>
+                                    <option value='AS'>American Samoa</option>
+                                    <option value='AD'>Andorra</option>
+                                    <option value='AO'>Angola</option>
+                                    <option value='AI'>Anguilla</option>
+                                    <option value='AQ'>Antarctica</option>
+                                    <option value='AG'>
+                                      Antigua and Barbuda
+                                    </option>
+                                    <option value='AR'>Argentina</option>
+                                    <option value='AM'>Armenia</option>
+                                    <option value='AW'>Aruba</option>
+                                    <option value='AU'>Australia</option>
+                                    <option value='AT'>Austria</option>
+                                    <option value='AZ'>Azerbaijan</option>
+                                    <option value='BS'>Bahamas</option>
+                                    <option value='BH'>Bahrain</option>
+                                    <option value='BD'>Bangladesh</option>
+                                    <option value='BB'>Barbados</option>
+                                    <option value='BY'>Belarus</option>
+                                    <option value='BE'>Belgium</option>
+                                    <option value='BZ'>Belize</option>
+                                    <option value='BJ'>Benin</option>
+                                    <option value='BM'>Bermuda</option>
+                                    <option value='BT'>Bhutan</option>
+                                    <option value='BO'>Bolivia</option>
+                                    <option value='BA'>
+                                      Bosnia and Herzegowina
+                                    </option>
+                                    <option value='BW'>Botswana</option>
+                                    <option value='BV'>Bouvet Island</option>
+                                    <option value='BR'>Brazil</option>
+                                    <option value='IO'>
+                                      British Indian Ocean Territory
+                                    </option>
+                                    <option value='BN'>
+                                      Brunei Darussalam
+                                    </option>
+                                    <option value='BG'>Bulgaria</option>
+                                    <option value='BF'>Burkina Faso</option>
+                                    <option value='BI'>Burundi</option>
+                                    <option value='KH'>Cambodia</option>
+                                    <option value='CM'>Cameroon</option>
+                                    <option value='CA'>Canada</option>
+                                    <option value='CV'>Cape Verde</option>
+                                    <option value='KY'>Cayman Islands</option>
+                                    <option value='CF'>
+                                      Central African Republic
+                                    </option>
+                                    <option value='TD'>Chad</option>
+                                    <option value='CL'>Chile</option>
+                                    <option value='CN'>China</option>
+                                    <option value='CX'>Christmas Island</option>
+                                    <option value='CC'>
+                                      Cocos (Keeling) Islands
+                                    </option>
+                                    <option value='CO'>Colombia</option>
+                                    <option value='KM'>Comoros</option>
+                                    <option value='CG'>Congo</option>
+                                    <option value='CD'>
+                                      Congo, the Democratic Republic of the
+                                    </option>
+                                    <option value='CK'>Cook Islands</option>
+                                    <option value='CR'>Costa Rica</option>
+                                    <option value='CI'>Cote d'Ivoire</option>
+                                    <option value='HR'>
+                                      Croatia (Hrvatska)
+                                    </option>
+                                    <option value='CU'>Cuba</option>
+                                    <option value='CY'>Cyprus</option>
+                                    <option value='CZ'>Czech Republic</option>
+                                    <option value='DK'>Denmark</option>
+                                    <option value='DJ'>Djibouti</option>
+                                    <option value='DM'>Dominica</option>
+                                    <option value='DO'>
+                                      Dominican Republic
+                                    </option>
+                                    <option value='TP'>East Timor</option>
+                                    <option value='EC'>Ecuador</option>
+                                    <option value='EG'>Egypt</option>
+                                    <option value='SV'>El Salvador</option>
+                                    <option value='GQ'>
+                                      Equatorial Guinea
+                                    </option>
+                                    <option value='ER'>Eritrea</option>
+                                    <option value='EE'>Estonia</option>
+                                    <option value='ET'>Ethiopia</option>
+                                    <option value='FK'>
+                                      Falkland Islands (Malvinas)
+                                    </option>
+                                    <option value='FO'>Faroe Islands</option>
+                                    <option value='FJ'>Fiji</option>
+                                    <option value='FI'>Finland</option>
+                                    <option value='FR'>France</option>
+                                    <option value='FX'>
+                                      France, Metropolitan
+                                    </option>
+                                    <option value='GF'>French Guiana</option>
+                                    <option value='PF'>French Polynesia</option>
+                                    <option value='TF'>
+                                      French Southern Territories
+                                    </option>
+                                    <option value='GA'>Gabon</option>
+                                    <option value='GM'>Gambia</option>
+                                    <option value='GE'>Georgia</option>
+                                    <option value='DE'>Germany</option>
+                                    <option value='GH'>Ghana</option>
+                                    <option value='GI'>Gibraltar</option>
+                                    <option value='GR'>Greece</option>
+                                    <option value='GL'>Greenland</option>
+                                    <option value='GD'>Grenada</option>
+                                    <option value='GP'>Guadeloupe</option>
+                                    <option value='GU'>Guam</option>
+                                    <option value='GT'>Guatemala</option>
+                                    <option value='GN'>Guinea</option>
+                                    <option value='GW'>Guinea-Bissau</option>
+                                    <option value='GY'>Guyana</option>
+                                    <option value='HT'>Haiti</option>
+                                    <option value='HM'>
+                                      Heard and Mc Donald Islands
+                                    </option>
+                                    <option value='VA'>
+                                      Holy See (Vatican City State)
+                                    </option>
+                                    <option value='HN'>Honduras</option>
+                                    <option value='HK'>Hong Kong</option>
+                                    <option value='HU'>Hungary</option>
+                                    <option value='IS'>Iceland</option>
+                                    <option value='IN'>India</option>
+                                    <option value='ID'>Indonesia</option>
+                                    <option value='IR'>
+                                      Iran (Islamic Republic of)
+                                    </option>
+                                    <option value='IQ'>Iraq</option>
+                                    <option value='IE'>Ireland</option>
+                                    <option value='IL'>Israel</option>
+                                    <option value='IT'>Italy</option>
+                                    <option value='JM'>Jamaica</option>
+                                    <option value='JP'>Japan</option>
+                                    <option value='JO'>Jordan</option>
+                                    <option value='KZ'>Kazakhstan</option>
+                                    <option value='KE'>Kenya</option>
+                                    <option value='KI'>Kiribati</option>
+                                    <option value='KP'>
+                                      Korea, Democratic People's Republic of
+                                    </option>
+                                    <option value='KR'>
+                                      Korea, Republic of
+                                    </option>
+                                    <option value='KW'>Kuwait</option>
+                                    <option value='KG'>Kyrgyzstan</option>
+                                    <option value='LA'>
+                                      Lao People's Democratic Republic
+                                    </option>
+                                    <option value='LV'>Latvia</option>
+                                    <option value='LB'>Lebanon</option>
+                                    <option value='LS'>Lesotho</option>
+                                    <option value='LR'>Liberia</option>
+                                    <option value='LY'>
+                                      Libyan Arab Jamahiriya
+                                    </option>
+                                    <option value='LI'>Liechtenstein</option>
+                                    <option value='LT'>Lithuania</option>
+                                    <option value='LU'>Luxembourg</option>
+                                    <option value='MO'>Macau</option>
+                                    <option value='MK'>
+                                      Macedonia, The Former Yugoslav Republic of
+                                    </option>
+                                    <option value='MG'>Madagascar</option>
+                                    <option value='MW'>Malawi</option>
+                                    <option value='MY'>Malaysia</option>
+                                    <option value='MV'>Maldives</option>
+                                    <option value='ML'>Mali</option>
+                                    <option value='MT'>Malta</option>
+                                    <option value='MH'>Marshall Islands</option>
+                                    <option value='MQ'>Martinique</option>
+                                    <option value='MR'>Mauritania</option>
+                                    <option value='MU'>Mauritius</option>
+                                    <option value='YT'>Mayotte</option>
+                                    <option value='MX'>Mexico</option>
+                                    <option value='FM'>
+                                      Micronesia, Federated States of
+                                    </option>
+                                    <option value='MD'>
+                                      Moldova, Republic of
+                                    </option>
+                                    <option value='MC'>Monaco</option>
+                                    <option value='MN'>Mongolia</option>
+                                    <option value='MS'>Montserrat</option>
+                                    <option value='MA'>Morocco</option>
+                                    <option value='MZ'>Mozambique</option>
+                                    <option value='MM'>Myanmar</option>
+                                    <option value='NA'>Namibia</option>
+                                    <option value='NR'>Nauru</option>
+                                    <option value='NP'>Nepal</option>
+                                    <option value='NL'>Netherlands</option>
+                                    <option value='AN'>
+                                      Netherlands Antilles
+                                    </option>
+                                    <option value='NC'>New Caledonia</option>
+                                    <option value='NZ'>New Zealand</option>
+                                    <option value='NI'>Nicaragua</option>
+                                    <option value='NE'>Niger</option>
+                                    <option value='NG'>Nigeria</option>
+                                    <option value='NU'>Niue</option>
+                                    <option value='NF'>Norfolk Island</option>
+                                    <option value='MP'>
+                                      Northern Mariana Islands
+                                    </option>
+                                    <option value='NO'>Norway</option>
+                                    <option value='OM'>Oman</option>
+                                    <option value='PK'>Pakistan</option>
+                                    <option value='PW'>Palau</option>
+                                    <option value='PA'>Panama</option>
+                                    <option value='PG'>Papua New Guinea</option>
+                                    <option value='PY'>Paraguay</option>
+                                    <option value='PE'>Peru</option>
+                                    <option value='PH'>Philippines</option>
+                                    <option value='PN'>Pitcairn</option>
+                                    <option value='PL'>Poland</option>
+                                    <option value='PT'>Portugal</option>
+                                    <option value='PR'>Puerto Rico</option>
+                                    <option value='QA'>Qatar</option>
+                                    <option value='RE'>Reunion</option>
+                                    <option value='RO'>Romania</option>
+                                    <option value='RU'>
+                                      Russian Federation
+                                    </option>
+                                    <option value='RW'>Rwanda</option>
+                                    <option value='KN'>
+                                      Saint Kitts and Nevis
+                                    </option>
+                                    <option value='LC'>Saint LUCIA</option>
+                                    <option value='VC'>
+                                      Saint Vincent and the Grenadines
+                                    </option>
+                                    <option value='WS'>Samoa</option>
+                                    <option value='SM'>San Marino</option>
+                                    <option value='ST'>
+                                      Sao Tome and Principe
+                                    </option>
+                                    <option value='SA'>Saudi Arabia</option>
+                                    <option value='SN'>Senegal</option>
+                                    <option value='SC'>Seychelles</option>
+                                    <option value='SL'>Sierra Leone</option>
+                                    <option value='SG'>Singapore</option>
+                                    <option value='SK'>
+                                      Slovakia (Slovak Republic)
+                                    </option>
+                                    <option value='SI'>Slovenia</option>
+                                    <option value='SB'>Solomon Islands</option>
+                                    <option value='SO'>Somalia</option>
+                                    <option value='ZA'>South Africa</option>
+                                    <option value='GS'>
+                                      South Georgia and the South Sandwich
+                                      Islands
+                                    </option>
+                                    <option value='ES'>Spain</option>
+                                    <option value='LK'>Sri Lanka</option>
+                                    <option value='SH'>St. Helena</option>
+                                    <option value='PM'>
+                                      St. Pierre and Miquelon
+                                    </option>
+                                    <option value='SD'>Sudan</option>
+                                    <option value='SR'>Suriname</option>
+                                    <option value='SJ'>
+                                      Svalbard and Jan Mayen Islands
+                                    </option>
+                                    <option value='SZ'>Swaziland</option>
+                                    <option value='SE'>Sweden</option>
+                                    <option value='CH'>Switzerland</option>
+                                    <option value='SY'>
+                                      Syrian Arab Republic
+                                    </option>
+                                    <option value='TW'>
+                                      Taiwan, Province of China
+                                    </option>
+                                    <option value='TJ'>Tajikistan</option>
+                                    <option value='TZ'>
+                                      Tanzania, United Republic of
+                                    </option>
+                                    <option value='TH'>Thailand</option>
+                                    <option value='TG'>Togo</option>
+                                    <option value='TK'>Tokelau</option>
+                                    <option value='TO'>Tonga</option>
+                                    <option value='TT'>
+                                      Trinidad and Tobago
+                                    </option>
+                                    <option value='TN'>Tunisia</option>
+                                    <option value='TR'>Turkey</option>
+                                    <option value='TM'>Turkmenistan</option>
+                                    <option value='TC'>
+                                      Turks and Caicos Islands
+                                    </option>
+                                    <option value='TV'>Tuvalu</option>
+                                    <option value='UG'>Uganda</option>
+                                    <option value='UA'>Ukraine</option>
+                                    <option value='AE'>
+                                      United Arab Emirates
+                                    </option>
+                                    <option value='GB'>United Kingdom</option>
+                                    <option value='US'>United States</option>
+                                    <option value='UM'>
+                                      United States Minor Outlying Islands
+                                    </option>
+                                    <option value='UY'>Uruguay</option>
+                                    <option value='UZ'>Uzbekistan</option>
+                                    <option value='VU'>Vanuatu</option>
+                                    <option value='VE'>Venezuela</option>
+                                    <option value='VN'>Viet Nam</option>
+                                    <option value='VG'>
+                                      Virgin Islands (British)
+                                    </option>
+                                    <option value='VI'>
+                                      Virgin Islands (U.S.)
+                                    </option>
+                                    <option value='WF'>
+                                      Wallis and Futuna Islands
+                                    </option>
+                                    <option value='EH'>Western Sahara</option>
+                                    <option value='YE'>Yemen</option>
+                                    <option value='YU'>Yugoslavia</option>
+                                    <option value='ZM'>Zambia</option>
+                                    <option value='ZW'>Zimbabwe</option>
+                                  </select>
                                 </div>
 
                                 <div class='input-group my-3'>
@@ -742,13 +1077,7 @@ const DetailsCard = (props) => {
                                       background: 'white',
                                     }}
                                   >
-                                    <option value='_undefined'>Unit</option>
-                                    <option value='ton'>metric ton</option>
                                     <option value='kg'>kg</option>
-                                    <option value='lbs'>lbs</option>
-                                    <option value='m3'>m³</option>
-                                    <option value='l'>liter</option>
-                                    <option value='ml'>ml</option>
                                   </select>
                                 </div>
                                 <div class=' my-3'>
@@ -776,9 +1105,9 @@ const DetailsCard = (props) => {
                                         marginRight: '21px',
                                       }}
                                     >
-                                      By sending a message to Tridge, you agree
-                                      to be contacted by our sales team via your
-                                      specified contact information.
+                                      By sending a message to TRU MARKET, you
+                                      agree to be contacted by our sales team
+                                      via your specified contact information.
                                     </p>
                                   </div>
                                   <div className='mx-2'>
@@ -803,19 +1132,22 @@ const DetailsCard = (props) => {
                       </div>
                     ) : collectionModule.second ? (
                       <div
+                        className='row '
                         style={{
-                          padding: '32px',
-                          fontFamily: 'Inter, sans-serif',
+                          width: '900px',
+                          padding: '30px 17px',
                           fontWeight: '400',
                           fontSize: '14px',
                           lineHeight: '22px',
                           backgroundColor: `${
-                            modalState ? 'rgb(33, 43, 54)' : 'lightgray'
+                            modalState ? 'rgb(33, 43, 54)' : 'rgb(33, 43, 54)'
                           }`,
                           borderRadius: '10px',
+                          overflowY: 'auto',
+                          maxHeight: 'calc(100vh - 145px)',
                         }}
                       >
-                        <p className='h3'>Purchase Order</p>
+                        <p className='h3 text-light'>Purchase Order</p>
                         <Card body className='personal_info mb-4'>
                           <div className='d-flex'>
                             <div
@@ -824,15 +1156,17 @@ const DetailsCard = (props) => {
                                 width: '80px',
                                 height: '80px',
                                 borderRadius: '50%',
-                                backgroundImage:
-                                  'url("https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/4ZrVLdVKeijzurndz/people-emotion-and-facial-expression-concept-face-of-happy-smiling-middle-aged-woman-at-office_rleqp4y7g_thumbnail-1080_09.png")',
+                                backgroundImage: `${
+                                  photos && 'url(' + photos + ')'
+                                }`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                               }}
                             ></div>
                             <div className='flex-grow-1 p-2 py-3'>
                               <p className='h6 text-success'>
-                                {localStorage?.name}
+                              {props.productId &&
+                                props.productId.data[0].title}
                               </p>
                               <span>
                                 <i className='fa fa-car text-danger'></i>{' '}
@@ -911,7 +1245,7 @@ const DetailsCard = (props) => {
                                 </tr>
                                 <tr>
                                   <td>phone Number</td>
-                                  <td>{userPhone.current?.value}</td>
+                                  <td>{userPhone}</td>
                                   <td>Port of loading</td>
                                   <td>{portLoading.current?.value}</td>
                                 </tr>
