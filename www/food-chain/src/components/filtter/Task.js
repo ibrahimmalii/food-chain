@@ -68,6 +68,8 @@ export default function Task(props) {
               type='number'
               onChange={updateValue}
               placeholder='0'
+              min='0'
+              max='100'
             />
           </Form.Group>
         </div>

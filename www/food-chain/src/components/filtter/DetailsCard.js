@@ -91,13 +91,25 @@ const DetailsCard = (props) => {
     });
   };
   const handleShow = () => {
-    setShow(true);
-    setInformation(true);
-    setCollectionModule({
-      first: false,
-      second: false,
-      third: true,
-    });
+    console.log(mileStones);
+
+    // measure total amount of milestones objects
+    const totalAmount = mileStones.reduce(
+      (total, prev) => +prev.amount + +total,
+      0
+    );
+    console.log(totalAmount);
+    if (totalAmount != 100) {
+      alert('You can not add more or less than 100% mile stones');
+    } else {
+      setShow(true);
+      setInformation(true);
+      setCollectionModule({
+        first: false,
+        second: false,
+        third: true,
+      });
+    }
   };
 
   const [srcPhoto, setSrc] = useState();
@@ -107,31 +119,31 @@ const DetailsCard = (props) => {
   const [mileStones, setMileStones] = useState([
     {
       id: '384hisdhf',
-      task: 'Pre-harvest',
+      task: null,
       date: null,
       amount: null,
     },
     {
       id: 'kdjfaije83',
-      task: 'Harvest',
+      task: null,
       date: null,
       amount: null,
     },
     {
       id: 'dkj83fkm',
-      task: 'Packing',
+      task: null,
       date: null,
       amount: null,
     },
     {
       id: 'lsdi8333',
-      task: 'Export documentation',
+      task: null,
       date: null,
       amount: null,
     },
     {
       id: 'akiehhd',
-      task: 'Arrival',
+      task: null,
       date: null,
       amount: null,
     },
@@ -1321,14 +1333,6 @@ const DetailsCard = (props) => {
                                 onSelectType={onSelectType}
                               />
                             ))}
-
-                            {/* <Button
-                              variant='success'
-                              disabled={mileStones.length >= 5 && true}
-                              onClick={addNewTask}
-                            >
-                              <i className='fa fa-plus'></i>
-                            </Button> */}
                           </Card.Body>
                           <Card.Footer className='text-end'>
                             <Button variant='primary' onClick={handleShow}>
