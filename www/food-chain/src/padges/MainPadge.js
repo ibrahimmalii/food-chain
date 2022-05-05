@@ -87,7 +87,6 @@ const MainPadge = (props) => {
               return (
                 <div key={index} className="col-3">
                   <TrendProduct photos={photo} />
-                  <UpComingProduct photos={photo} />
                 </div>
               );
             })

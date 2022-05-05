@@ -26,7 +26,7 @@ export default function OpenUpQuote(props) {
               className='fa fa-angle-up text-light float-end  '
               onClick={handleChangeUp}
             />
-            <h1>Are you interested in this market?</h1>
+            <h1>Are you interested in this product?</h1>
           </div>
         </div>
       ) : (

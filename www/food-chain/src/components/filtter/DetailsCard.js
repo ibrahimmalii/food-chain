@@ -8,6 +8,7 @@ import {
   Button,
   Card,
   Modal,
+  Form,
   Dropdown,
   FormControl,
   SplitButton,
@@ -19,6 +20,39 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 const DetailsCard = (props) => {
+  //About amountns
+  const amount1 = useRef();
+  const amount2 = useRef();
+  const amount3 = useRef();
+  const amount4 = useRef();
+  const amount5 = useRef();
+
+  const measureTotalAmounts = () => {
+    // if (amount1.current.value === '') {
+    //   amount1.current.value = 0;
+    // }
+    // if (amount2.current.value === '') {
+    //   amount2.current.value = 0;
+    // }
+    // if (amount3.current.value === '') {
+    //   amount3.current.value = 0;
+    // }
+    // if (amount4.current.value === '') {
+    //   amount4.current.value = 0;
+    // }
+    // if (amount5.current.value === '') {
+    //   amount5.current.value = 0;
+    // }
+
+    const total =
+      (+amount1.current.value || 0) +
+      (+amount2.current.value || 0) +
+      (+amount3.current.value || 0) +
+      (+amount4.current.value || 0) +
+      (+amount5.current.value || 0);
+    return total;
+  };
+
   const shipmentData = useRef();
   const portLoading = useRef();
   const purchaseVolume = useRef();
@@ -91,13 +125,13 @@ const DetailsCard = (props) => {
     });
   };
   const handleShow = () => {
-    console.log(mileStones);
+    const totalAmount = measureTotalAmounts();
 
     // measure total amount of milestones objects
-    const totalAmount = mileStones.reduce(
-      (total, prev) => +prev.amount + +total,
-      0
-    );
+    // const totalAmount = mileStones.reduce(
+    //   (total, prev) => +prev.amount + +total,
+    //   0
+    // );
     console.log(totalAmount);
     if (totalAmount != 100) {
       alert('You can not add more or less than 100% mile stones');
@@ -160,10 +194,7 @@ const DetailsCard = (props) => {
     Harvest: {
       selected: false,
     },
-    Packing: {
-      selected: false,
-    },
-    'Export documentation': {
+    Arrival: {
       selected: false,
     },
     Arrival: {
@@ -220,6 +251,7 @@ const DetailsCard = (props) => {
     console.log(userPhone);
     measurePrice();
     e.preventDefault();
+
     if (
       username.current?.value &&
       userEmail.current.value &&
@@ -560,7 +592,7 @@ const DetailsCard = (props) => {
                               backgroundColor: 'rgb(69, 79, 91) ',
                               outline: 'none',
                               border: 'none',
-                              padding: '13px',
+                              padding: '10px',
                             }}
                             placeholder='Your full name'
                             type='text'
@@ -573,7 +605,7 @@ const DetailsCard = (props) => {
                               outline: 'none',
                               marginTop: '10px',
                               border: 'none',
-                              padding: '13px',
+                              padding: '10px',
                             }}
                             placeholder='Your company name'
                             ref={userCompany}
@@ -587,7 +619,7 @@ const DetailsCard = (props) => {
                               outline: 'none',
                               marginTop: '10px',
                               border: 'none',
-                              padding: '13px',
+                              padding: '10px',
                             }}
                             placeholder='Your business email address'
                             ref={userEmail}
@@ -599,7 +631,7 @@ const DetailsCard = (props) => {
                               isEmail ? 'd-none' : 'text-danger fw-bold'
                             }
                           >
-                            You have to write a correct email
+                            Please submit a correct email
                           </small>
                           <PhoneInput
                             name='phoneNumber'
@@ -613,7 +645,7 @@ const DetailsCard = (props) => {
                               outline: 'none',
                               marginTop: '10px',
                               border: 'none',
-                              padding: '7px 0',
+                              padding: '5px 0',
                               borderRadius: '5px',
                             }}
                             inputStyle={{
@@ -680,9 +712,9 @@ const DetailsCard = (props) => {
                               </small>
 
                               <div className='mt-3 form-inputs'>
-                                <div class='input-group my-3 '>
+                                <div class='input-group my-2 '>
                                   <span
-                                    class='input-group-text p-3'
+                                    class='input-group-text p-2'
                                     style={{ width: '45px' }}
                                   >
                                     <i
@@ -1065,9 +1097,9 @@ const DetailsCard = (props) => {
                                   </select>
                                 </div>
 
-                                <div class='input-group my-3'>
+                                <div class='input-group my-2'>
                                   <span
-                                    class='input-group-text p-3'
+                                    class='input-group-text p-2'
                                     style={{ width: '45px' }}
                                   >
                                     <i
@@ -1092,9 +1124,9 @@ const DetailsCard = (props) => {
                                     onChange={(e) => userShipment(e)}
                                   />
                                 </div>
-                                <div class='input-group my-3 '>
+                                <div class='input-group my-2 '>
                                   <span
-                                    class='input-group-text p-3'
+                                    class='input-group-text p-2'
                                     style={{ width: '45px' }}
                                   >
                                     <i
@@ -1133,7 +1165,7 @@ const DetailsCard = (props) => {
                                     class='form-control'
                                     style={{
                                       resize: 'none',
-                                      height: '108px',
+                                      height: '90px',
                                       fontSize: '1rem',
                                     }}
                                     ref={discription}
@@ -1224,11 +1256,9 @@ const DetailsCard = (props) => {
                           </div>
                         </Card>
                         <Card>
-                          <Card.Text className='p-2'>
-                            <p className='h4'>Terms</p>
-                          </Card.Text>
-                          <hr />
-                          <Card.Body>
+                          <Card.Text className='p-2 h4'>Terms</Card.Text>
+                          <hr className='m-0' />
+                          <Card.Body className='py-0'>
                             <small>
                               You're protected by{' '}
                               <span className='text-success fw-bold'>
@@ -1254,13 +1284,8 @@ const DetailsCard = (props) => {
                             </div>
 
                             <div className='deposit mt-4'>
-                              <p className='h5'>Deposit funds into Escrow</p>
-                              <small className='text-muted'>
-                                Escrow is a neutral holding place that protects
-                                your deposit until work is approved.
-                              </small>
-                              <hr />
-                              <p className='h4'>Buyer details</p>
+                              <hr className='m-0' />
+                              <p className='h4 mt-1'>Buyer details</p>
                               <table
                                 style={{
                                   width: '100%',
@@ -1271,43 +1296,39 @@ const DetailsCard = (props) => {
                                 }}
                               >
                                 <tr>
-                                  <td>Company name</td>
+                                  <td>Company name:</td>
                                   <td>{userCompany.current?.value}</td>
-                                  <td>Product name</td>
+                                  <td>Product name:</td>
                                   <td>
                                     {props.productId &&
                                       props.productId.data[0].title}
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td>Contact name</td>
+                                  <td>Contact name:</td>
                                   <td>{localStorage?.name}</td>
-                                  <td>Purchase volume</td>
+                                  <td>Purchase volume:</td>
                                   <td>{purchaseVolume.current?.value}</td>
                                 </tr>
                                 <tr>
-                                  <td>phone Number</td>
+                                  <td>phone Number:</td>
                                   <td>{userPhone}</td>
-                                  <td>Port of loading</td>
+                                  <td>Port of loading:</td>
                                   <td>{portLoading.current?.value}</td>
                                 </tr>
                                 <tr>
-                                  <td>email</td>
+                                  <td>email:</td>
                                   <td>{userEmail.current?.value}</td>
-                                  <td>ETD</td>
+                                  <td>ETD:</td>
                                   <td>
                                     {localStorage.shipment &&
                                       measureShipmentDate()}
                                   </td>
                                 </tr>
                               </table>
-                              <hr />
-                              <small className='text-muted'>
-                                This is the price you and Farhan have agreed
-                                upon.
-                              </small>
+                              <hr className='m-0' />
                             </div>
-                            <div className='deposit-funds mt-4'>
+                            <div className='deposit-funds mt-2'>
                               <p className='h5'>Deposit funds into Escrow</p>
                               <small className='text-muted'>
                                 Escrow is a neutral holding place in the Smart
@@ -1315,15 +1336,217 @@ const DetailsCard = (props) => {
                                 is approved.
                               </small>
                             </div>
-                            <hr />
+                            <hr className='m-0' />
                           </Card.Body>
-                          <Card.Body>
-                            <p className='h4'>Project Milestones</p>
+                          <Card.Body className='py-0 pt-2'>
+                            <p className='h4'>Supply chain value points</p>
                             <small className='text-muted'>
                               Add project milestones and pay in installments as
                               each milestone is completed to your satisfaction.
                             </small>
-                            {mileStones.map((item, index) => (
+
+                            <div>
+                              <Form>
+                                <div className='d-flex'>
+                                  <Form.Group
+                                    className='mb-3 flex-grow-1'
+                                    controlId='formBasicEmail'
+                                  >
+                                    <Form.Label>
+                                      Milestone Descriptino
+                                    </Form.Label>
+                                    <Form.Control
+                                      type='text'
+                                      value='Pre-harvest'
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                      disabled
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mx-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Label>
+                                      Disabled select UTC{' '}
+                                      <i className='fa fa-question'></i>
+                                    </Form.Label>
+                                    <Form.Control
+                                      type='date'
+                                      placeholder='Due Date'
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mb-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Label>Deposit Amount</Form.Label>
+                                    <Form.Control
+                                      type='number'
+                                      ref={amount1}
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                    />
+                                  </Form.Group>
+                                </div>
+                              </Form>
+                              <Form>
+                                <div className='d-flex'>
+                                  <Form.Group
+                                    className='mb-3 flex-grow-1'
+                                    controlId='formBasicEmail'
+                                  >
+                                    <Form.Control
+                                      type='text'
+                                      value='Harvest'
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                      disabled
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mx-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='date'
+                                      placeholder='Due Date'
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mb-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='number'
+                                      ref={amount2}
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                    />
+                                  </Form.Group>
+                                </div>
+                              </Form>
+                              <Form>
+                                <div className='d-flex'>
+                                  <Form.Group
+                                    className='mb-3 flex-grow-1'
+                                    controlId='formBasicEmail'
+                                  >
+                                    <Form.Control
+                                      type='text'
+                                      value='Packing'
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                      disabled
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mx-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='date'
+                                      placeholder='Due Date'
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mb-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='number'
+                                      ref={amount3}
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                    />
+                                  </Form.Group>
+                                </div>
+                              </Form>
+                              <Form>
+                                <div className='d-flex'>
+                                  <Form.Group
+                                    className='mb-3 flex-grow-1'
+                                    controlId='formBasicEmail'
+                                  >
+                                    <Form.Control
+                                      type='text'
+                                      value='Export documentation'
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                      disabled
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mx-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='date'
+                                      placeholder='Due Date'
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mb-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='number'
+                                      ref={amount4}
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                    />
+                                  </Form.Group>
+                                </div>
+                              </Form>
+                              <Form>
+                                <div className='d-flex'>
+                                  <Form.Group
+                                    className='mb-3 flex-grow-1'
+                                    controlId='formBasicEmail'
+                                  >
+                                    <Form.Control
+                                      type='text'
+                                      value='Arrival'
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                      disabled
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mx-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='date'
+                                      placeholder='Due Date'
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className='mb-3'
+                                    controlId='formBasicPassword'
+                                  >
+                                    <Form.Control
+                                      type='number'
+                                      ref={amount5}
+                                      placeholder='0'
+                                      min='0'
+                                      max='100'
+                                    />
+                                  </Form.Group>
+                                </div>
+                              </Form>
+                            </div>
+
+                            {/* {mileStones.map((item, index) => (
                               <Task
                                 key={item.id}
                                 data={item}
@@ -1332,7 +1555,7 @@ const DetailsCard = (props) => {
                                 isChanged={isChanged}
                                 onSelectType={onSelectType}
                               />
-                            ))}
+                            ))} */}
                           </Card.Body>
                           <Card.Footer className='text-end'>
                             <Button variant='primary' onClick={handleShow}>
@@ -1395,7 +1618,7 @@ const DetailsCard = (props) => {
                                 <div className='mb-2 fw-bold'>
                                   <span>Quantity: </span>
                                   <span className='dataSelected'>
-                                    {localStorage.getItem('volume')}
+                                    {localStorage.getItem('volume')} KG
                                   </span>
                                 </div>
                                 <div className='mb-2 fw-bold'>
